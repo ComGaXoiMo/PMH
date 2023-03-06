@@ -1,0 +1,14 @@
+{
+  "remoteServiceBaseUrl": "https://dev-pmh-api.sadec.co/",
+  "appBaseUrl": "https://dev-pmh.sadec.co/",
+  "appLayoutConfig": {
+    "loader": {
+      "enabled": false,
+      "type": "default",
+      "title": "",
+      "message": "",
+      "loadingType": "default",
+      "delayTime": 0
+    }
+  }
+}
