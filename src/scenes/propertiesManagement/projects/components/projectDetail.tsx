@@ -1,14 +1,19 @@
 import * as React from "react";
 
-import { observer } from "mobx-react";
+import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 
-export interface IProjectsDetailProps {}
+export interface IProjectsDetailProps {
+  projectStore: ProjectStore;
+}
 
 export interface IProjectsDetailState {}
 import { Tabs } from "antd";
 import { L } from "@lib/abpUtility";
 import withRouter from "@components/Layout/Router/withRouter";
+import Stores from "@stores/storeIdentifier";
+import Summary from "./tabSummary";
+import ProjectStore from "@stores/projects/projectStore";
 
 const tabKeys = {
   tabSummaries: "TAB_SUMMARY",
@@ -17,6 +22,7 @@ const tabKeys = {
   tabContracts: "TAB_CONTRACTS",
   tabDocuments: "TAB_DOCUMENTS",
 };
+@inject(Stores.CompanyStore)
 @observer
 class ProjectsDetail extends AppComponentListBase<
   IProjectsDetailProps,
@@ -46,7 +52,9 @@ class ProjectsDetail extends AppComponentListBase<
               tab={L(tabKeys.tabSummaries)}
               key={tabKeys.tabSummaries}
               className={"color-tab"}
-            ></Tabs.TabPane>
+            >
+              <Summary projectStore={this.props.projectStore} />
+            </Tabs.TabPane>
             <Tabs.TabPane
               tab={L(tabKeys.tabUnits)}
               key={tabKeys.tabUnits}

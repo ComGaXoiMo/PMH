@@ -1,65 +1,57 @@
 import * as React from "react";
 
 import { inject, observer } from "mobx-react";
-import { AppComponentListBase } from "@components/AppComponentBase";
 import DataTable from "@components/DataTable";
 import gettColumns from "./components/projectColumn";
 import { Button, Table } from "antd";
-import CompanyStore from "@stores/clientManagement/companyStore";
 import Stores from "@stores/storeIdentifier";
-import withRouter from "@components/Layout/Router/withRouter";
 import AppConsts from "@lib/appconst";
 import { CheckOutlined, CloseOutlined, EditOutlined } from "@ant-design/icons";
 import { L } from "@lib/abpUtility";
 import ProjectFilterPanel from "./components/projectFilterPanel";
 import AppDataStore from "@stores/appDataStore";
 import { portalLayouts } from "@components/Layout/Router/router.config";
+import ProjectStore from "@stores/projects/projectStore";
+import { withRouter } from "react-router-dom";
+
 const { align } = AppConsts;
 export interface IProjectProps {
-  navigate: any;
-  companyStore: CompanyStore;
+  history: any;
   appDataStore: AppDataStore;
+  projectStore: ProjectStore;
 }
 
 export interface IProjectState {
   maxResultCount: number;
   skipCount: number;
   filters: any;
-  companyId: number;
+  projectProvinces: any[];
+  projectId: number;
 }
 
-@inject(Stores.CompanyStore)
+@inject(Stores.ProjectStore)
 @observer
-class Projects extends AppComponentListBase<IProjectProps, IProjectState> {
+class Projects extends React.Component<any> {
   formRef: any = React.createRef();
 
   state = {
     maxResultCount: 10,
     skipCount: 0,
-    companyId: 0,
-    filters: {
-      projectId: undefined,
-    },
+    projectId: 0,
+    projectProvinces: [],
+    filters: {},
   };
 
   async componentDidMount() {
     await this.getAll();
 
-    await Promise.all([
-      this.props.appDataStore.getClientTypes({}),
-      this.props.appDataStore.getIndustries({}),
-      this.props.appDataStore.getLeadSources({}),
-      this.props.appDataStore.getCountries({}),
-    ]);
-    await this.props.appDataStore.getIndustries({});
+    await Promise.all([]);
   }
   getAll = async () => {
-    await this.props.companyStore.getAll({
+    await this.props.projectStore.getAll({
       maxResultCount: this.state.maxResultCount,
       skipCount: this.state.skipCount,
-      isShowInActive: false,
-      isShowNotVerified: false,
-      // ...this.state.filters,
+      ...this.state.filters,
     });
   };
 
@@ -72,18 +64,16 @@ class Projects extends AppComponentListBase<IProjectProps, IProjectState> {
   handleFilterChange = (filters) => {
     this.setState({ filters }, this.getAll);
   };
-  gotoDetail = (id?) => {
-    console.log(id);
-    const { navigate } = this.props;
-    if (id) {
-      navigate(portalLayouts.projectsDetail.path.replace(":id", id));
-    } else {
-      navigate(portalLayouts.projectsCreate.path);
-    }
+  gotoDetail = (id) => {
+    const { history } = this.props;
+    id
+      ? history.push(portalLayouts.projectsDetail.path.replace(":id", id))
+      : history.push(portalLayouts.projectsCreate.path);
   };
+
   public render() {
     const {
-      companyStore: { tableData },
+      projectStore: { tableData },
     } = this.props;
 
     const columns = gettColumns({
@@ -121,7 +111,7 @@ class Projects extends AppComponentListBase<IProjectProps, IProjectState> {
         <DataTable
           // extraFilterComponent={filterComponent}
           // onRefresh={this.getAll}
-          // onCreate={() => this.openOrCloseModal()}
+          onCreate={() => this.gotoDetail(null)}
           pagination={{
             pageSize: this.state.maxResultCount,
             total: tableData === undefined ? 0 : tableData.totalCount,

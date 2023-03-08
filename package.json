@@ -17,6 +17,7 @@
     "@craco/craco": "^5.6.2",
     "@goongmaps/goong-geocoder": "^1.1.1",
     "@goongmaps/goong-map-react": "^1.1.0",
+    "@react-navigation/native": "^6.1.6",
     "@types/grecaptcha": "^3.0.3",
     "@types/lodash": "^4.14.149",
     "abp-web-resources": "^5.1.1",

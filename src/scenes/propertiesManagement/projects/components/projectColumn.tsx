@@ -13,19 +13,21 @@ const columns = (actionColumn?) => {
     },
     {
       title: L("PROPERTY"),
-      dataIndex: "businessName",
-      key: "businessName",
+      dataIndex: "projectName",
+      key: "projectName",
       width: "15%",
       ellipsis: true,
-      render: (businessName) => <>{businessName}</>,
+      render: (projectName) => <>{projectName}</>,
     },
     {
       title: L("LOCATION"),
-      dataIndex: "companyAddress",
-      key: "companyAddress",
+      dataIndex: "projectAddress",
+      key: "projectAddress",
       ellipsis: true,
       width: "10%",
-      render: (companyAddress) => <>{companyAddress?.address}</>,
+      render: (projectAddress) => (
+        <>{projectAddress.map((item) => item?.address).join(", ")}</>
+      ),
     },
     {
       title: L("OWNER"),
@@ -37,20 +39,18 @@ const columns = (actionColumn?) => {
 
     {
       title: L("MANAGER"),
-      dataIndex: "Manager",
-      key: "Manager",
+      dataIndex: "propertyManagement",
+      key: "propertyManagement",
       width: "10%",
       ellipsis: true,
-      render: (Manager) => <>{Manager?.name}</>,
+      render: (propertyManagement) => <>{propertyManagement?.businessName}</>,
     },
     {
       title: L("TYPE"),
-      dataIndex: "companyTypeMap",
-      key: "companyTypeMap",
+      dataIndex: "types",
+      key: "types",
       width: "10%",
-      render: (companyTypeMap) => (
-        <>{companyTypeMap.map((item) => item?.companyTypeName).join(", ")}</>
-      ),
+      render: (types) => <>{types.map((item) => item?.name).join(", ")}</>,
     },
     {
       title: L("UNIT"),
