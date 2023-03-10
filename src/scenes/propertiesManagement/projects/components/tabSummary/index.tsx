@@ -9,6 +9,7 @@ import Stores from "@stores/storeIdentifier";
 import ProjectStore from "@stores/projects/projectStore";
 // import FileUploadWrap from "@components/FileUpload/FileUploadCRM";
 import FileStore from "@stores/common/fileStore";
+import Monition from "./components/Monition";
 
 export interface ISummaryProps {
   projectStore?: ProjectStore;
@@ -133,6 +134,9 @@ class Summary extends AppComponentListBase<ISummaryProps, ISummaryState> {
                 }}
               >
                 <strong>{L("PROJECT_ACTIVITY")}</strong>
+                <Row>
+                  <Monition />
+                </Row>
               </div>
             </Col>
           </Row>

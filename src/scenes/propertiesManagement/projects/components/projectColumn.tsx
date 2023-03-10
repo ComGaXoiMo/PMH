@@ -73,22 +73,7 @@ const columns = (actionColumn?) => {
       width: "10%",
       render: (YearBuild) => <>{YearBuild?.name}</>,
     },
-    // {
-    //   title: L("DELIVERY_CREATED_AT"),
-    //   dataIndex: "workflow",
-    //   key: "workflow",
 
-    //   ellipsis: true,
-    //   render: (workflow, row) => (
-    //     <div className="text-muted small">
-    //       <CalendarOutlined className="mr-1" />{" "}
-    //       {renderDateTime(row?.creationTime)}
-    //       <div>
-    //         <UserOutlined className="mr-1" /> {row?.creatorUser?.displayName}
-    //       </div>
-    //     </div>
-    //   ),
-    // },
     actionColumn,
   ];
 

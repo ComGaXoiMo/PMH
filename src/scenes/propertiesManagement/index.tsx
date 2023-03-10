@@ -3,24 +3,23 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 
-export interface IPropertiesProps {}
-
-export interface IPropertiesState {}
 import { Tabs } from "antd";
 import { L } from "@lib/abpUtility";
 import Projects from "./projects";
 import Units from "./units";
 import ArrivalDepartures from "./arrivalDeparture";
 import SiteVisits from "./siteVisit";
-import Stores from "@stores/storeIdentifier";
 
+export interface IPropertiesProps {}
+
+export interface IPropertiesState {}
 const tabKeys = {
   tabProjects: "TAB_PROJECTS",
   tabUnits: "TAB_UNITS",
   tabArrival_Departure: "TAB_ARRIVAL_DEPARTURE",
   tabSiteVisit: "TAB_SITE_VISIT",
 };
-@inject(Stores.CompanyStore)
+@inject()
 @observer
 class Properties extends AppComponentListBase<
   IPropertiesProps,

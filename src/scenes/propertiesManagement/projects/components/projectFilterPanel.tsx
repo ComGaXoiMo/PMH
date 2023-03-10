@@ -11,7 +11,7 @@ type Props = {
   filter: any;
 };
 
-const companyFilterPanel = (props: Props) => {
+const projectsFilterPanel = (props: Props) => {
   const searchTitleOptions = async (keyword?) => {};
 
   React.useEffect(() => {
@@ -35,4 +35,4 @@ const companyFilterPanel = (props: Props) => {
   );
 };
 
-export default withRouter(companyFilterPanel);
+export default withRouter(projectsFilterPanel);

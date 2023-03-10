@@ -125,6 +125,7 @@ class Projects extends React.Component<any> {
             columns={columns}
             pagination={false}
             dataSource={tableData === undefined ? [] : tableData.items}
+            bordered
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
           />
         </DataTable>

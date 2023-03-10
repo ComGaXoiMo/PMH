@@ -1,0 +1,43 @@
+@import '../../../../styles/variable.less';
+.stacking-plan {
+  .floor-item {
+    height: 100px;
+    border-left: 4px solid @primary-color;
+    flex: 0 0 100px;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 12px;
+    background: white;
+  }
+
+  .wrap-units {
+    height: 100px;
+    .unit-item {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      border-radius: 0.25rem;
+      font-size: 12px;
+      margin-right: 0.5rem;
+      height: 100px;
+
+      &:last-child {
+        margin-right: 0 !important;
+      }
+    }
+
+    .unit-empty,
+    .secondary {
+      color: #383d41;
+      background-color: #e2e3e5;
+      border-color: #d6d8db;
+    }
+
+    .unit-in-use,
+    .primary {
+      color: #1b3b80;
+      background-color: #d6e3fd;
+      border-color: #c6d8fd;
+    }
+  }
+}
