@@ -49,7 +49,7 @@ class Units extends React.Component<any> {
     filters: {},
     visible: false,
     title: L("CREATE"),
-    tabView: "",
+    tabView: "GRID_VIEW",
   };
 
   async componentDidMount() {
@@ -81,7 +81,6 @@ class Units extends React.Component<any> {
   };
   changeTab = async (value) => {
     await this.setState({ tabView: value.target.value });
-    await console.log(this.state.tabView);
   };
 
   public render() {

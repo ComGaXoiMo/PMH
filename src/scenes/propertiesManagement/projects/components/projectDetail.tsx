@@ -5,6 +5,7 @@ import { AppComponentListBase } from "@components/AppComponentBase";
 
 export interface IProjectsDetailProps {
   projectStore: ProjectStore;
+  params: any;
 }
 
 export interface IProjectsDetailState {}
@@ -40,12 +41,12 @@ class ProjectsDetail extends AppComponentListBase<
   public render() {
     return (
       <>
-        <div className="header-element">
-          <h1>{L("PROJECTS_UNIT")}</h1>
+        <div className="container-element">
+          <strong>{this.props.params?.id}</strong>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}
-            className={"color-tabs"}
+            className={"antd-tab-cusstom"}
             type="card"
           >
             <Tabs.TabPane

@@ -13,8 +13,8 @@ type Props = {
   onCancel: () => void;
 };
 const tabKeys = {
-  tabInfo: "TAB_MY_TASK",
-  tabActivity: "TAB_ALL",
+  tabInfo: "TAB_INFO",
+  tabActivity: "TAB_ACTIVITY",
   tabBooking: "TAB_BOOKING",
   tabSiteVisit: "TAB_SITE_VISITS",
   tabContracts: "TAB_CONTRACTS",
@@ -24,7 +24,7 @@ const tabKeys = {
 const UnitModal = inject()(
   observer((props: Props) => {
     const [form] = useForm();
-    const [tabActiveKey, setTabActiveKey] = React.useState();
+    const [tabActiveKey, setTabActiveKey] = React.useState(tabKeys.tabInfo);
     React.useEffect(() => {
       if (props.id) {
         console.log("init");
@@ -52,7 +52,7 @@ const UnitModal = inject()(
         <Tabs
           activeKey={tabActiveKey}
           onTabClick={changeTab}
-          className={"color-tabs h-100"}
+          className={"antd-tab-cusstom h-100"}
           type="card"
         >
           <Tabs.TabPane

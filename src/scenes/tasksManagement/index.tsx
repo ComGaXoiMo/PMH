@@ -26,12 +26,12 @@ class Tasks extends AppComponentListBase<ITasksProps, ITasksState> {
   public render() {
     return (
       <>
-        <div className="header-element">
+        <div className="container-element">
           <h1>{L("TASKS")}</h1>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}
-            className={"color-tabs"}
+            className={"antd-tab-cusstom"}
             type="card"
           >
             <Tabs.TabPane

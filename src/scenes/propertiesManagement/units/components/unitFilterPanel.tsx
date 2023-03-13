@@ -13,15 +13,15 @@ type Props = {
 };
 
 const tabKeys = {
-  gridView: "GRID_VIEW",
-  listView: "LIST_VIEW",
+  gridView: L("GRID_VIEW"),
+  listView: L("LIST_VIEW"),
 };
 class UnitsFilterPanel extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
   state = {
-    selectedType: "",
+    selectedType: tabKeys.gridView,
   };
   componentDidMount() {
     this.searchTitleOptions("");
@@ -33,7 +33,6 @@ class UnitsFilterPanel extends React.Component<Props> {
 
   changeTab = async (event) => {
     const value = event.target.value;
-    console.log("checked", value);
     await this.setState({ selectedType: value });
   };
   render() {
@@ -96,11 +95,11 @@ class UnitsFilterPanel extends React.Component<Props> {
             value={this.state.selectedType}
             buttonStyle="solid"
           >
-            <Radio.Button key={tabKeys.listView} value={tabKeys.listView}>
-              {tabKeys.listView}
-            </Radio.Button>
             <Radio.Button key={tabKeys.gridView} value={tabKeys.gridView}>
               {tabKeys.gridView}
+            </Radio.Button>
+            <Radio.Button key={tabKeys.listView} value={tabKeys.listView}>
+              {tabKeys.listView}
             </Radio.Button>
           </Radio.Group>
         </Row>

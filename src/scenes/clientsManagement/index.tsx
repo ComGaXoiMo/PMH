@@ -4,6 +4,9 @@ import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import { Tabs } from "antd";
 import { L } from "@lib/abpUtility";
+import ContactsAndLead from "./contactsAndLead";
+import Company from "./company";
+import Tenants from "./tenants";
 
 export interface IClientsProps {}
 
@@ -28,27 +31,27 @@ class Clients extends AppComponentListBase<IClientsProps, IClientsState> {
   public render() {
     return (
       <>
-        <div className="header-element">
-          <h1>{L("CLIENTS")}</h1>
+        <div className="container-element">
+          <strong>{L("CLIENTS")}</strong>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}
-            className={"color-tabs"}
+            className={"antd-tab-cusstom"}
             type="card"
           >
             <Tabs.TabPane
               tab={L(tabKeys.tabContacts_Lead)}
               key={tabKeys.tabContacts_Lead}
               className={"color-tab"}
-            ></Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabCompany)}
-              key={tabKeys.tabCompany}
-            ></Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabTenant)}
-              key={tabKeys.tabTenant}
-            ></Tabs.TabPane>
+            >
+              <ContactsAndLead />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabCompany)} key={tabKeys.tabCompany}>
+              <Company />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabTenant)} key={tabKeys.tabTenant}>
+              <Tenants />
+            </Tabs.TabPane>
             <Tabs.TabPane
               tab={L(tabKeys.tabReport)}
               key={tabKeys.tabReport}
