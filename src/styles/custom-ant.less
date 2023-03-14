@@ -326,8 +326,40 @@ input {
 /* MENU */
 .ant-menu {
   color: @text-color !important;
+  
 }
+.ant-menu > .ant-menu-item:hover,
+.ant-menu > .ant-menu-submenu:hover,
+.ant-menu > .ant-menu-item-active,
+.ant-menu> .ant-menu-submenu-active,
+.ant-menu > .ant-menu-item-open,
+.ant-menu> .ant-menu-submenu-open,
+.ant-menu > .ant-menu-item-selected,
+.ant-menu > .ant-menu-submenu-selected {
+  border-bottom: 0px;
+  background-color: @primary-color;
+}
+.ant-menu-item-selected{
+  background-color: @primary-color !important;
 
+}
+.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu .ant-menu-submenu-title:hover {
+    background-color: rgba(@primary-color, 0.12) !important;
+    border-bottom: 0px !important;
+}
+.ant-menu > .ant-menu-item{
+  border-radius: 8px;
+  margin:10px 5px 5px 5px !important;
+  line-height: 30px;
+
+}
+.ant-menu-horizontal > .ant-menu-item-selected a {
+  color: black !important;
+  font-weight: bold;
+}
+.ant-menu-bar{
+  border-radius: 8px;
+}
 /* FORM SIZE*/
 //.ant-select-lg,
 //.ant-input-lg,
@@ -625,11 +657,20 @@ input {
 }
 /* DRAWER */
 .ant-drawer-wrapper-body{
-  border-left: 4px solid #d0b355;
+  border-left: 4px solid #FEC20C;
 }
 /* CARD */
+
+.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab{
+  background-color: white;
+  border: 0px;
+}
 .card-detail{
 border-radius: 20px !important;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #000000 !important;
+  /* text-shadow: 0 0 0.25px currentcolor; */
 }
 /* PMH DS */
 .container-element{
@@ -648,17 +689,19 @@ border-radius: 20px !important;
 
   background-color: white ;
 }
-.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-card > div > .ant-tabs-nav {
-  background-color: white ;
-}
+// .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-card > div > .ant-tabs-nav {
+//   background-color: white ;
+// }
 .ant-tabs-tab-active{
-background-color: #cccccc ;
+background-color: #f2f4f8 !important ;
+border-radius: 16px 16px 0px 0px !important;
 }
 .antd-tab-cusstom{
   
   background-color: #F2F4F8;
 
 }
+
 .ant-drawer-mask{
   background: #ffffff00 !important;
 }

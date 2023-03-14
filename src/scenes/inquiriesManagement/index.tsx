@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import { Tabs } from "antd";
 import { L } from "@lib/abpUtility";
+import InquiriesList from "./inquiriesList";
 
 export interface IInquiriesProps {}
 
@@ -27,7 +28,7 @@ class Inquiries extends AppComponentListBase<IInquiriesProps, IInquiriesState> {
     return (
       <>
         <div className="container-element">
-          <h1>{L("INQUIRIES")}</h1>
+          <strong>{L("INQUIRIES")}</strong>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}
@@ -38,7 +39,9 @@ class Inquiries extends AppComponentListBase<IInquiriesProps, IInquiriesState> {
               tab={L(tabKeys.tabInquiriesList)}
               key={tabKeys.tabInquiriesList}
               className={"color-tab"}
-            ></Tabs.TabPane>
+            >
+              <InquiriesList />
+            </Tabs.TabPane>
             <Tabs.TabPane
               tab={L(tabKeys.tabReports)}
               key={tabKeys.tabReports}

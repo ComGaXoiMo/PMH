@@ -4,6 +4,9 @@ import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import { Tabs } from "antd";
 import { L } from "@lib/abpUtility";
+import Lease from "./lease";
+import Deposit from "./deposit";
+import Payment from "./payment";
 
 export interface ILeaseContractsProps {}
 
@@ -32,7 +35,7 @@ class LeaseContracts extends AppComponentListBase<
     return (
       <>
         <div className="container-element">
-          <h1>{L("CONTRACTS")}</h1>
+          <strong>{L("CONTRACTS")}</strong>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}
@@ -43,15 +46,15 @@ class LeaseContracts extends AppComponentListBase<
               tab={L(tabKeys.tabLease)}
               key={tabKeys.tabLease}
               className={"color-tab"}
-            ></Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabDeposit)}
-              key={tabKeys.tabDeposit}
-            ></Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabPayment)}
-              key={tabKeys.tabPayment}
-            ></Tabs.TabPane>
+            >
+              <Lease />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabDeposit)} key={tabKeys.tabDeposit}>
+              <Deposit />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabPayment)} key={tabKeys.tabPayment}>
+              <Payment />
+            </Tabs.TabPane>
             <Tabs.TabPane
               tab={L(tabKeys.tabReport)}
               key={tabKeys.tabReport}
