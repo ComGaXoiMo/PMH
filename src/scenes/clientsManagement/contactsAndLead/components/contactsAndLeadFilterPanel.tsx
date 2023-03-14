@@ -1,7 +1,7 @@
 import React from "react";
 import withRouter from "@components/Layout/Router/withRouter";
 import { L } from "@lib/abpUtility";
-import { Select } from "antd";
+import { Button, Select } from "antd";
 import Col from "antd/lib/col";
 import Search from "antd/lib/input/Search";
 import Row from "antd/lib/row";
@@ -10,6 +10,7 @@ type Props = {
   handleSearch: any;
   filter: any;
   changeTab: any;
+  onCreate: () => void;
 };
 
 class contactsAndLeadFilterPanel extends React.Component<Props> {
@@ -48,6 +49,14 @@ class contactsAndLeadFilterPanel extends React.Component<Props> {
               // showSearch
             ></Select>
           </Col>
+          <div style={{ position: "absolute", right: 40 }}>
+            <Button
+              style={{ borderRadius: "8px", backgroundColor: "#FEC20C" }}
+              onClick={() => this.props.onCreate()}
+            >
+              {L("NEW_CONTRACT")}
+            </Button>
+          </div>
         </Row>
       </>
     );

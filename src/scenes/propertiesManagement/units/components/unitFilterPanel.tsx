@@ -1,7 +1,7 @@
 import React from "react";
 import withRouter from "@components/Layout/Router/withRouter";
 import { L } from "@lib/abpUtility";
-import { Radio, Select } from "antd";
+import { Button, Radio, Select } from "antd";
 import Col from "antd/lib/col";
 import Search from "antd/lib/input/Search";
 import Row from "antd/lib/row";
@@ -10,6 +10,7 @@ type Props = {
   handleSearch: any;
   filter: any;
   changeTab: any;
+  onCreate: () => void;
 };
 
 const tabKeys = {
@@ -102,6 +103,14 @@ class UnitsFilterPanel extends React.Component<Props> {
               {tabKeys.listView}
             </Radio.Button>
           </Radio.Group>
+          <div style={{ position: "absolute", right: 40 }}>
+            <Button
+              style={{ borderRadius: "8px", backgroundColor: "#FEC20C" }}
+              onClick={() => this.props.onCreate()}
+            >
+              {L("NEW_UNIT")}
+            </Button>
+          </div>
         </Row>
       </>
     );

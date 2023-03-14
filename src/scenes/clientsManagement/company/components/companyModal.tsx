@@ -19,7 +19,7 @@ const tabKeys = {
   tabInquiries: "TAB_INQUIRIES",
   tabLeaseContracts: "TAB_LEASE_CONTRACT",
 };
-const ContractModal = inject()(
+const CompanyModal = inject()(
   observer((props: Props) => {
     const [form] = useForm();
     const [tabActiveKey, setTabActiveKey] = React.useState(tabKeys.tabInfo);
@@ -83,4 +83,4 @@ const ContractModal = inject()(
   })
 );
 
-export default ContractModal;
+export default CompanyModal;

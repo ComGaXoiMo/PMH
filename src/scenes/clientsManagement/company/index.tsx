@@ -13,6 +13,8 @@ import Stores from "@stores/storeIdentifier";
 import withRouter from "@components/Layout/Router/withRouter";
 import CompanyFilterPanel from "./components/companyFilterPanel";
 import CompanyStore from "@stores/clientManagement/companyStore";
+import CompanyModal from "./components/companyModal";
+import CompanyCreateModal from "./components/companyCreateModal";
 
 const { align } = AppConsts;
 export interface IContactProps {
@@ -27,6 +29,8 @@ export interface IContactState {
   filters: any;
   projectProvinces: any[];
   modalVisible: boolean;
+  visible: boolean;
+  title: string;
   projectId: number;
 }
 
@@ -44,6 +48,8 @@ class Company extends React.Component<IContactProps, IContactState> {
     projectId: 0,
     projectProvinces: [],
     filters: {},
+    visible: false,
+    title: L("CREATE"),
   };
 
   async componentDidMount() {
@@ -64,7 +70,22 @@ class Company extends React.Component<IContactProps, IContactState> {
       ...this.state.filters,
     });
   };
+  gotoDetail = (id?, title?) => {
+    if (id) {
+      this.setState({ title: title });
+      this.setState({ visible: true });
+    } else {
+      // this.setState({ idBatch: null })
+      this.setState({ visible: true });
+    }
+  };
+  toggleModal = () =>
+    this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
+  handleImport = async () => {
+    await this.getAll();
+    this.toggleModal();
+  };
   handleTableChange = (pagination: any) => {
     this.setState(
       { skipCount: (pagination.current - 1) * this.state.maxResultCount! },
@@ -74,7 +95,6 @@ class Company extends React.Component<IContactProps, IContactState> {
   handleFilterChange = (filters) => {
     this.setState({ filters }, this.getAll);
   };
-  gotoDetail = (id) => {};
 
   public render() {
     const {
@@ -94,7 +114,7 @@ class Company extends React.Component<IContactProps, IContactState> {
             className="ml-1"
             shape="circle"
             icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id)}
+            onClick={() => this.gotoDetail(item.id, item.name)}
           />
           {/* )} */}
           {/* {this.isGranted(appPermissions.a.delete) && ( */}
@@ -111,7 +131,11 @@ class Company extends React.Component<IContactProps, IContactState> {
     });
     return (
       <>
-        <CompanyFilterPanel />
+        <CompanyFilterPanel
+          onCreate={() => {
+            this.toggleModal();
+          }}
+        />
         <DataTable
           // extraFilterComponent={filterComponent}
           // onRefresh={this.getAll}
@@ -132,6 +156,19 @@ class Company extends React.Component<IContactProps, IContactState> {
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
           />
         </DataTable>
+        <CompanyModal
+          title={this.state.title}
+          id={1}
+          visible={this.state.visible}
+          onCancel={() => {
+            this.getAll(), this.setState({ visible: false });
+          }}
+        />
+        <CompanyCreateModal
+          visible={this.state.modalVisible}
+          onClose={this.toggleModal}
+          onOk={this.handleImport}
+        />
       </>
     );
   }

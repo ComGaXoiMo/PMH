@@ -13,6 +13,7 @@ import ContactsAndLeadFilterPanel from "./components/contactsAndLeadFilterPanel"
 import ContactStore from "@stores/clientManagement/contactStore";
 import Stores from "@stores/storeIdentifier";
 import withRouter from "@components/Layout/Router/withRouter";
+import CreateContractModal from "./components/createContractModal";
 import ContractModal from "./components/contractModal";
 
 const { align } = AppConsts;
@@ -29,6 +30,8 @@ export interface IContactState {
   projectProvinces: any[];
   modalVisible: boolean;
   projectId: number;
+  visible: boolean;
+  title: string;
 }
 
 @inject(Stores.ContactStore)
@@ -45,6 +48,8 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
     projectId: 0,
     projectProvinces: [],
     filters: {},
+    visible: false,
+    title: L("CREATE"),
   };
 
   async componentDidMount() {
@@ -78,10 +83,18 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
       async () => await this.getAll()
     );
   };
+  gotoDetail = (id?, title?) => {
+    if (id) {
+      this.setState({ title: title });
+      this.setState({ visible: true });
+    } else {
+      // this.setState({ idBatch: null })
+      this.setState({ visible: true });
+    }
+  };
   handleFilterChange = (filters) => {
     this.setState({ filters }, this.getAll);
   };
-  gotoDetail = (id) => {};
 
   public render() {
     const {
@@ -101,7 +114,7 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
             className="ml-1"
             shape="circle"
             icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id)}
+            onClick={() => this.gotoDetail(item.id, item.name)}
           />
           {/* )} */}
           {/* {this.isGranted(appPermissions.a.delete) && ( */}
@@ -118,11 +131,15 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
     });
     return (
       <>
-        <ContactsAndLeadFilterPanel />
+        <ContactsAndLeadFilterPanel
+          onCreate={() => {
+            this.toggleModal();
+          }}
+        />
         <DataTable
           // extraFilterComponent={filterComponent}
           // onRefresh={this.getAll}
-          onCreate={this.toggleModal}
+          // onCreate={this.toggleModal}
           pagination={{
             pageSize: this.state.maxResultCount,
             total: tableData === undefined ? 0 : tableData.totalCount,
@@ -141,6 +158,14 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
           />
         </DataTable>
         <ContractModal
+          title={this.state.title}
+          id={1}
+          visible={this.state.visible}
+          onCancel={() => {
+            this.getAll(), this.setState({ visible: false });
+          }}
+        />
+        <CreateContractModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
           onOk={this.handleImport}

@@ -119,12 +119,17 @@ class Units extends React.Component<any> {
     return (
       <>
         <div>
-          <UnitFilterPanel changeTab={this.changeTab} />
+          <UnitFilterPanel
+            changeTab={this.changeTab}
+            onCreate={() => {
+              this.gotoDetail(null);
+            }}
+          />
           {this.state.tabView === "LIST_VIEW" && (
             <DataTable
               // extraFilterComponent={filterComponent}
               // onRefresh={this.getAll}
-              onCreate={() => this.gotoDetail(null)}
+              // onCreate={() => this.gotoDetail(null)}
               pagination={{
                 pageSize: this.state.maxResultCount,
                 total: tableData === undefined ? 0 : tableData.totalCount,
