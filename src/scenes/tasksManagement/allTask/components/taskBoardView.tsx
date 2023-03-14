@@ -1,12 +1,12 @@
 import * as React from "react";
 
 import { inject, observer } from "mobx-react";
-import "./pipeline-view.less";
+import "./pipeline.less";
 
 import { Button, Card } from "antd";
 import withRouter from "@components/Layout/Router/withRouter";
-import InquiriesBoardItem from "./inquiriesBoardItem";
-import CreateInquiriesModal from "./createInquiriesModal";
+import InquiriesBoardItem from "./taskBoardItem";
+import CreateInquiriesModal from "./allTaskModal";
 // import { Table } from "antd";
 
 export interface IUnitProps {
@@ -15,19 +15,25 @@ export interface IUnitProps {
   modalVisible: false;
 }
 
-export interface IInquiriesListtate {
+export interface IAllTaskBoardViewtate {
   modalVisible: boolean;
 }
 
 @inject()
 @observer
-class InquiriesList extends React.Component<IUnitProps, IInquiriesListtate> {
+class AllTaskBoardView extends React.Component<
+  IUnitProps,
+  IAllTaskBoardViewtate
+> {
   formRef: any = React.createRef();
   state = {
     modalVisible: false,
   };
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    console.log("index:", this.props.index);
+    console.log("status:", this.props.status);
+  }
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
@@ -39,13 +45,12 @@ class InquiriesList extends React.Component<IUnitProps, IInquiriesListtate> {
 
     return (
       <>
-        <Card
-          className="iqr-pipeline-view-container"
-          style={{ borderColor: this.props.status?.borderColorCode }}
-          key={this.props.index}
-        >
+        <Card className="pipeline-view-container" key={this.props.index}>
           <div className="h-100 ">
-            <div className="iqr-title-card">
+            <div
+              style={{ backgroundColor: this.props.status?.borderColorCode }}
+              className="title-card"
+            >
               <strong>{this.props.status?.name}</strong>
             </div>
             <div className="b">
@@ -64,4 +69,4 @@ class InquiriesList extends React.Component<IUnitProps, IInquiriesListtate> {
   }
 }
 
-export default withRouter(InquiriesList);
+export default withRouter(AllTaskBoardView);

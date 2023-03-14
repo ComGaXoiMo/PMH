@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import { Tabs } from "antd";
 import { L } from "@lib/abpUtility";
+import AllTask from "./allTask";
 
 export interface ITasksProps {}
 
@@ -27,7 +28,7 @@ class Tasks extends AppComponentListBase<ITasksProps, ITasksState> {
     return (
       <>
         <div className="container-element">
-          <h1>{L("TASKS")}</h1>
+          <strong>{L("TASKS")}</strong>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}
@@ -38,11 +39,13 @@ class Tasks extends AppComponentListBase<ITasksProps, ITasksState> {
               tab={L(tabKeys.tabMyTask)}
               key={tabKeys.tabMyTask}
               className={"color-tab"}
-            ></Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabAll)}
-              key={tabKeys.tabAll}
-            ></Tabs.TabPane>
+            >
+              {" "}
+              <AllTask />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabAll)} key={tabKeys.tabAll}>
+              <AllTask />
+            </Tabs.TabPane>
           </Tabs>
         </div>
       </>

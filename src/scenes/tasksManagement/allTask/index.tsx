@@ -1,8 +1,8 @@
 import * as React from "react";
-import gettColumns from "./components/inquiruesColumn";
+import gettColumns from "./components/allTaskColumn";
 
 import { inject, observer } from "mobx-react";
-import UnitFilterPanel from "./components/inquiriesFilterPanel";
+import UnitFilterPanel from "./components/taskFilterPanel";
 import AppConsts from "@lib/appconst";
 import { L } from "@lib/abpUtility";
 import { Button, Col, Row, Table } from "antd";
@@ -12,16 +12,17 @@ import {
   EditOutlined,
 } from "@ant-design/icons/lib/icons";
 import DataTable from "@components/DataTable";
-import { withRouter } from "react-router-dom";
-import InquiriesBoardView from "./components/inquiriesBoardView";
+import InquiriesBoardView from "./components/taskBoardView";
 // import { Table } from "antd";
 const { align } = AppConsts;
-import "./components/pipeline-view.less";
-export interface IUnitProps {
+import "./components/pipeline.less";
+import withRouter from "@components/Layout/Router/withRouter";
+import AllTaskModal from "./components/allTaskModal";
+export interface IAllTaskProps {
   history: any;
 }
 
-export interface IInquiriesListtate {
+export interface IAllTaskState {
   maxResultCount: number;
   skipCount: number;
   filters: any;
@@ -30,47 +31,55 @@ export interface IInquiriesListtate {
   visible: boolean;
   title: string;
   tabView: string;
+  modalVisible: boolean;
 }
 const typeF = [
   {
     id: 1,
-    name: "Prospect",
-    value: "Prospect",
-    label: "Prospect",
-    borderColorCode: "red",
+    name: "NotStart",
+    value: "NotStart",
+    label: "NotStart",
+    borderColorCode: "#ff000030",
   },
   {
     id: 2,
-    name: "Offer",
-    value: "Offer",
-    label: "Offer",
-    borderColorCode: "blue",
+    name: "Overdue",
+    value: "Overdue",
+    label: "Overdue",
+    borderColorCode: "#1890ff30",
   },
   {
     id: 3,
-    name: "LeaseAgreement",
-    value: "LeaseAgreement",
-    label: "LeaseAgreement",
-    borderColorCode: "black",
+    name: "DueToday",
+    value: "DueToday",
+    label: "DueToday",
+    borderColorCode: "#52c41a30",
   },
   {
     id: 4,
-    name: "Close",
-    value: "Close",
-    label: "Close",
-    borderColorCode: "pink",
+    name: "Complete",
+    value: "Complete",
+    label: "Complete",
+    borderColorCode: "#ffea002e",
   },
   {
     id: 5,
-    name: "Dropped",
-    value: "Dropped",
-    label: "Dropped",
-    borderColorCode: "yellow",
+    name: "Cancle",
+    value: "Cancle",
+    label: "Cancle",
+    borderColorCode: "#00ff2254e",
+  },
+  {
+    id: 6,
+    name: "Close",
+    value: "Close",
+    label: "Close",
+    borderColorCode: "#5d2feb30",
   },
 ];
 @inject()
 @observer
-class InquiriesList extends React.Component<any> {
+class AllTask extends React.Component<IAllTaskProps, IAllTaskState> {
   formRef: any = React.createRef();
   state = {
     maxResultCount: 10,
@@ -81,6 +90,7 @@ class InquiriesList extends React.Component<any> {
     visible: false,
     title: L("CREATE"),
     tabView: "BOARD_VIEW",
+    modalVisible: false,
   };
 
   async componentDidMount() {
@@ -88,11 +98,7 @@ class InquiriesList extends React.Component<any> {
     await Promise.all([]);
   }
   getAll = async () => {
-    await this.props.InquiriesListtore.getAllRes({
-      maxResultCount: this.state.maxResultCount,
-      skipCount: this.state.skipCount,
-      ...this.state.filters,
-    });
+    console.log(1);
   };
   handleTableChange = (pagination: any) => {
     this.setState(
@@ -100,14 +106,12 @@ class InquiriesList extends React.Component<any> {
       async () => await this.getAll()
     );
   };
-  gotoDetail = (id?, title?) => {
-    if (id) {
-      this.setState({ title: title });
-      this.setState({ visible: true });
-    } else {
-      // this.setState({ idBatch: null })
-      this.setState({ visible: true });
-    }
+  toggleModal = () =>
+    this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
+
+  handleImport = async () => {
+    await this.getAll();
+    this.toggleModal();
   };
   changeTab = async (value) => {
     await this.setState({ tabView: value.target.value });
@@ -115,7 +119,7 @@ class InquiriesList extends React.Component<any> {
 
   public render() {
     const {
-      // InquiriesListtore: { tableData },
+      // AllTasktore: { tableData },
     } = this.props;
     const columns = gettColumns({
       title: L("ACTIONS"),
@@ -131,7 +135,7 @@ class InquiriesList extends React.Component<any> {
             className="ml-1"
             shape="circle"
             icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id, item.name)}
+            onClick={() => this.toggleModal()}
           />
           {/* )} */}
           {/* {this.isGranted(appPermissions.a.delete) && ( */}
@@ -149,7 +153,12 @@ class InquiriesList extends React.Component<any> {
     return (
       <>
         <div>
-          <UnitFilterPanel changeTab={this.changeTab} />
+          <UnitFilterPanel
+            changeTab={this.changeTab}
+            onCreate={() => {
+              this.toggleModal();
+            }}
+          />
           {this.state.tabView === "LIST_VIEW" && (
             <DataTable
               // extraFilterComponent={filterComponent}
@@ -174,10 +183,10 @@ class InquiriesList extends React.Component<any> {
             </DataTable>
           )}
           {this.state.tabView === "BOARD_VIEW" && (
-            <Row gutter={[16, 10]} className="mt-3 iqr-wrap-pipeline-flex">
+            <Row gutter={[16, 10]} className="mt-3 wrap-pipeline-flex">
               <Col
                 sm={{ span: 24, offset: 0 }}
-                className="iqr-pipeline-view-wrapper"
+                className="pipeline-view-wrapper"
               >
                 {typeF.map((status, index) => (
                   <InquiriesBoardView
@@ -190,9 +199,14 @@ class InquiriesList extends React.Component<any> {
             </Row>
           )}
         </div>
+        <AllTaskModal
+          visible={this.state.modalVisible}
+          onClose={this.toggleModal}
+          onOk={this.handleImport}
+        />
       </>
     );
   }
 }
 
-export default withRouter(InquiriesList);
+export default withRouter(AllTask);
