@@ -1,27 +1,32 @@
 import * as React from "react";
-import gettColumns from "./components/inquiruesColumn";
+import gettColumns from "./components/unitColumn";
 
 import { inject, observer } from "mobx-react";
-import UnitFilterPanel from "./components/inquiriesFilterPanel";
+import UnitFilterPanel from "./components/unitFilterPanel";
 import AppConsts from "@lib/appconst";
 import { L } from "@lib/abpUtility";
-import { Button, Col, Row, Table } from "antd";
+import { Button, Table } from "antd";
 import {
   CheckOutlined,
   CloseOutlined,
   EditOutlined,
 } from "@ant-design/icons/lib/icons";
 import DataTable from "@components/DataTable";
+import Stores from "@stores/storeIdentifier";
+import UnitStore from "@stores/projects/unitStore";
 import { withRouter } from "react-router-dom";
-import InquiriesBoardView from "./components/inquiriesBoardView";
+import UnitModal from "./components/unitModal";
+import StackPland from "./components/stackPland";
 // import { Table } from "antd";
 const { align } = AppConsts;
-import "./components/pipeline-view.less";
+
 export interface IUnitProps {
   history: any;
+
+  unitStore: UnitStore;
 }
 
-export interface IInquiriesListtate {
+export interface IUnitState {
   maxResultCount: number;
   skipCount: number;
   filters: any;
@@ -31,46 +36,10 @@ export interface IInquiriesListtate {
   title: string;
   tabView: string;
 }
-const typeF = [
-  {
-    id: 1,
-    name: "Prospect",
-    value: "Prospect",
-    label: "Prospect",
-    borderColorCode: "red",
-  },
-  {
-    id: 2,
-    name: "Offer",
-    value: "Offer",
-    label: "Offer",
-    borderColorCode: "blue",
-  },
-  {
-    id: 3,
-    name: "LeaseAgreement",
-    value: "LeaseAgreement",
-    label: "LeaseAgreement",
-    borderColorCode: "black",
-  },
-  {
-    id: 4,
-    name: "Close",
-    value: "Close",
-    label: "Close",
-    borderColorCode: "pink",
-  },
-  {
-    id: 5,
-    name: "Dropped",
-    value: "Dropped",
-    label: "Dropped",
-    borderColorCode: "yellow",
-  },
-];
-@inject()
+
+@inject(Stores.UnitStore)
 @observer
-class InquiriesList extends React.Component<any> {
+class Units extends React.Component<any> {
   formRef: any = React.createRef();
   state = {
     maxResultCount: 10,
@@ -80,15 +49,16 @@ class InquiriesList extends React.Component<any> {
     filters: {},
     visible: false,
     title: L("CREATE"),
-    tabView: "BOARD_VIEW",
+    tabView: "GRID_VIEW",
   };
 
   async componentDidMount() {
     await this.getAll();
+
     await Promise.all([]);
   }
   getAll = async () => {
-    await this.props.InquiriesListtore.getAllRes({
+    await this.props.unitStore.getAllRes({
       maxResultCount: this.state.maxResultCount,
       skipCount: this.state.skipCount,
       ...this.state.filters,
@@ -110,13 +80,12 @@ class InquiriesList extends React.Component<any> {
     }
   };
   changeTab = async (value) => {
-    console.log(value.target.value);
     await this.setState({ tabView: value.target.value });
   };
 
   public render() {
     const {
-      // InquiriesListtore: { tableData },
+      unitStore: { tableData },
     } = this.props;
     const columns = gettColumns({
       title: L("ACTIONS"),
@@ -150,7 +119,12 @@ class InquiriesList extends React.Component<any> {
     return (
       <>
         <div>
-          <UnitFilterPanel changeTab={this.changeTab} />
+          <UnitFilterPanel
+            changeTab={this.changeTab}
+            onCreate={() => {
+              this.gotoDetail(null);
+            }}
+          />
           {this.state.tabView === "LIST_VIEW" && (
             <DataTable
               // extraFilterComponent={filterComponent}
@@ -158,7 +132,7 @@ class InquiriesList extends React.Component<any> {
               // onCreate={() => this.gotoDetail(null)}
               pagination={{
                 pageSize: this.state.maxResultCount,
-                // total: tableData === undefined ? 0 : tableData.totalCount,
+                total: tableData === undefined ? 0 : tableData.totalCount,
                 onChange: this.handleTableChange,
               }}
             >
@@ -168,32 +142,29 @@ class InquiriesList extends React.Component<any> {
                 rowKey={(record) => record.id}
                 columns={columns}
                 pagination={false}
-                // dataSource={tableData === undefined ? [] : tableData.items}
+                dataSource={tableData === undefined ? [] : tableData.items}
                 scroll={{ x: 800, y: 500, scrollToFirstRowOnChange: true }}
                 bordered
               />
             </DataTable>
           )}
-          {this.state.tabView === "BOARD_VIEW" && (
-            <Row gutter={[16, 10]} className="mt-3 iqr-wrap-pipeline-flex">
-              <Col
-                sm={{ span: 24, offset: 0 }}
-                className="iqr-pipeline-view-wrapper"
-              >
-                {typeF.map((status, index) => (
-                  <InquiriesBoardView
-                    index={index}
-                    key={index}
-                    status={status}
-                  />
-                ))}
-              </Col>
-            </Row>
+          {this.state.tabView === "GRID_VIEW" && (
+            <div>
+              <StackPland projectId={82} />
+            </div>
           )}
+          <UnitModal
+            title={this.state.title}
+            id={1}
+            visible={this.state.visible}
+            onCancel={() => {
+              this.getAll(), this.setState({ visible: false });
+            }}
+          />
         </div>
       </>
     );
   }
 }
 
-export default withRouter(InquiriesList);
+export default withRouter(Units);

@@ -17,11 +17,11 @@ import InquiriesBoardView from "./components/inquiriesBoardView";
 // import { Table } from "antd";
 const { align } = AppConsts;
 import "./components/pipeline-view.less";
-export interface IUnitProps {
+export interface IInquiriesProps {
   history: any;
 }
 
-export interface IInquiriesListtate {
+export interface IInquiriesstate {
   maxResultCount: number;
   skipCount: number;
   filters: any;
@@ -70,7 +70,7 @@ const typeF = [
 ];
 @inject()
 @observer
-class InquiriesList extends React.Component<any> {
+class Inquiries extends React.Component<any> {
   formRef: any = React.createRef();
   state = {
     maxResultCount: 10,
@@ -110,7 +110,6 @@ class InquiriesList extends React.Component<any> {
     }
   };
   changeTab = async (value) => {
-    console.log(value.target.value);
     await this.setState({ tabView: value.target.value });
   };
 
@@ -196,4 +195,4 @@ class InquiriesList extends React.Component<any> {
   }
 }
 
-export default withRouter(InquiriesList);
+export default withRouter(Inquiries);

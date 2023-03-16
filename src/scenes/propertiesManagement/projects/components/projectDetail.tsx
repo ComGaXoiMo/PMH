@@ -2,9 +2,11 @@ import * as React from "react";
 
 import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
-
-export interface IProjectsDetailProps {
+import Units from "./tabUnit";
+import Inquiries from "./tabinquiry";
+interface IProjectsDetailProps extends RouteComponentProps {
   projectStore: ProjectStore;
+  unitStore: UnitStore;
   params: any;
 }
 
@@ -15,6 +17,8 @@ import withRouter from "@components/Layout/Router/withRouter";
 import Stores from "@stores/storeIdentifier";
 import Summary from "./tabSummary";
 import ProjectStore from "@stores/projects/projectStore";
+import UnitStore from "@stores/projects/unitStore";
+import { RouteComponentProps } from "react-router-dom";
 
 const tabKeys = {
   tabSummaries: "TAB_SUMMARY",
@@ -23,15 +27,24 @@ const tabKeys = {
   tabContracts: "TAB_CONTRACTS",
   tabDocuments: "TAB_DOCUMENTS",
 };
-@inject(Stores.CompanyStore)
+@inject(Stores.CompanyStore, Stores.UnitStore)
 @observer
-class ProjectsDetail extends AppComponentListBase<
-  IProjectsDetailProps,
-  IProjectsDetailState
-> {
+class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
   formRef: any = React.createRef();
-  state = {
-    tabActiveKey: tabKeys.tabSummaries,
+  formRefProjectAddress: any = React.createRef();
+
+  constructor(props: IProjectsDetailProps) {
+    super(props);
+    this.state = {
+      tabActiveKey: tabKeys.tabSummaries,
+      isDirty: false,
+      companies: [],
+      propertyManagements: [],
+      contacts: [],
+    };
+  }
+  componentDidMount = async () => {
+    await console.log(this.props.projectStore);
   };
 
   changeTab = (tabKey) => {
@@ -42,7 +55,7 @@ class ProjectsDetail extends AppComponentListBase<
     return (
       <>
         <div className="container-element">
-          <strong>{this.props.params?.id}</strong>
+          <strong>{1}</strong>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}
@@ -52,18 +65,18 @@ class ProjectsDetail extends AppComponentListBase<
             <Tabs.TabPane
               tab={L(tabKeys.tabSummaries)}
               key={tabKeys.tabSummaries}
-              className={"color-tab"}
             >
-              <Summary projectStore={this.props.projectStore} />
+              <Summary />
             </Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabUnits)}
-              key={tabKeys.tabUnits}
-            ></Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabUnits)} key={tabKeys.tabUnits}>
+              <Units />
+            </Tabs.TabPane>
             <Tabs.TabPane
               tab={L(tabKeys.tabInquiries)}
               key={tabKeys.tabInquiries}
-            ></Tabs.TabPane>
+            >
+              <Inquiries />
+            </Tabs.TabPane>
             <Tabs.TabPane
               tab={L(tabKeys.tabContracts)}
               key={tabKeys.tabContracts}
