@@ -66,7 +66,7 @@ class ArrivalDeparture extends React.Component<any> {
         <DataTable
           // extraFilterComponent={filterComponent}
           // onRefresh={this.getAll}
-          onCreate={() => this.gotoDetail(null)}
+          // onCreate={() => this.gotoDetail(null)}
           pagination={{
             pageSize: this.state.maxResultCount,
             // total: tableData === undefined ? 0 : tableData.totalCount,

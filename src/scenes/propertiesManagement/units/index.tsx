@@ -49,7 +49,7 @@ class Units extends React.Component<any> {
     filters: {},
     visible: false,
     title: L("CREATE"),
-    tabView: "",
+    tabView: "GRID_VIEW",
   };
 
   async componentDidMount() {
@@ -81,12 +81,11 @@ class Units extends React.Component<any> {
   };
   changeTab = async (value) => {
     await this.setState({ tabView: value.target.value });
-    await console.log(this.state.tabView);
   };
 
   public render() {
     const {
-      unitStore: { tableData },
+      unitStore: { isLoading, tableData },
     } = this.props;
     const columns = gettColumns({
       title: L("ACTIONS"),
@@ -120,12 +119,17 @@ class Units extends React.Component<any> {
     return (
       <>
         <div>
-          <UnitFilterPanel changeTab={this.changeTab} />
+          <UnitFilterPanel
+            changeTab={this.changeTab}
+            onCreate={() => {
+              this.gotoDetail(null);
+            }}
+          />
           {this.state.tabView === "LIST_VIEW" && (
             <DataTable
               // extraFilterComponent={filterComponent}
               // onRefresh={this.getAll}
-              onCreate={() => this.gotoDetail(null)}
+              // onCreate={() => this.gotoDetail(null)}
               pagination={{
                 pageSize: this.state.maxResultCount,
                 total: tableData === undefined ? 0 : tableData.totalCount,
@@ -137,6 +141,7 @@ class Units extends React.Component<any> {
                 className=""
                 rowKey={(record) => record.id}
                 columns={columns}
+                loading={isLoading}
                 pagination={false}
                 dataSource={tableData === undefined ? [] : tableData.items}
                 scroll={{ x: 800, y: 500, scrollToFirstRowOnChange: true }}
@@ -146,7 +151,7 @@ class Units extends React.Component<any> {
           )}
           {this.state.tabView === "GRID_VIEW" && (
             <div>
-              <StackPland projectId={82} />
+              <StackPland loading={isLoading} projectId={82} />
             </div>
           )}
           <UnitModal

@@ -1,6 +1,6 @@
 import withRouter from "@components/Layout/Router/withRouter";
 import { L } from "@lib/abpUtility";
-import { Select } from "antd";
+import { Button, Select } from "antd";
 import Col from "antd/lib/col";
 import Search from "antd/lib/input/Search";
 import Row from "antd/lib/row";
@@ -9,6 +9,7 @@ import React from "react";
 type Props = {
   handleSearch: any;
   filter: any;
+  onCreate: () => void;
 };
 
 const projectsFilterPanel = (props: Props) => {
@@ -31,6 +32,14 @@ const projectsFilterPanel = (props: Props) => {
           // showSearch
         ></Select>
       </Col>
+      <div style={{ position: "absolute", right: 40 }}>
+        <Button
+          style={{ borderRadius: "8px", backgroundColor: "#FEC20C" }}
+          onClick={() => props.onCreate()}
+        >
+          {L("NEW_PROPERTY")}
+        </Button>
+      </div>
     </Row>
   );
 };

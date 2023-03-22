@@ -73,7 +73,7 @@ class Projects extends React.Component<any> {
 
   public render() {
     const {
-      projectStore: { tableData },
+      projectStore: { isLoading, tableData },
     } = this.props;
 
     const columns = gettColumns({
@@ -107,11 +107,15 @@ class Projects extends React.Component<any> {
     });
     return (
       <>
-        <ProjectFilterPanel />
+        <ProjectFilterPanel
+          onCreate={() => {
+            this.gotoDetail(null);
+          }}
+        />
         <DataTable
           // extraFilterComponent={filterComponent}
           // onRefresh={this.getAll}
-          onCreate={() => this.gotoDetail(null)}
+          // onCreate={() => this.gotoDetail(null)}
           pagination={{
             pageSize: this.state.maxResultCount,
             total: tableData === undefined ? 0 : tableData.totalCount,
@@ -124,6 +128,7 @@ class Projects extends React.Component<any> {
             rowKey={(record) => record.id}
             columns={columns}
             pagination={false}
+            loading={isLoading}
             dataSource={tableData === undefined ? [] : tableData.items}
             bordered
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
