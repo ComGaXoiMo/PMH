@@ -4,11 +4,6 @@ import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import Units from "./tabUnit";
 import Inquiries from "./tabinquiry";
-interface IProjectsDetailProps extends RouteComponentProps {
-  projectStore: ProjectStore;
-  unitStore: UnitStore;
-  params: any;
-}
 
 export interface IProjectsDetailState {}
 import { Tabs } from "antd";
@@ -19,7 +14,11 @@ import Summary from "./tabSummary";
 import ProjectStore from "@stores/projects/projectStore";
 import UnitStore from "@stores/projects/unitStore";
 import { RouteComponentProps } from "react-router-dom";
-
+interface IProjectsDetailProps extends RouteComponentProps {
+  projectStore: ProjectStore;
+  unitStore: UnitStore;
+  params: any;
+}
 const tabKeys = {
   tabSummaries: "TAB_SUMMARY",
   tabUnits: "TAB_UNITS",
@@ -27,7 +26,7 @@ const tabKeys = {
   tabContracts: "TAB_CONTRACTS",
   tabDocuments: "TAB_DOCUMENTS",
 };
-@inject(Stores.CompanyStore, Stores.UnitStore)
+@inject(Stores.ProjectStore, Stores.UnitStore)
 @observer
 class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
   formRef: any = React.createRef();
@@ -55,7 +54,7 @@ class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
     return (
       <>
         <div className="container-element">
-          <strong>{1}</strong>
+          <strong>{this.props.projectStore.editProject?.name}</strong>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}

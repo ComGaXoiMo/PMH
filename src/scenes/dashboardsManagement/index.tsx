@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import { Tabs } from "antd";
 import { L } from "@lib/abpUtility";
+import Overviews from "./components/overviews";
 
 export interface IDashboardsProps {}
 
@@ -46,7 +47,9 @@ class Dashboards extends AppComponentListBase<
               tab={L(tabKeys.tabOverview)}
               key={tabKeys.tabOverview}
               className={"color-tab"}
-            ></Tabs.TabPane>
+            >
+              <Overviews />
+            </Tabs.TabPane>
             <Tabs.TabPane
               tab={L(tabKeys.tabLeasing)}
               key={tabKeys.tabLeasing}

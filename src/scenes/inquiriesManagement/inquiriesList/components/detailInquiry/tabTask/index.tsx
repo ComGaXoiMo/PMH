@@ -3,16 +3,16 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import { Card, Col, Row } from "antd";
-import { L } from "@lib/abpUtility";
 import Stores from "@stores/storeIdentifier";
 import ProjectStore from "@stores/projects/projectStore";
 // import FileUploadWrap from "@components/FileUpload/FileUploadCRM";
 import FileStore from "@stores/common/fileStore";
-import Monition from "./components/Monition";
 import UnitStore from "@stores/projects/unitStore";
 import withRouter from "@components/Layout/Router/withRouter";
 import AppDataStore from "@stores/appDataStore";
 import ActivityFilter from "./components/taskFilter";
+import TaskBoardItem from "./components/taskBoardItem";
+import CreateTaskModal from "./components/createTaskModal";
 
 export interface ITaskProps {
   projectStore: ProjectStore;
@@ -21,7 +21,9 @@ export interface ITaskProps {
   appDataStore: AppDataStore;
   fileStore: FileStore;
 }
-export interface ITaskState {}
+export interface ITaskState {
+  modalVisible: boolean;
+}
 const fakedata = [
   {
     data: {
@@ -78,31 +80,31 @@ class Task extends AppComponentListBase<ITaskProps, ITaskState> {
 
   constructor(props: ITaskProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      modalVisible: false,
+    };
   }
 
   async componentDidMount() {
-    await Promise.all([
-      this.props.appDataStore.getPropertyTypes(),
-      this.props.appDataStore.getFacilities(),
-      this.props.appDataStore.getGrades(),
-      this.props.appDataStore.getCountries({}),
-      this.props.projectStore.getTransportations(""),
-      this.getDetail(this.props.params?.id),
-    ]);
+    await Promise.all([]);
     this.initData();
   }
   initData = () => {};
-  getDetail = async (id?) => {};
-  changeTab = async (value) => {
-    console.log(value.target);
-    await this.setState({ tabView: value.target.value });
-  };
 
+  toggleModal = () =>
+    this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
+
+  handleImport = async () => {
+    this.toggleModal();
+  };
   public render() {
     return (
       <>
-        <ActivityFilter changeTab={this.changeTab} />
+        <ActivityFilter
+          onCreate={() => {
+            this.toggleModal();
+          }}
+        />
 
         <Row gutter={[8, 0]}>
           <Col sm={{ span: 24 }}>
@@ -115,15 +117,21 @@ class Task extends AppComponentListBase<ITaskProps, ITaskState> {
                 borderRadius: "16px",
               }}
             >
-              <strong>{L("PROJECT_ACTIVITY")}</strong>
               <Row>
                 {fakedata.map((item) => (
-                  <Monition data={item.data} />
+                  <Col sm={{ span: 24 }}>
+                    <TaskBoardItem />
+                  </Col>
                 ))}
               </Row>
             </Card>
           </Col>
         </Row>
+        <CreateTaskModal
+          visible={this.state.modalVisible}
+          onClose={this.toggleModal}
+          onOk={this.handleImport}
+        />
       </>
     );
   }

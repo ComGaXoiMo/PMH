@@ -546,7 +546,22 @@ export const portalLayouts: any = {
       () => import("../../../scenes/tasksManagement/index")
     ),
   },
-
+  proposals: {
+    path: "/proposals",
+    name: "PROPOSALS",
+    // permission: appPermissions.company.create,
+    layout: layouts.portalLayout,
+    component: LoadableComponent(() => import("../../../scenes/proposal")),
+  },
+  proposalCreate: {
+    path: "/proposal-create",
+    name: "PROPOSAL_CREATE",
+    // permission: appPermissions.company.create,
+    layout: layouts.portalLayout,
+    component: LoadableComponent(
+      () => import("../../../scenes/proposal/components/proposalCreate")
+    ),
+  },
   map: {
     path: "http://property-landing.sadec.co/",
     name: "MAP",

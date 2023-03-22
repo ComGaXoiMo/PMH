@@ -1,7 +1,7 @@
 import React from "react";
 import withRouter from "@components/Layout/Router/withRouter";
 import { L } from "@lib/abpUtility";
-import { Button, Radio, Select } from "antd";
+import { Radio, Select } from "antd";
 import Col from "antd/lib/col";
 import Search from "antd/lib/input/Search";
 import Row from "antd/lib/row";
@@ -84,14 +84,14 @@ class AllTaskFilterPanel extends React.Component<Props> {
             </Radio.Button>
           </Radio.Group>
 
-          <div style={{ position: "absolute", right: 40 }}>
+          {/* <div style={{ position: "absolute", right: 40 }}>
             <Button
               style={{ borderRadius: "8px", backgroundColor: "#FEC20C" }}
               onClick={() => this.props.onCreate()}
             >
               New Task
             </Button>
-          </div>
+          </div> */}
         </Row>
       </>
     );

@@ -12,7 +12,7 @@ import {
   EditOutlined,
 } from "@ant-design/icons/lib/icons";
 import DataTable from "@components/DataTable";
-import InquiriesBoardView from "./components/taskBoardView";
+import TaskBoardView from "./components/taskBoardView";
 // import { Table } from "antd";
 const { align } = AppConsts;
 import "./components/pipeline.less";
@@ -189,11 +189,7 @@ class AllTask extends React.Component<IAllTaskProps, IAllTaskState> {
                 className="pipeline-view-wrapper"
               >
                 {typeF.map((status, index) => (
-                  <InquiriesBoardView
-                    index={index}
-                    key={index}
-                    status={status}
-                  />
+                  <TaskBoardView index={index} key={index} status={status} />
                 ))}
               </Col>
             </Row>

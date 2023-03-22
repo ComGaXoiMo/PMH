@@ -27,7 +27,7 @@ class general extends AppComponentListBase<IGeneralProps, IGeneralState> {
           style={{
             backgroundColor: "white",
             minHeight: "80vh",
-            height: "max-content",
+            overflow: "auto",
             padding: "10px",
             borderRadius: "16px",
           }}
@@ -153,7 +153,7 @@ class general extends AppComponentListBase<IGeneralProps, IGeneralState> {
 
               <Row gutter={[8, 0]}>
                 <Col sm={24}>
-                  <Form.Item label={L("LABLE")} name="">
+                  <Form.Item label={L("LABEL")} name="">
                     <Input />
                   </Form.Item>
                 </Col>

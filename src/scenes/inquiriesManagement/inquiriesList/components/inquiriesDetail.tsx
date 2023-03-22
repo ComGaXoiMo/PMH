@@ -41,7 +41,7 @@ class InquiriessDetail extends AppComponentListBase<
     return (
       <>
         <div>
-          <strong>{this.props.params?.id}</strong>
+          <strong>{this.props.params?.id ?? "Create"} </strong>
           <Card className="w-100 h-100">
             <Row gutter={[8, 8]}>
               <Col sm={{ span: 22 }}>

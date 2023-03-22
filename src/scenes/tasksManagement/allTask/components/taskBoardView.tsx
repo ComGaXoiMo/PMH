@@ -5,8 +5,8 @@ import "./pipeline.less";
 
 import { Button, Card } from "antd";
 import withRouter from "@components/Layout/Router/withRouter";
-import InquiriesBoardItem from "./taskBoardItem";
-import CreateInquiriesModal from "./allTaskModal";
+import TaskBoardItem from "./taskBoardItem";
+import CreatetaskModal from "./allTaskModal";
 // import { Table } from "antd";
 
 export interface IUnitProps {
@@ -53,13 +53,15 @@ class AllTaskBoardView extends React.Component<
             >
               <strong>{this.props.status?.name}</strong>
             </div>
-            <div className="b">
-              <InquiriesBoardItem />
+            <div>
+              <TaskBoardItem />
+              <TaskBoardItem />
+              <TaskBoardItem />
             </div>
           </div>
           <Button onClick={this.toggleModal}>Add new</Button>
         </Card>
-        <CreateInquiriesModal
+        <CreatetaskModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
           onOk={this.handleImport}
