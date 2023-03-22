@@ -47,6 +47,7 @@ export interface IProjectStackingPlanProps {
   projectStore: ProjectStore;
   unitStore: UnitStore;
   appDataStore: AppDataStore;
+  loading: any;
 }
 @inject(
   Stores.AppDataStore,

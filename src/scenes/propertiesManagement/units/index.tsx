@@ -85,7 +85,7 @@ class Units extends React.Component<any> {
 
   public render() {
     const {
-      unitStore: { tableData },
+      unitStore: { isLoading, tableData },
     } = this.props;
     const columns = gettColumns({
       title: L("ACTIONS"),
@@ -141,6 +141,7 @@ class Units extends React.Component<any> {
                 className=""
                 rowKey={(record) => record.id}
                 columns={columns}
+                loading={isLoading}
                 pagination={false}
                 dataSource={tableData === undefined ? [] : tableData.items}
                 scroll={{ x: 800, y: 500, scrollToFirstRowOnChange: true }}
@@ -150,7 +151,7 @@ class Units extends React.Component<any> {
           )}
           {this.state.tabView === "GRID_VIEW" && (
             <div>
-              <StackPland projectId={82} />
+              <StackPland loading={isLoading} projectId={82} />
             </div>
           )}
           <UnitModal

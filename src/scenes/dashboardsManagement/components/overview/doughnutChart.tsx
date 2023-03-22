@@ -12,11 +12,11 @@ import {
   registerables as registerablesJS,
 } from "chart.js";
 import withRouter from "@components/Layout/Router/withRouter";
-export interface IDoghnutProps {
+export interface IDoughnutProps {
   Title: any;
 }
 
-export interface IDoghnutState {}
+export interface IDoughnutState {}
 ChartJS.register(...registerablesJS, ArcElement, Tooltip, Legend);
 const data = {
   labels: ["New", "Renew", "Tertminate", "early terminate"],
@@ -48,7 +48,10 @@ export const globalPlugins: any = (additionPlugin?) => ({
 });
 @inject()
 @observer
-class Doghnut extends AppComponentListBase<IDoghnutProps, IDoghnutState> {
+class DoughnutChart extends AppComponentListBase<
+  IDoughnutProps,
+  IDoughnutState
+> {
   formRef: any = React.createRef();
   state = {};
 
@@ -84,4 +87,4 @@ class Doghnut extends AppComponentListBase<IDoghnutProps, IDoghnutState> {
   }
 }
 
-export default withRouter(Doghnut);
+export default withRouter(DoughnutChart);

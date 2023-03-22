@@ -73,7 +73,7 @@ class Projects extends React.Component<any> {
 
   public render() {
     const {
-      projectStore: { tableData },
+      projectStore: { isLoading, tableData },
     } = this.props;
 
     const columns = gettColumns({
@@ -128,6 +128,7 @@ class Projects extends React.Component<any> {
             rowKey={(record) => record.id}
             columns={columns}
             pagination={false}
+            loading={isLoading}
             dataSource={tableData === undefined ? [] : tableData.items}
             bordered
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}

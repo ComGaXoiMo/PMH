@@ -3,7 +3,8 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import { Row, Col, Card } from "antd";
-import Doghnut from "./overview/doughnut";
+import Doughnut from "./overview/doughnutChart";
+import BarChart from "./overview/barChart";
 
 export interface IOverviewProps {}
 
@@ -24,31 +25,31 @@ class Overviews extends AppComponentListBase<IOverviewProps, IOverviewState> {
         <div className="dashboard-style">
           <Row gutter={[16, 20]}>
             <Col sm={{ span: 8, offset: 0 }}>
-              <Doghnut Title="Top 5 Clients" />
+              <Doughnut Title="Top 5 Clients" />
             </Col>
             <Col sm={{ span: 8, offset: 0 }}>
-              <Doghnut Title="Top 5 Client Industry" />
+              <Doughnut Title="Top 5 Client Industry" />
             </Col>
             <Col sm={{ span: 8, offset: 0 }}>
-              <Doghnut Title="Expiring leased" />
+              <Doughnut Title="Expiring leased" />
             </Col>
             <Col sm={{ span: 8, offset: 0 }}>
-              <Doghnut Title="Lease Contract" />
+              <Doughnut Title="Lease Contract" />
             </Col>
             <Col sm={{ span: 8, offset: 0 }}>
-              <Doghnut Title="Deposit" />
+              <Doughnut Title="Deposit" />
             </Col>
             <Col sm={{ span: 8, offset: 0 }}>
-              <Doghnut Title="Payment" />
+              <Doughnut Title="Payment" />
             </Col>
             <Col sm={{ span: 16, offset: 0 }}>
               <Card />
             </Col>
             <Col sm={{ span: 8, offset: 0 }}>
-              <Doghnut Title="Inquiries" />
+              <Doughnut Title="Inquiries" />
             </Col>
             <Col sm={{ span: 24, offset: 0 }}>
-              <Doghnut Title="Inquiries" />
+              <BarChart Title="Inquiries" />
             </Col>
           </Row>
         </div>

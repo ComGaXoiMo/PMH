@@ -98,7 +98,7 @@ class Company extends React.Component<IContactProps, IContactState> {
 
   public render() {
     const {
-      companyStore: { tableData },
+      companyStore: { isLoading, tableData },
     } = this.props;
     const columns = gettColumns({
       title: L("ACTIONS"),
@@ -151,6 +151,7 @@ class Company extends React.Component<IContactProps, IContactState> {
             rowKey={(record) => record.id}
             columns={columns}
             pagination={false}
+            loading={isLoading}
             dataSource={tableData === undefined ? [] : tableData.items}
             bordered
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}

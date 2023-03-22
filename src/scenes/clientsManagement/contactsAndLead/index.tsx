@@ -98,7 +98,7 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
 
   public render() {
     const {
-      contactStore: { tableData },
+      contactStore: { tableData, isLoading },
     } = this.props;
     const columns = gettColumns({
       title: L("ACTIONS"),
@@ -153,6 +153,7 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
             columns={columns}
             pagination={false}
             dataSource={tableData === undefined ? [] : tableData.items}
+            loading={isLoading}
             bordered
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
           />
