@@ -98,7 +98,6 @@ class Staffs extends AppComponentListBase<IStaffsProps, IStaffsState> {
 
     this.setState({ staffId: id });
     this.Modal();
-    console.log("check");
     this.formRef.current?.setFieldsValue({});
   };
 

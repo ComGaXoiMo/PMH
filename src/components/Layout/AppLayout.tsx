@@ -66,7 +66,11 @@ class AppLayout extends React.Component<any> {
     const layout = (
       <Layout className="h-100 container-style-custom">
         <div className="left-menu-style">
-          <Appbar sessionStore={sessionStore} changeMenu={this.onChangeMenu} />
+          <Appbar
+            history={history}
+            sessionStore={sessionStore}
+            changeMenu={this.onChangeMenu}
+          />
         </div>
         <div className="footer-menu-style">
           <FooterAppbar
