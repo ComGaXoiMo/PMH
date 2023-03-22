@@ -37,38 +37,39 @@ class Properties extends AppComponentListBase<
   public render() {
     return (
       <>
-        <div className="header-element">
-          <h1>{L("PROJECTS_UNIT")}</h1>
-          <Tabs
-            activeKey={this.state.tabActiveKey}
-            onTabClick={this.changeTab}
-            className={"color-tabs"}
-            type="card"
-          >
-            <Tabs.TabPane
-              tab={L(tabKeys.tabProjects)}
-              key={tabKeys.tabProjects}
-              className={"color-tab"}
-            >
-              <Projects />
-            </Tabs.TabPane>
-            <Tabs.TabPane tab={L(tabKeys.tabUnits)} key={tabKeys.tabUnits}>
-              <Units />
-            </Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabArrival_Departure)}
-              key={tabKeys.tabArrival_Departure}
-            >
-              <ArrivalDepartures />
-            </Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabSiteVisit)}
-              key={tabKeys.tabSiteVisit}
-            >
-              <SiteVisits />
-            </Tabs.TabPane>
-          </Tabs>
+        <div className="container-element">
+          <strong>{L("PROJECTS_UNIT")}</strong>
         </div>
+
+        <Tabs
+          activeKey={this.state.tabActiveKey}
+          onTabClick={this.changeTab}
+          className={"antd-tab-cusstom"}
+          type="card"
+        >
+          <Tabs.TabPane
+            tab={L(tabKeys.tabProjects)}
+            key={tabKeys.tabProjects}
+            className={"color-tab"}
+          >
+            <Projects />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab={L(tabKeys.tabUnits)} key={tabKeys.tabUnits}>
+            <Units />
+          </Tabs.TabPane>
+          <Tabs.TabPane
+            tab={L(tabKeys.tabArrival_Departure)}
+            key={tabKeys.tabArrival_Departure}
+          >
+            <ArrivalDepartures />
+          </Tabs.TabPane>
+          <Tabs.TabPane
+            tab={L(tabKeys.tabSiteVisit)}
+            key={tabKeys.tabSiteVisit}
+          >
+            <SiteVisits />
+          </Tabs.TabPane>
+        </Tabs>
       </>
     );
   }

@@ -42,7 +42,7 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
       }
       getContainer={props.getContainer}
     >
-      <div className="mb-3">{props.children}</div>
+      {props.children}
       {/* {props.useBottomAction && (
         <>
           <div style={{ height: 60 }} />
@@ -74,7 +74,7 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
         position: relative !important;
       }
       .ant-drawer-body {
-        padding-top: 4px !important;
+        padding: 4px 0px 0px 0px !important;
       }
       .bottom-action-style {
         position: absolute  !important;
