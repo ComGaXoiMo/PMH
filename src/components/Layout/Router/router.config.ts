@@ -502,6 +502,30 @@ export const portalLayouts: any = {
       () => import("../../../scenes/inquiriesManagement/index")
     ),
   },
+  inquiriesCreate: {
+    path: "/inquiries-create",
+    name: "INQUIRIES_CREATE",
+    // permission: appPermissions.company.create,
+    layout: layouts.portalLayout,
+    component: LoadableComponent(
+      () =>
+        import(
+          "../../../scenes/inquiriesManagement/inquiriesList/components/inquiriesDetail"
+        )
+    ),
+  },
+  inquiriesDetail: {
+    path: "/inquiries-detail/:id",
+    name: "INQUIRIES_DETAIL",
+    // permission: appPermissions.company.detail,
+    layout: layouts.portalLayout,
+    component: LoadableComponent(
+      () =>
+        import(
+          "../../../scenes/inquiriesManagement/inquiriesList/components/inquiriesDetail"
+        )
+    ),
+  },
   leaseContracts: {
     path: "/lease-contracts",
     name: "LEASE_CONTRACTS",
@@ -522,7 +546,22 @@ export const portalLayouts: any = {
       () => import("../../../scenes/tasksManagement/index")
     ),
   },
-
+  proposals: {
+    path: "/proposals",
+    name: "PROPOSALS",
+    // permission: appPermissions.company.create,
+    layout: layouts.portalLayout,
+    component: LoadableComponent(() => import("../../../scenes/proposal")),
+  },
+  proposalCreate: {
+    path: "/proposal-create",
+    name: "PROPOSAL_CREATE",
+    // permission: appPermissions.company.create,
+    layout: layouts.portalLayout,
+    component: LoadableComponent(
+      () => import("../../../scenes/proposal/components/proposalCreate")
+    ),
+  },
   map: {
     path: "http://property-landing.sadec.co/",
     name: "MAP",

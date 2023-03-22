@@ -3,6 +3,7 @@ import { MenuProps } from "antd";
 // import { useNavigate } from 'react-router'
 import { isGranted, LMainMenu } from "@lib/abpUtility";
 import { useHistory } from "react-router-dom";
+import { CaretDownOutlined } from "@ant-design/icons";
 type MenuItem = Required<MenuProps>["items"][number];
 
 const getMenuItem = (
@@ -43,7 +44,9 @@ const GetMenuItems = ({
         href={path}
       >
         {Icon ? <Icon className="menu-icon" /> : ""}
-        <span className="selected-title">{LMainMenu(name)}</span>
+        <span className="selected-title">
+          {LMainMenu(name)} <CaretDownOutlined />
+        </span>
       </a>
     );
   } else {
