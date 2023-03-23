@@ -3,17 +3,15 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
 
-export interface IInquiriessDetailProps {
-  params: any;
-}
-
-export interface IInquiriessDetailState {}
 import { Card, Col, Row, Select } from "antd";
 import withRouter from "@components/Layout/Router/withRouter";
 import Stores from "@stores/storeIdentifier";
 import { L } from "@lib/abpUtility";
 import General from "./detailInquiry/general";
 import Info from "./detailInquiry/info";
+import InquiryStore from "@stores/communication/inquiryStore";
+import AppDataStore from "@stores/appDataStore";
+import ListingStore from "@stores/projects/listingStore";
 
 const tabKeys = {
   tabSummaries: "TAB_SUMMARY",
@@ -22,7 +20,22 @@ const tabKeys = {
   tabContracts: "TAB_CONTRACTS",
   tabDocuments: "TAB_DOCUMENTS",
 };
-@inject(Stores.CompanyStore)
+export interface IInquiriessDetailProps {
+  params: any;
+  inquiryStore: InquiryStore;
+  listingStore: ListingStore;
+  appDataStore: AppDataStore;
+}
+
+export interface IInquiriessDetailState {
+  tabActiveKey: any;
+}
+@inject(
+  Stores.AppDataStore,
+  Stores.InquiryStore,
+  Stores.UnitStore,
+  Stores.ListingStore
+)
 @observer
 class InquiriessDetail extends AppComponentListBase<
   IInquiriessDetailProps,
@@ -32,12 +45,24 @@ class InquiriessDetail extends AppComponentListBase<
   state = {
     tabActiveKey: tabKeys.tabSummaries,
   };
+  async componentDidMount() {
+    await this.getAll();
+    await Promise.all([]);
+  }
+  getAll = async () => {
+    this.props.appDataStore.getInquirySourceAndStatus();
+    this.props.inquiryStore.getAll("");
+  };
 
   changeTab = (tabKey) => {
     this.setState({ tabActiveKey: tabKey });
   };
 
   public render() {
+    const {
+      appDataStore: { inquiryStatus },
+      inquiryStore: {},
+    } = this.props;
     return (
       <>
         <div>
@@ -46,21 +71,11 @@ class InquiriessDetail extends AppComponentListBase<
             <Row gutter={[8, 8]}>
               <Col sm={{ span: 22 }}>
                 <div className="wrap">
-                  <div className="progress">
-                    <strong>Prospect</strong>
-                  </div>
-                  <div className="progress">
-                    <strong>Offer</strong>
-                  </div>
-                  <div className="progress">
-                    <strong>Lease Agrement</strong>
-                  </div>
-                  <div className="progress">
-                    <strong>Close</strong>
-                  </div>
-                  <div className="progress">
-                    <strong>Dropped</strong>
-                  </div>
+                  {inquiryStatus.map((inquiry, index) => (
+                    <div className="progress">
+                      <strong>{inquiry.name}</strong>
+                    </div>
+                  ))}
                 </div>
               </Col>
               <Col sm={{ span: 2 }}>
@@ -71,7 +86,7 @@ class InquiriessDetail extends AppComponentListBase<
           <div style={{ padding: "17px" }}>
             <Row gutter={[8, 0]}>
               <Col sm={12}>
-                <General />
+                <General params={this.props.params?.id} />
               </Col>
               <Col sm={12}>
                 <Info />

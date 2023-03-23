@@ -16,25 +16,84 @@ import withRouter from "@components/Layout/Router/withRouter";
 export interface IBarChartHorizontalProps {
   Title: any;
 }
-
+const lb = ["unit01", "unit02", "unit03", "unit04"];
+const dt = [
+  {
+    name: "unit01",
+    Leased: 1,
+    Vacant: 10,
+    Showroom: 0,
+    Renovation: 2,
+  },
+  {
+    name: "unit02",
+    Leased: 1,
+    Vacant: 0,
+    Showroom: 2,
+    Renovation: 2,
+  },
+  {
+    name: "unit03",
+    Leased: 3,
+    Vacant: 2,
+    Showroom: 0,
+    Renovation: 2,
+  },
+  {
+    name: "unit04",
+    Leased: 1,
+    Vacant: 1,
+    Showroom: 0,
+    Renovation: 1,
+  },
+];
 export interface IBarChartHorizontalState {}
 ChartJS.register(...registerablesJS, ArcElement, Tooltip, Legend);
 const data = {
-  labels: ["New", "Renew", "Tertminate", "early terminate"],
+  labels: lb,
   datasets: [
     {
-      data: [3, 10, 10, 10],
-      backgroundColor: ["#27AE60", "#FEC20C", "#F2994A", "#666699"],
-      display: true,
-      //   borderColor: "#D1D6DC",
+      label: "Leased",
+      backgroundColor: "#FFF5D6",
+      data: lb.map((label) => {
+        const res = dt.find((data) => data.name === label);
+        console.log(label);
+        return res?.Leased ?? 0;
+      }),
+      stack: "Stack 0",
+    },
+    {
+      label: "Vacant",
+      backgroundColor: "#FEC20C",
+      data: lb.map((label) => {
+        const res = dt.find((data) => data.name === label);
+        return res?.Vacant ?? 0;
+      }),
+      stack: "Stack 0",
+    },
+    {
+      label: "Showroom",
+      backgroundColor: "#760505",
+      data: lb.map((label) => {
+        const res = dt.find((data) => data.name === label);
+        return res?.Showroom ?? 0;
+      }),
+      stack: "Stack 0",
+    },
+    {
+      label: "Renovation",
+      backgroundColor: "#440303",
+      data: lb.map((label) => {
+        const res = dt.find((data) => data.name === label);
+        return res?.Renovation ?? 0;
+      }),
+      stack: "Stack 0",
     },
   ],
 };
 export const globalPlugins: any = (additionPlugin?) => ({
   ...additionPlugin,
-  legend: {
-    position: "left",
-  },
+
   datalabels: {
     color: "white",
     display: function (context) {

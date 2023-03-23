@@ -8,6 +8,7 @@ import withRouter from "@components/Layout/Router/withRouter";
 // import { Table } from "antd";
 
 export interface IInquiriesListProps {
+  data: any;
   goDetail: () => void;
 }
 
@@ -22,7 +23,9 @@ class InquiriesBoardItem extends React.Component<
   formRef: any = React.createRef();
   state = {};
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    console.log(this.props.data);
+  }
 
   public render() {
     const {} = this.props;
@@ -42,9 +45,9 @@ class InquiriesBoardItem extends React.Component<
             key={""}
           >
             <div className="h-100 board-item">
-              <strong>Inquiries Name 02</strong>
-              <label>Unit:302C</label>
-              <label>Customer: Zaire Dorwart</label>
+              <strong>{this.props.data?.toPrice}$</strong>
+              <label>Type: {this.props.data?.propertyType.name}</label>
+              <label>Contact: {this.props.data?.contact.contactName}</label>
             </div>
           </Card>
         </a>

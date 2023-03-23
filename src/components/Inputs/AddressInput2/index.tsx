@@ -135,19 +135,23 @@ const AddressInputMulti: React.FC<AddressInputMultiProps> = ({
 
   return (
     <>
-      {(currentValue || []).map((address: any, index) => {
-        return (
-          <AddressInput
-            value={address}
-            addressActions={() => addressActions(address, index)}
-            onChange={(updateValue) => handleChange(index, updateValue)}
-            countries={countries}
-            configOption={configOption}
-            rowGutter={rowGutter}
-            key={index}
-          />
-        );
-      })}
+      <Row gutter={[8, 8]}>
+        {(currentValue || []).map((address: any, index) => {
+          return (
+            <Col sm={24}>
+              <AddressInput
+                value={address}
+                addressActions={() => addressActions(address, index)}
+                onChange={(updateValue) => handleChange(index, updateValue)}
+                countries={countries}
+                configOption={configOption}
+                rowGutter={rowGutter}
+                key={index}
+              />
+            </Col>
+          );
+        })}
+      </Row>
       {(!currentValue || !currentValue.length) && (
         <Button type="dashed" block onClick={addAddress}>
           {L("BTN_ADD")}
@@ -225,18 +229,18 @@ const AddressInput: React.FC<AddressInput2Props> = ({
   //   triggerChange(currentValue);
   // };
 
-  const changeCountry = async (countryId) => {
-    let updatedValue = {
-      ...currentValue,
-      countryId,
-      provinceId: undefined,
-      districtId: undefined,
-    };
-    if (configOption.showProvince) {
-      initProvinces(countryId);
-    }
-    triggerChange(updatedValue);
-  };
+  // const changeCountry = async (countryId) => {
+  //   let updatedValue = {
+  //     ...currentValue,
+  //     countryId,
+  //     provinceId: undefined,
+  //     districtId: undefined,
+  //   };
+  //   if (configOption.showProvince) {
+  //     initProvinces(countryId);
+  //   }
+  //   triggerChange(updatedValue);
+  // };
 
   const initProvinces = async (countryId) => {
     const data = countryId ? await appDataService.getProvinces(countryId) : [];
@@ -275,7 +279,7 @@ const AddressInput: React.FC<AddressInput2Props> = ({
           // ref={inputRef}
         />
       </Col>
-      <Col sm={{ span: 24, offset: 0 }}>
+      {/* <Col sm={{ span: 12, offset: 0 }}>
         <Select
           style={{ width: "100%" }}
           allowClear
@@ -287,9 +291,9 @@ const AddressInput: React.FC<AddressInput2Props> = ({
         >
           {renderOptions(countries)}
         </Select>
-      </Col>
+      </Col> */}
       {configOption.showProvince && (
-        <Col sm={{ span: 24, offset: 0 }}>
+        <Col sm={{ span: 12, offset: 0 }}>
           <Select
             style={{ width: "100%" }}
             allowClear
@@ -304,7 +308,7 @@ const AddressInput: React.FC<AddressInput2Props> = ({
         </Col>
       )}
       {configOption.showDistrict && (
-        <Col sm={{ span: 24, offset: 0 }}>
+        <Col sm={{ span: 12, offset: 0 }}>
           <Select
             style={{ width: "100%" }}
             allowClear

@@ -24,7 +24,7 @@ const FormRangeInput: React.FC<FormInputProps> = ({
 }) => {
   return (
     <Input.Group size="large">
-      <Row gutter={8}>
+      <Row gutter={[8, 8]}>
         <Col span={12}>
           <Form.Item
             label={L(label)}

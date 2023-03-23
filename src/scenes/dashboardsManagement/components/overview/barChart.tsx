@@ -51,9 +51,12 @@ class BarChart extends AppComponentListBase<IBarChartProps, IBarChartState> {
         <Card style={{ borderRadius: "16px" }}>
           <strong>{this.props.Title}</strong>
           <div>
-            <Row gutter={[0, 0]}>
+            <Row gutter={[2, 2]}>
               {/* <Col sm={{ span: 12, offset: 0 }}></Col> */}
-              <Col sm={{ span: 24, offset: 0 }}>
+              <Col sm={{ span: 16, offset: 0 }}>
+                <BarChartHorizontal />
+              </Col>
+              <Col sm={{ span: 8, offset: 0 }}>
                 <BarChartHorizontal />
               </Col>
             </Row>

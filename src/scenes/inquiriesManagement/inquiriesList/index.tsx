@@ -17,8 +17,13 @@ import InquiriesBoardView from "./components/inquiriesBoardView";
 // import { Table } from "antd";
 const { align } = AppConsts;
 import "./components/pipeline-view.less";
+import AppDataStore from "@stores/appDataStore";
+import Stores from "@stores/storeIdentifier";
+import InquiryStore from "@stores/communication/inquiryStore";
 export interface IUnitProps {
   history: any;
+  appDataStore: AppDataStore;
+  inquiryStore: InquiryStore;
 }
 
 export interface IInquiriesListtate {
@@ -31,44 +36,8 @@ export interface IInquiriesListtate {
   title: string;
   tabView: string;
 }
-const typeF = [
-  {
-    id: 1,
-    name: "Prospect",
-    value: "Prospect",
-    label: "Prospect",
-    borderColorCode: "red",
-  },
-  {
-    id: 2,
-    name: "Offer",
-    value: "Offer",
-    label: "Offer",
-    borderColorCode: "blue",
-  },
-  {
-    id: 3,
-    name: "LeaseAgreement",
-    value: "LeaseAgreement",
-    label: "LeaseAgreement",
-    borderColorCode: "black",
-  },
-  {
-    id: 4,
-    name: "Close",
-    value: "Close",
-    label: "Close",
-    borderColorCode: "pink",
-  },
-  {
-    id: 5,
-    name: "Dropped",
-    value: "Dropped",
-    label: "Dropped",
-    borderColorCode: "yellow",
-  },
-];
-@inject()
+
+@inject(Stores.AppDataStore, Stores.InquiryStore)
 @observer
 class InquiriesList extends React.Component<any> {
   formRef: any = React.createRef();
@@ -88,11 +57,8 @@ class InquiriesList extends React.Component<any> {
     await Promise.all([]);
   }
   getAll = async () => {
-    await this.props.InquiriesListtore.getAllRes({
-      maxResultCount: this.state.maxResultCount,
-      skipCount: this.state.skipCount,
-      ...this.state.filters,
-    });
+    this.props.appDataStore.getInquirySourceAndStatus();
+    this.props.inquiryStore.getAll("");
   };
   handleTableChange = (pagination: any) => {
     this.setState(
@@ -110,13 +76,13 @@ class InquiriesList extends React.Component<any> {
     }
   };
   changeTab = async (value) => {
-    console.log(value.target.value);
     await this.setState({ tabView: value.target.value });
   };
 
   public render() {
     const {
-      // InquiriesListtore: { tableData },
+      appDataStore: { inquiryStatus },
+      inquiryStore: { pageResult },
     } = this.props;
     const columns = gettColumns({
       title: L("ACTIONS"),
@@ -180,11 +146,13 @@ class InquiriesList extends React.Component<any> {
                 sm={{ span: 24, offset: 0 }}
                 className="iqr-pipeline-view-wrapper"
               >
-                {typeF.map((status, index) => (
+                {inquiryStatus.map((inquiry, index) => (
                   <InquiriesBoardView
-                    index={index}
                     key={index}
-                    status={status}
+                    data={pageResult.items.filter(
+                      (item) => item?.statusId === inquiry.id
+                    )}
+                    status={inquiry}
                   />
                 ))}
               </Col>

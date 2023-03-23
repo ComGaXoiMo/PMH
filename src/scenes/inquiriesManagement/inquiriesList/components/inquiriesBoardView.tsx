@@ -9,11 +9,13 @@ import InquiriesBoardItem from "./inquiriesBoardItem";
 import CreateInquiriesModal from "./createInquiriesModal";
 import { portalLayouts } from "@components/Layout/Router/router.config";
 import { AppComponentListBase } from "@components/AppComponentBase";
+import Stores from "@stores/storeIdentifier";
 // import { Table } from "antd";
 
 export interface IUnitProps {
   history: any;
   index: any;
+  data: any;
   status: any;
   modalVisible: false;
 }
@@ -22,7 +24,7 @@ export interface IInquiriesListtate {
   modalVisible: boolean;
 }
 
-@inject()
+@inject(Stores.InquiryStore)
 @observer
 class InquiriesList extends AppComponentListBase<
   IUnitProps,
@@ -33,13 +35,16 @@ class InquiriesList extends AppComponentListBase<
     modalVisible: false,
   };
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    this.getAll();
+  }
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
   handleImport = async () => {
     this.toggleModal();
   };
+  getAll = async () => {};
   gotoDetail = (id?) => {
     const { history } = this.props;
     id
@@ -47,8 +52,6 @@ class InquiriesList extends AppComponentListBase<
       : history.push(portalLayouts.inquiriesCreate.path);
   };
   public render() {
-    const {} = this.props;
-
     return (
       <>
         <Card
@@ -60,10 +63,12 @@ class InquiriesList extends AppComponentListBase<
             <div className="iqr-title-card">
               <strong>{this.props.status?.name}</strong>
             </div>
-            <div className="b">
-              <InquiriesBoardItem goDetail={() => this.gotoDetail()} />
-              <InquiriesBoardItem />
-            </div>
+            {this.props.data.map((item) => (
+              <InquiriesBoardItem
+                data={item}
+                goDetail={() => this.gotoDetail(item?.id)}
+              />
+            ))}
           </div>
           <Button onClick={this.toggleModal}>Add new</Button>
         </Card>
