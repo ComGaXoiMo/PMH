@@ -9,7 +9,10 @@ import { defaultAvatar, sidebarStatus } from "@lib/appconst";
 // import { portalLayouts } from "../Router/router.config";
 import { SettingOutlined } from "@ant-design/icons/lib/icons";
 
+import { portalLayouts } from "../Router/router.config";
+
 interface Props {
+  history: any;
   sessionStore: SessionStore;
   changeMenu: (value: any) => void;
 }
@@ -43,26 +46,26 @@ const Appbar = (props: Props) => {
       </div>
       <div className="text-center my-1">
         <LanguageSelect wrapClass="wrap-item" placement={"topRight"} />
-        {/* <a
+        <a
           onClick={() => {
             props.changeMenu(sidebarStatus.account);
-            setCurrentSidebarStatus(sidebarStatus.account);
-            history.push(portalLayouts.accountConfigMyProfile.path);
+            // currentSidebarStatus(sidebarStatus.account);
+            props.history.push(portalLayouts.accountConfigMyProfile.path);
           }}
-        > */}
-        <span
-          className={`wrap-item my-1 ${
-            currentSidebarStatus === sidebarStatus.account && "styleses"
-          }`}
         >
-          <Avatar
-            style={{ height: 40, width: 40, borderRadius: "50%" }}
-            shape="circle"
-            alt={"profile"}
-            src={profilePicture}
-          />
-        </span>
-        {/* </a> */}
+          <span
+            className={`wrap-item my-1 ${
+              currentSidebarStatus === sidebarStatus.account && "styleses"
+            }`}
+          >
+            <Avatar
+              style={{ height: 40, width: 40, borderRadius: "50%" }}
+              shape="circle"
+              alt={"profile"}
+              src={profilePicture}
+            />
+          </span>
+        </a>
         <a
           onClick={() => {
             // props.changeMenu(sidebarStatus.setting)

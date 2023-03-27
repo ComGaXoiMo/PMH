@@ -1,83 +1,91 @@
-import './index.less'
-import 'famfamfam-flags/dist/sprite/famfamfam-flags.css'
+import "./index.less";
+import "famfamfam-flags/dist/sprite/famfamfam-flags.css";
 
-import * as React from 'react'
+import * as React from "react";
 
-import { Avatar, Dropdown, Menu } from 'antd'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import Stores from '../../../../stores/storeIdentifier'
-import SessionStore from '../../../../stores/sessionStore'
-import { inject, observer } from 'mobx-react'
-import { L } from '../../../../lib/abpUtility'
-import MyProfileFormModal from './components/myProfileFormModal'
-import ChangePasswordModal from './components/changePasswordModal'
-import { defaultAvatar } from '@lib/appconst'
+import { Avatar, Dropdown, Menu } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import Stores from "../../../../stores/storeIdentifier";
+import SessionStore from "../../../../stores/sessionStore";
+import { inject, observer } from "mobx-react";
+import { L } from "../../../../lib/abpUtility";
+import MyProfileFormModal from "./components/myProfileFormModal";
+import ChangePasswordModal from "./components/changePasswordModal";
+import { defaultAvatar } from "@lib/appconst";
 
 export interface IMyProfileProps {
-  history?: any
-  sessionStore?: SessionStore
-  wrapClass?: string
+  history?: any;
+  sessionStore?: SessionStore;
+  wrapClass?: string;
 }
 
 @inject(Stores.SessionStore)
 @observer
 class MyProfileSelect extends React.Component<IMyProfileProps> {
-  formRef: any = React.createRef()
+  formRef: any = React.createRef();
 
   state = {
     showProfileModal: false,
     showChangePasswordModal: false,
-    imageUrl: ''
-  }
+    imageUrl: "",
+  };
 
   componentDidMount(): void {
-    this.props.sessionStore?.getMyProfilePicture()
+    this.props.sessionStore?.getMyProfilePicture();
   }
 
   hideOrShowModal = (modalName) => {
-    this.setState({ [modalName]: !this.state[modalName] })
-  }
+    this.setState({ [modalName]: !this.state[modalName] });
+  };
 
   showUpdateMyProfileModal = async () => {
-    this.setState({ showProfileModal: true })
-    const form = this.formRef.current
+    this.setState({ showProfileModal: true });
+    const form = this.formRef.current;
     if (this.props.sessionStore && form) {
-      form.setFieldsValue({ ...this.props.sessionStore.currentLogin.user })
+      form.setFieldsValue({ ...this.props.sessionStore.currentLogin.user });
     }
-  }
+  };
 
   logOut = async () => {
-    await this.props.sessionStore?.logout()
-  }
+    await this.props.sessionStore?.logout();
+  };
 
   render() {
-    const currentLogin = this.props.sessionStore!.currentLogin
-    const profilePicture = this.props.sessionStore?.profilePicture || defaultAvatar
+    const currentLogin = this.props.sessionStore!.currentLogin;
+    const profilePicture =
+      this.props.sessionStore?.profilePicture || defaultAvatar;
     const myProfileMenu = (
       <Menu>
         <Menu.Item key="1" onClick={this.showUpdateMyProfileModal}>
           <UserOutlined />
-          <span> {L('MY_PROFILE')}</span>
+          <span> {L("MY_PROFILE")}</span>
         </Menu.Item>
-        <Menu.Item key="3" onClick={() => this.hideOrShowModal('showChangePasswordModal')}>
+        <Menu.Item
+          key="3"
+          onClick={() => this.hideOrShowModal("showChangePasswordModal")}
+        >
           <LockOutlined />
-          <span> {L('CHANGE_PASSWORD')}</span>
+          <span> {L("CHANGE_PASSWORD")}</span>
         </Menu.Item>
         {/* <Menu.Item key="2" onClick={this.logOut}>
           <LogoutOutlined />
           <span> {L('LOGOUT')}</span>
         </Menu.Item> */}
       </Menu>
-    )
+    );
 
     return (
       <>
-        <Dropdown overlay={myProfileMenu} placement="bottomRight" className={this.props.wrapClass}>
+        <Dropdown
+          overlay={myProfileMenu}
+          placement="bottomRight"
+          className={this.props.wrapClass}
+        >
           <div className="mx-3">
             <Avatar
-              style={{ height: 36, width: 36, borderRadius: '50%' }}
+              style={{ height: 36, width: 36, borderRadius: "50%" }}
               shape="circle"
-              alt={'profile'}
+              alt={"profile"}
               src={profilePicture}
             />
             <span className="mx-1">{currentLogin.user?.displayName}</span>
@@ -87,24 +95,24 @@ class MyProfileSelect extends React.Component<IMyProfileProps> {
           formRef={this.formRef}
           sessionStore={this.props.sessionStore}
           visible={this.state.showProfileModal}
-          onCancel={() => this.hideOrShowModal('showProfileModal')}
+          onCancel={() => this.hideOrShowModal("showProfileModal")}
         />
         <ChangePasswordModal
           visible={this.state.showChangePasswordModal}
           onCancel={() =>
             this.setState({
-              showChangePasswordModal: false
+              showChangePasswordModal: false,
             })
           }
           onCreate={() =>
             this.setState({
-              showChangePasswordModal: false
+              showChangePasswordModal: false,
             })
           }
         />
       </>
-    )
+    );
   }
 }
 
-export default MyProfileSelect
+export default MyProfileSelect;
