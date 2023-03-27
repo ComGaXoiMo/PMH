@@ -145,9 +145,7 @@ export const portalLayouts: any = {
     name: "MY_PROFILE",
     layout: layouts.portalLayout,
     // icon: LogoutOutlined,
-    component: LoadableComponent(
-      () => import("../../../scenes/accounts/AccountConfig/MyProfile")
-    ),
+    component: LoadableComponent(() => import("../../../scenes/accounts/")),
   },
   accountConfigChangePassword: {
     path: "/account-config/change-password",

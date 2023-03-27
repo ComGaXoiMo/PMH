@@ -14,7 +14,7 @@ import { inject, observer } from "mobx-react";
 import Stores from "@stores/storeIdentifier";
 import Appbar from "./Appbar/Appbar";
 import { sidebarStatus } from "@lib/appconst";
-import AccountSider from "./SiderMenu/accountSider";
+// import AccountSider from "./SiderMenu/accountSider";
 import NoSider from "./SiderMenu/noSider";
 import FooterAppbar from "./Footer/FooterAppbar";
 
@@ -60,7 +60,7 @@ class AppLayout extends React.Component<any> {
       location: { pathname },
     } = this.props;
 
-    const { path } = this.props.match;
+    // const { path } = this.props.match;
     const { collapsed, sideBarState } = this.state;
     const { sessionStore } = this.props;
     const layout = (
@@ -79,7 +79,7 @@ class AppLayout extends React.Component<any> {
           />
         </div>
 
-        {sideBarState === sidebarStatus.account && (
+        {/* {sideBarState === sidebarStatus.account && (
           <AccountSider
             path={path}
             onCollapse={() =>
@@ -88,7 +88,7 @@ class AppLayout extends React.Component<any> {
             history={history}
             collapsed={collapsed}
           />
-        )}
+        )} */}
         {sideBarState === sidebarStatus.setting && <NoSider />}
         <Layout
           className="site-layout"
