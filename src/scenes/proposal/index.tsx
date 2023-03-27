@@ -22,7 +22,9 @@ class Proposal extends AppComponentListBase<IProposalProps, IProposalState> {
     return (
       <>
         <div className="container-element">
-          <h1>{L("Proposal")}</h1>
+          <div className="modul-lable-name">
+            <strong>{L("Proposal")}</strong>
+          </div>
         </div>
       </>
     );

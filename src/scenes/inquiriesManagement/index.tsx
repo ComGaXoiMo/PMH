@@ -28,7 +28,9 @@ class Inquiries extends AppComponentListBase<IInquiriesProps, IInquiriesState> {
     return (
       <>
         <div className="container-element">
-          <strong>{L("INQUIRIES")}</strong>
+          <div className="modul-lable-name">
+            <strong>{L("INQUIRIES")}</strong>
+          </div>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}

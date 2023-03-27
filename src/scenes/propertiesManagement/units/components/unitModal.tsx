@@ -4,6 +4,7 @@ import CustomDrawer from "@components/Drawer/CustomDrawer";
 import { useForm } from "antd/es/form/Form";
 import { Card, Tabs } from "antd";
 import { L } from "@lib/abpUtility";
+import TabInfo from "./tabInfo";
 
 type Props = {
   visible: boolean;
@@ -62,14 +63,14 @@ const UnitModal = inject()(
             style={{ paddingBottom: "10px" }}
           >
             <Card className="card-detail w-100 h-100">
-              <strong>{L("UNIT_DETAIL")}</strong>
+              <TabInfo />
             </Card>
           </Tabs.TabPane>
           <Tabs.TabPane
             tab={L(tabKeys.tabActivity)}
             key={tabKeys.tabActivity}
           ></Tabs.TabPane>
-          <Tabs.TabPane
+          {/* <Tabs.TabPane
             tab={L(tabKeys.tabBooking)}
             key={tabKeys.tabBooking}
           ></Tabs.TabPane>{" "}
@@ -88,7 +89,7 @@ const UnitModal = inject()(
           <Tabs.TabPane
             tab={L(tabKeys.tabDocuments)}
             key={tabKeys.tabDocuments}
-          ></Tabs.TabPane>
+          ></Tabs.TabPane> */}
         </Tabs>
       </CustomDrawer>
     );

@@ -14,6 +14,7 @@ import Summary from "./tabSummary";
 import ProjectStore from "@stores/projects/projectStore";
 import UnitStore from "@stores/projects/unitStore";
 import { RouteComponentProps } from "react-router-dom";
+import Leases from "@scenes/leaseContractsManagement/lease";
 interface IProjectsDetailProps extends RouteComponentProps {
   projectStore: ProjectStore;
   unitStore: UnitStore;
@@ -54,7 +55,11 @@ class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
     return (
       <>
         <div className="container-element">
-          <strong>{this.props.projectStore.editProject?.name}</strong>
+          <div className="modul-lable-name">
+            <strong>
+              {this.props.projectStore.editProject?.name ?? "Create"}
+            </strong>
+          </div>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}
@@ -67,23 +72,33 @@ class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
             >
               <Summary />
             </Tabs.TabPane>
-            <Tabs.TabPane tab={L(tabKeys.tabUnits)} key={tabKeys.tabUnits}>
-              <Units />
-            </Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabInquiries)}
-              key={tabKeys.tabInquiries}
-            >
-              <Inquiries />
-            </Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabContracts)}
-              key={tabKeys.tabContracts}
-            ></Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabDocuments)}
-              key={tabKeys.tabDocuments}
-            ></Tabs.TabPane>
+            {this.props.projectStore.editProject?.name && (
+              <Tabs.TabPane tab={L(tabKeys.tabUnits)} key={tabKeys.tabUnits}>
+                <Units />
+              </Tabs.TabPane>
+            )}
+            {this.props.projectStore.editProject?.name && (
+              <Tabs.TabPane
+                tab={L(tabKeys.tabInquiries)}
+                key={tabKeys.tabInquiries}
+              >
+                <Inquiries />
+              </Tabs.TabPane>
+            )}
+            {this.props.projectStore.editProject?.name && (
+              <Tabs.TabPane
+                tab={L(tabKeys.tabContracts)}
+                key={tabKeys.tabContracts}
+              >
+                <Leases />
+              </Tabs.TabPane>
+            )}
+            {this.props.projectStore.editProject?.name && (
+              <Tabs.TabPane
+                tab={L(tabKeys.tabDocuments)}
+                key={tabKeys.tabDocuments}
+              ></Tabs.TabPane>
+            )}
           </Tabs>
         </div>
       </>

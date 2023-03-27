@@ -37,7 +37,7 @@ class Properties extends AppComponentListBase<
   public render() {
     return (
       <>
-        <div className="container-element">
+        <div className="modul-lable-name">
           <strong>{L("PROJECTS_UNIT")}</strong>
         </div>
 

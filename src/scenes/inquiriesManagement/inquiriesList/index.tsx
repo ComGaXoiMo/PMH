@@ -20,10 +20,14 @@ import "./components/pipeline-view.less";
 import AppDataStore from "@stores/appDataStore";
 import Stores from "@stores/storeIdentifier";
 import InquiryStore from "@stores/communication/inquiryStore";
+import ListingStore from "@stores/projects/listingStore";
+import UnitStore from "@stores/projects/unitStore";
 export interface IUnitProps {
   history: any;
   appDataStore: AppDataStore;
   inquiryStore: InquiryStore;
+  listingStore: ListingStore;
+  unitStore: UnitStore;
 }
 
 export interface IInquiriesListtate {
@@ -54,7 +58,17 @@ class InquiriesList extends React.Component<any> {
 
   async componentDidMount() {
     await this.getAll();
-    await Promise.all([]);
+    await Promise.all([
+      this.props.appDataStore.getCountryFull(),
+      this.props.appDataStore.getInquiryTypes({}),
+      this.props.appDataStore.getPropertyTypes(),
+      this.props.appDataStore.getContacts({}),
+      this.props.appDataStore.getClients({}),
+      this.props.appDataStore.getInquirySourceAndStatus(),
+      this.props.unitStore.getFacilities(),
+      this.props.unitStore.getFacing(),
+      this.props.unitStore.getView(),
+    ]);
   }
   getAll = async () => {
     this.props.appDataStore.getInquirySourceAndStatus();

@@ -38,7 +38,9 @@ class InquiriessDetail extends AppComponentListBase<
     return (
       <>
         <div className="container-element">
-          <strong>{this.props.params?.id}</strong>
+          <div className="modul-lable-name">
+            <strong>{this.props.params?.id}</strong>
+          </div>
           <Card />
           <Card />
         </div>

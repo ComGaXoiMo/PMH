@@ -30,8 +30,8 @@ export interface IContactState {
   projectProvinces: any[];
   modalVisible: boolean;
   visible: boolean;
-  title: string;
   projectId: number;
+  dataModal: any;
 }
 
 @inject(Stores.CompanyStore)
@@ -49,7 +49,7 @@ class Company extends React.Component<IContactProps, IContactState> {
     projectProvinces: [],
     filters: {},
     visible: false,
-    title: L("CREATE"),
+    dataModal: {},
   };
 
   async componentDidMount() {
@@ -70,9 +70,10 @@ class Company extends React.Component<IContactProps, IContactState> {
       ...this.state.filters,
     });
   };
-  gotoDetail = (id?, title?) => {
+  gotoDetail = async (id?, title?) => {
     if (id) {
-      this.setState({ title: title });
+      await this.props.companyStore.get(id);
+
       this.setState({ visible: true });
     } else {
       // this.setState({ idBatch: null })
@@ -157,14 +158,17 @@ class Company extends React.Component<IContactProps, IContactState> {
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
           />
         </DataTable>
-        <CompanyModal
-          title={this.state.title}
-          id={1}
-          visible={this.state.visible}
-          onCancel={() => {
-            this.getAll(), this.setState({ visible: false });
-          }}
-        />
+        {this.state.visible && (
+          <CompanyModal
+            companyStore={this.props.companyStore}
+            appDataStore={this.props.appDataStore}
+            data={this.props.companyStore?.editCompany}
+            visible={this.state.visible}
+            onCancel={() => {
+              this.getAll(), this.setState({ visible: false });
+            }}
+          />
+        )}
         <CompanyCreateModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}

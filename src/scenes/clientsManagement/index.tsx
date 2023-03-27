@@ -32,7 +32,9 @@ class Clients extends AppComponentListBase<IClientsProps, IClientsState> {
     return (
       <>
         <div className="container-element">
-          <strong>{L("CLIENTS")}</strong>
+          <div className="modul-lable-name">
+            <strong>{L("CLIENTS")}</strong>
+          </div>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}

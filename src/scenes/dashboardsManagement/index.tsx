@@ -36,7 +36,9 @@ class Dashboards extends AppComponentListBase<
     return (
       <>
         <div className="container-element">
-          <h1>{L("INQUIRIES")}</h1>
+          <div className="modul-lable-name">
+            <h1>{L("DASHBOARD")}</h1>
+          </div>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}

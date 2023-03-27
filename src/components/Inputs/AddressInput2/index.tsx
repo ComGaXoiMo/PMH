@@ -193,6 +193,7 @@ const AddressInput: React.FC<AddressInput2Props> = ({
   const [districts, setDistricts] = useState([] as any);
   let inputRef = React.createRef() as any;
   useEffect(() => {
+    initProvinces("232");
     if (!isEqual(previousValue, value)) {
       setCurrentValue(value);
       if (inputRef && inputRef.current) {

@@ -49,7 +49,7 @@ class ProposalCreate extends AppComponentListBase<
   public render() {
     return (
       <>
-        <div className="container-element">
+        <div className="modul-lable-name">
           <strong>{L("ProposalCreate")}</strong>
         </div>
         <div className="proposal-create-body">

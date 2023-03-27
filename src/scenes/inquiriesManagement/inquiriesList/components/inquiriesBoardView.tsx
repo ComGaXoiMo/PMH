@@ -10,6 +10,7 @@ import CreateInquiriesModal from "./createInquiriesModal";
 import { portalLayouts } from "@components/Layout/Router/router.config";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import Stores from "@stores/storeIdentifier";
+
 // import { Table } from "antd";
 
 export interface IUnitProps {
@@ -36,11 +37,16 @@ class InquiriesList extends AppComponentListBase<
   };
 
   async componentDidMount() {
-    this.getAll();
+    await this.initData();
+    await Promise.all([]);
   }
+  initData = async () => {};
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
+  handleOpenModal = async () => {
+    await this.toggleModal();
+  };
   handleImport = async () => {
     this.toggleModal();
   };
@@ -70,7 +76,7 @@ class InquiriesList extends AppComponentListBase<
               />
             ))}
           </div>
-          <Button onClick={this.toggleModal}>Add new</Button>
+          <Button onClick={this.handleOpenModal}>Add new</Button>
         </Card>
         <CreateInquiriesModal
           visible={this.state.modalVisible}

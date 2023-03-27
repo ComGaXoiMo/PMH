@@ -32,8 +32,9 @@ export default class createAllTaskModal extends React.PureComponent<
     return (
       <Modal
         open={visible}
+        style={{ top: 20 }}
         destroyOnClose
-        title={L("CREATE_NEW_INQUIRIES")}
+        title={L("CREATE_TASKS")}
         cancelText={L("BTN_CANCEL")}
         onCancel={() => {
           onClose();
@@ -44,9 +45,9 @@ export default class createAllTaskModal extends React.PureComponent<
           layout={"vertical"}
           //  onFinish={this.onSave}
           // validateMessages={validateMessages}
-          size="large"
+          size="middle"
         >
-          <Row gutter={[16, 4]}>
+          <Row gutter={[16, 0]}>
             <Col sm={{ span: 24 }}>
               <strong>Tenant Details</strong>
             </Col>
@@ -90,7 +91,7 @@ export default class createAllTaskModal extends React.PureComponent<
                 <Select placeholder={L("ENTER_INFOMATION")}></Select>
               </Form.Item>
             </Col>
-            <Col sm={{ span: 12 }}>
+            <Col sm={{ span: 24 }}>
               <Form.Item label={L("OFFER_NAME")} name="textArea">
                 <TextArea placeholder={L("ENTER_INFOMATION")}></TextArea>
               </Form.Item>

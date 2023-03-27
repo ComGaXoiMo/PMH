@@ -35,7 +35,9 @@ class LeaseContracts extends AppComponentListBase<
     return (
       <>
         <div className="container-element">
-          <strong>{L("CONTRACTS")}</strong>
+          <div className="modul-lable-name">
+            <strong>{L("CONTRACTS")}</strong>
+          </div>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}

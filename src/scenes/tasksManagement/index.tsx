@@ -28,7 +28,9 @@ class Tasks extends AppComponentListBase<ITasksProps, ITasksState> {
     return (
       <>
         <div className="container-element">
-          <strong>{L("TASKS")}</strong>
+          <div className="modul-lable-name">
+            <strong>{L("TASKS")}</strong>
+          </div>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}

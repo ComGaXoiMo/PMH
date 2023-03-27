@@ -16,6 +16,7 @@ import { debounce } from "lodash";
 import FormNumber from "@components/FormItem/FormNumber";
 import FormRangeInput from "@components/FormItem/FormRangeInput";
 import AddressInputMulti from "@components/Inputs/AddressInput2";
+import FormTextArea from "@components/FormItem/FormTextArea";
 
 export interface IGeneralProps {
   params: any;
@@ -80,9 +81,10 @@ class general extends AppComponentListBase<IGeneralProps, IGeneralState> {
         <Card
           style={{
             backgroundColor: "white",
-            minHeight: "80vh",
+            minHeight: "60vh",
+            maxHeight: "80vh",
             overflow: "auto",
-            padding: "10px",
+            padding: "20px",
             borderRadius: "16px",
           }}
         >
@@ -148,7 +150,7 @@ class general extends AppComponentListBase<IGeneralProps, IGeneralState> {
                           ),
                         }}
                         options={this.props.appDataStore.clients}
-                        label={L("CLIENT_NAME")}
+                        label={L("COMPANY_NAME")}
                         name="clientId"
                       />
                     </Col>
@@ -267,18 +269,12 @@ class general extends AppComponentListBase<IGeneralProps, IGeneralState> {
                     </Col>
                   </Row>
                 </Row>
-                <Row gutter={[8, 8]}>
-                  <Col sm={24}>
-                    <strong>Note</strong>
-                  </Col>
+                <Row gutter={[8, 8]} className="w-100">
+                  <strong>Note</strong>
 
-                  <Row gutter={[8, 0]}>
-                    <Col sm={24}>
-                      <Form.Item label={L("LABEL")} name="">
-                        <Input />
-                      </Form.Item>
-                    </Col>
-                  </Row>
+                  <Col sm={{ span: 24 }}>
+                    <FormTextArea label={L("DESCRIPTION")} name="description" />
+                  </Col>
                 </Row>
               </Row>
             )}

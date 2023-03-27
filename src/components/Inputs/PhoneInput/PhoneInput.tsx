@@ -46,7 +46,7 @@ const PhoneInput = (props: Props) => {
           disabled={props.disabled}
           addonBefore={selectBefore}
           type="number"
-          size="large"
+          size="middle"
           style={{ backgroundColor: "white" }}
           addonAfter={props.suffix}
         />
