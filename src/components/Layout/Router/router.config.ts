@@ -437,7 +437,7 @@ export const portalLayouts: any = {
   //TODO: pmh
   dashboardsAndReports: {
     path: "/dashboards-reports",
-    name: "DASHBOARDS_AND_REPROTS",
+    name: "DASHBOARDS_AND_REPORTS",
     // permission: appPermissions.properties.page,
     layout: layouts.portalLayout,
     // icon: CopyrightOutlined,
@@ -544,6 +544,16 @@ export const portalLayouts: any = {
       () => import("../../../scenes/tasksManagement/index")
     ),
   },
+  settings: {
+    path: "/settings",
+    name: "SETTINGS",
+    // permission: appPermissions.properties.page,
+    layout: layouts.portalLayout,
+    // icon: CopyrightOutlined,
+    component: LoadableComponent(
+      () => import("../../../scenes/settingsManagement/index")
+    ),
+  },
   proposals: {
     path: "/proposals",
     name: "PROPOSALS",
@@ -582,6 +592,7 @@ export const appMenuGroups: any = [
   routers.inquiries,
   routers.leaseContracts,
   routers.tasks,
+  routers.settings,
 ];
 
 export const accountMenuGroups: any = [

@@ -28,13 +28,22 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const UnitEmpty = ({ width, size }: { width: number; size: number }) => {
+const UnitEmpty = ({
+  width,
+  size,
+  handleClick,
+}: {
+  width: number;
+  size: number;
+  handleClick: any;
+}) => {
   if (size <= 0) return null;
 
   return (
     <div
       style={{ flexBasis: `${width}%` }}
       className="unit-item unit-empty mb-0"
+      onClick={handleClick}
     >
       <p className="mb-0">{L("EMPTY")}</p>
       <small>{formatNumber(size)}</small>
@@ -49,25 +58,20 @@ export interface IProjectStackingPlanProps {
   appDataStore: AppDataStore;
   loading: any;
 }
-@inject(
-  Stores.AppDataStore,
-  Stores.ProjectStore,
-  Stores.ActivityStore,
-  Stores.FileStore,
-  Stores.UnitStore
-)
+@inject(Stores.AppDataStore, Stores.ProjectStore, Stores.UnitStore)
 class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
   formRef: any = React.createRef();
   state = {
     floors: [],
+    projectId: undefined,
     unitGroups: {},
     selectedUnit: null,
     modalVisible: false,
     statisticFilter: { projectId: this.props.projectId },
   };
 
-  componentDidMount = () => {
-    this.fetchData();
+  componentDidMount = async () => {
+    await this.fetchData();
   };
 
   hideOrShowModal = () => {
@@ -179,7 +183,15 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
     const key = `f-${floor.id}`;
     const units: Array<any> = this.state.unitGroups[key] || [];
     if (units.length < 1) {
-      return <UnitEmpty width={100} size={floor.size} />;
+      return (
+        <UnitEmpty
+          width={100}
+          size={floor.size}
+          handleClick={() => {
+            this.setState({ modalVisible: true, selectedUnit: undefined });
+          }}
+        />
+      );
     }
     const sumUnits = sum(units.map((unit) => unit.size));
     const percentUnits = 100 - (sumUnits / floor.size) * 100;
@@ -224,7 +236,13 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
         ))}
         {/*<UnitDiv className="unit-item p-0">{placeholder}</UnitDiv>*/}
         {sumUnits !== 0 && (
-          <UnitEmpty width={percentUnits} size={floor.size - sumUnits} />
+          <UnitEmpty
+            width={percentUnits}
+            size={floor.size - sumUnits}
+            handleClick={() => {
+              this.setState({ modalVisible: true, selectedUnit: undefined });
+            }}
+          />
         )}
       </>
     );

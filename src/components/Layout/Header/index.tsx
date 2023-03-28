@@ -48,7 +48,9 @@ const Header = (props: IHeaderProps) => {
   return (
     <div className={"header-container"}>
       <div className={"wrap-header"}>
-        <Menu className="ant-menu-bar" mode="horizontal" items={menuItems} />
+        <Menu className="ant-menu-bar" mode="horizontal" items={menuItems}>
+          <Menu.Item></Menu.Item>
+        </Menu>
       </div>
     </div>
   );

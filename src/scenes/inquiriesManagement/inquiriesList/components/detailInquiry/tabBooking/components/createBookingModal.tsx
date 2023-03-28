@@ -33,7 +33,7 @@ export default class CreateBookingModal extends React.PureComponent<
       <Modal
         open={visible}
         destroyOnClose
-        title={L("NEW_TASK")}
+        title={L("NEW_BOOKING")}
         cancelText={L("BTN_CANCEL")}
         onCancel={() => {
           onClose();

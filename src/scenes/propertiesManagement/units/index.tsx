@@ -36,7 +36,10 @@ export interface IUnitState {
   title: string;
   tabView: string;
 }
-
+const tabKeys = {
+  gridView: L("GRID_VIEW"),
+  listView: L("LIST_VIEW"),
+};
 @inject(Stores.UnitStore)
 @observer
 class Units extends React.Component<any> {
@@ -49,7 +52,7 @@ class Units extends React.Component<any> {
     filters: {},
     visible: false,
     title: L("CREATE"),
-    tabView: "GRID_VIEW",
+    tabView: tabKeys.gridView,
   };
 
   async componentDidMount() {
@@ -57,6 +60,7 @@ class Units extends React.Component<any> {
 
     await Promise.all([]);
   }
+
   getAll = async () => {
     await this.props.unitStore.getAllRes({
       maxResultCount: this.state.maxResultCount,
@@ -120,12 +124,13 @@ class Units extends React.Component<any> {
       <>
         <div>
           <UnitFilterPanel
+            tabKeys={tabKeys}
             changeTab={this.changeTab}
             onCreate={() => {
               this.gotoDetail(null);
             }}
           />
-          {this.state.tabView === "LIST_VIEW" && (
+          {this.state.tabView === tabKeys.listView && (
             <DataTable
               // extraFilterComponent={filterComponent}
               // onRefresh={this.getAll}
@@ -149,7 +154,7 @@ class Units extends React.Component<any> {
               />
             </DataTable>
           )}
-          {this.state.tabView === "GRID_VIEW" && (
+          {this.state.tabView === tabKeys.gridView && (
             <div>
               <StackPland loading={isLoading} projectId={82} />
             </div>

@@ -33,7 +33,7 @@ export default class CreateSiteVisitModal extends React.PureComponent<
       <Modal
         open={visible}
         destroyOnClose
-        title={L("NEW_TASK")}
+        title={L("NEW_SITE_VISIT")}
         cancelText={L("BTN_CANCEL")}
         onCancel={() => {
           onClose();

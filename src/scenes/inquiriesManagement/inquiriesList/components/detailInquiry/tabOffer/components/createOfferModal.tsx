@@ -33,7 +33,7 @@ export default class CreateOfferModal extends React.PureComponent<
       <Modal
         open={visible}
         destroyOnClose
-        title={L("NEW_TASK")}
+        title={L("NEW_OFFER")}
         cancelText={L("BTN_CANCEL")}
         onCancel={() => {
           onClose();

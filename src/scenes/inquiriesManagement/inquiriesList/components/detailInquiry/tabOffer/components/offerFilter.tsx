@@ -52,7 +52,7 @@ class OfferFilterPanel extends AppComponentListBase<Props> {
               style={{ borderRadius: "8px", backgroundColor: "#FEC20C" }}
               onClick={() => this.props.onCreate()}
             >
-              {L("NEW_PROPERTY")}
+              {L("NEW_OFFER")}
             </Button>
           </div>
         </Row>

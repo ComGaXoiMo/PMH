@@ -30,7 +30,7 @@ export default class CreateCallModal extends React.PureComponent<Props, State> {
       <Modal
         open={visible}
         destroyOnClose
-        title={L("NEW_TASK")}
+        title={L("NEW_CALL")}
         cancelText={L("BTN_CANCEL")}
         onCancel={() => {
           onClose();

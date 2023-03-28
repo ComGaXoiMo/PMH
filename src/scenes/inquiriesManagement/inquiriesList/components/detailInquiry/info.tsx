@@ -152,13 +152,13 @@ class infoInquiry extends AppComponentListBase<
             >
               <TabDocument />
             </Tabs.TabPane>{" "}
-            <Tabs.TabPane
+            {/* <Tabs.TabPane
               tab={L(tabKeys.tabAssociateParty)}
               key={tabKeys.tabAssociateParty}
               className={"color-tab"}
             >
               <TabCall />
-            </Tabs.TabPane>{" "}
+            </Tabs.TabPane>{" "} */}
             <Tabs.TabPane
               tab={L(tabKeys.tabAuditTrail)}
               key={tabKeys.tabAuditTrail}

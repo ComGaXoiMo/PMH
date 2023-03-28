@@ -22,7 +22,12 @@ class ProjectStore {
   @action
   async create(updateInput: any) {
     this.isLoading = true;
-    const body = {...updateInput, projectAddress: Array.isArray(updateInput.projectAddress) ? updateInput.projectAddress : [updateInput.projectAddress]}
+    const body = {
+      ...updateInput,
+      projectAddress: Array.isArray(updateInput.projectAddress)
+        ? updateInput.projectAddress
+        : [updateInput.projectAddress],
+    };
     this.editProject = await projectService
       .create(body)
       .finally(() => (this.isLoading = false));
@@ -67,10 +72,13 @@ class ProjectStore {
   @action
   async update(updateInput: any) {
     this.isLoading = true;
-    const body = {...updateInput, projectAddress: Array.isArray(updateInput.projectAddress) ? updateInput.projectAddress : [updateInput.projectAddress]}
-    await projectService
-      .update(body)
-      .finally(() => (this.isLoading = false));
+    const body = {
+      ...updateInput,
+      projectAddress: Array.isArray(updateInput.projectAddress)
+        ? updateInput.projectAddress
+        : [updateInput.projectAddress],
+    };
+    await projectService.update(body).finally(() => (this.isLoading = false));
   }
 
   @action
