@@ -41,7 +41,7 @@ const FormRangeInput: React.FC<FormInputProps> = ({
         </Col>
         <Col span={12}>
           <Form.Item
-            style={{ marginTop: 40 }}
+            style={{ marginTop: 20 }}
             name={seccondName}
             rules={rule}
             {...formVerticalLayout}

@@ -32,7 +32,7 @@ export default class companyCreateModal extends React.PureComponent<
       <Modal
         open={visible}
         destroyOnClose
-        title={L("CREATE_NEW_CONTRACT")}
+        title={L("CREATE_NEW_COMPANY")}
         cancelText={L("BTN_CANCEL")}
         onCancel={() => {
           onClose();
@@ -47,12 +47,12 @@ export default class companyCreateModal extends React.PureComponent<
         >
           <Row gutter={[16, 8]}>
             <Col sm={{ span: 12 }}>
-              <Form.Item label={L("FIRST_NAME")} name="fisrtName">
+              <Form.Item label={L("COMPANYNAME")} name="">
                 <Input placeholder={L("ENTER_INFOMATION")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
-              <Form.Item label={L("LAST_NAME")} name="lastName">
+              <Form.Item label={L("OWNER")} name="">
                 <Input placeholder={L("ENTER_INFOMATION")}></Input>
               </Form.Item>
             </Col>

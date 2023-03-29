@@ -10,8 +10,8 @@ export interface ITasksProps {}
 
 export interface ITasksState {}
 const tabKeys = {
-  tabMyTask: "TAB_MY_TASK",
-  tabAll: "TAB_ALL",
+  tabMyTask: L("TAB_MY_TASK"),
+  tabAll: L("TAB_ALL"),
 };
 @inject()
 @observer

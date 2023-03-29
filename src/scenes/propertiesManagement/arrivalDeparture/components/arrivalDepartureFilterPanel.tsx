@@ -13,8 +13,8 @@ type Props = {
 };
 
 const tabKeys = {
-  shortTerm: "SHORT_TIME",
-  longTerm: "LONG_TIME",
+  shortTerm: L("SHORT_TIME"),
+  longTerm: L("LONG_TIME"),
 };
 class ArrivalDeparturesFilterPanel extends React.Component<Props> {
   constructor(props: Props) {

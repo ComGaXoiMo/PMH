@@ -10,26 +10,33 @@ import { renderOptions } from "@lib/helper";
 import _ from "lodash";
 
 type Props = {
-  handleSearch: any;
+  handleSearch: (filters) => void;
   tabKeys: any;
   filter: any;
   changeTab: any;
   onCreate: () => void;
 };
 
-type States = {
-  selectedType: any;
-  projectId: number;
-  listProject: any[];
-};
-class UnitsFilterPanel extends React.Component<Props, States> {
+// type States = {
+//   selectedType: any;
+//   filters: any;
+//   listProject: any[];
+// };
+class UnitsFilterPanel extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
   }
   state = {
     selectedType: this.props.tabKeys.gridView,
-    projectId: 0,
     listProject: [],
+    listFloor: [],
+    filters: {
+      time: "",
+      projectId: 0,
+      floorId: 0,
+      typeId: 0,
+      statusId: 0,
+    },
   };
   componentDidMount = async () => {
     await this.getProject("");
@@ -46,10 +53,26 @@ class UnitsFilterPanel extends React.Component<Props, States> {
     });
     this.setState({ listProject: newProjects });
   };
+  getFloorResult = async (id, keyword) => {
+    const res = await projectService.getFloors(id, {
+      pageSize: 20,
+      pageNumber: 1,
+      keyword,
+    });
+    this.setState({ listFloor: res });
+  };
   searchTitleOptions = async (keyword?) => {
     // your searchTitleOptions logic here
   };
-
+  handleChange = async (name, value) => {
+    {
+      // this.setState({ [name]: value });
+      await this.setState({
+        filters: { ...this.state.filters, [name]: value },
+      });
+      await this.props.handleSearch(this.state.filters);
+    }
+  };
   changeTab = async (event) => {
     const value = event.target.value;
     await this.setState({ selectedType: value });
@@ -62,6 +85,36 @@ class UnitsFilterPanel extends React.Component<Props, States> {
             <Search size="middle" placeholder={L("FILTER_KEYWORD")} />
           </Col>
 
+          <Col sm={{ span: 2, offset: 0 }}>
+            <Select
+              placeholder={L("PROJECT")}
+              filterOption={false}
+              className="w-100"
+              onChange={(value) => {
+                this.handleChange("projectId", value),
+                  this.getFloorResult(value, "");
+              }}
+              onSearch={(value) => this.getProject(value)}
+              allowClear
+              showSearch
+            >
+              {" "}
+              {renderOptions(this.state.listProject)}
+            </Select>
+          </Col>
+
+          {this.state.selectedType === this.props.tabKeys.gridView && (
+            <Col sm={{ span: 2, offset: 0 }}>
+              <Select
+                placeholder={L("BUILDING")}
+                filterOption={false}
+                className="w-100"
+                allowClear
+                showSearch
+                disabled={!this.state.filters?.projectId}
+              ></Select>
+            </Col>
+          )}
           {this.state.selectedType === this.props.tabKeys.gridView && (
             <Col sm={{ span: 2, offset: 0 }}>
               <Select
@@ -72,40 +125,6 @@ class UnitsFilterPanel extends React.Component<Props, States> {
               ></Select>
             </Col>
           )}
-          {this.state.selectedType === this.props.tabKeys.gridView && (
-            <Col sm={{ span: 2, offset: 0 }}>
-              <Select
-                placeholder={L("PROJECT")}
-                filterOption={false}
-                className="w-100"
-                onChange={(e) => {
-                  if (!e) {
-                    console.log(e);
-                    this.setState({ projectId: 0 });
-                    return;
-                  }
-                  console.log(e);
-
-                  this.setState({ projectId: e });
-                  // getFloorResult(e, "");
-                }}
-                onSearch={(value) => this.getProject(value)}
-                allowClear
-                showSearch
-              >
-                {" "}
-                {renderOptions(this.state.listProject)}
-              </Select>
-            </Col>
-          )}
-          <Col sm={{ span: 2, offset: 0 }}>
-            <Select
-              placeholder={L("BUILDING")}
-              style={{ width: "100%" }}
-              allowClear
-              // showSearch
-            ></Select>
-          </Col>
           <Col sm={{ span: 2, offset: 0 }}>
             <Select
               placeholder={L("TYPE")}

@@ -12,6 +12,8 @@ import Info from "./detailInquiry/info";
 import InquiryStore from "@stores/communication/inquiryStore";
 import AppDataStore from "@stores/appDataStore";
 import ListingStore from "@stores/projects/listingStore";
+import { LeftOutlined } from "@ant-design/icons";
+import { portalLayouts } from "@components/Layout/Router/router.config";
 
 const tabKeys = {
   tabSummaries: "TAB_SUMMARY",
@@ -22,6 +24,7 @@ const tabKeys = {
 };
 export interface IInquiriessDetailProps {
   params: any;
+  history: any;
   inquiryStore: InquiryStore;
   listingStore: ListingStore;
   appDataStore: AppDataStore;
@@ -57,7 +60,10 @@ class InquiriessDetail extends AppComponentListBase<
   changeTab = (tabKey) => {
     this.setState({ tabActiveKey: tabKey });
   };
-
+  goBack = () => {
+    const { history } = this.props;
+    history.push(portalLayouts.inquiries.path);
+  };
   public render() {
     const {
       appDataStore: { inquiryStatus },
@@ -66,7 +72,20 @@ class InquiriessDetail extends AppComponentListBase<
     return (
       <>
         <div>
-          <strong>{this.props.params?.id ?? "Create"} </strong>
+          <div className="modul-lable-name">
+            <a onClick={this.goBack} style={{ color: "black" }}>
+              <LeftOutlined
+                style={{
+                  backgroundColor: "#F3F5F6",
+                  borderRadius: "8px",
+                  padding: "6px",
+                }}
+              />{" "}
+              Back
+            </a>
+            <br />
+            <strong>{this.props.params?.id ?? "Create"} </strong>
+          </div>
           <Card className="w-100 h-100">
             <Row gutter={[8, 8]}>
               <Col sm={{ span: 22 }}>

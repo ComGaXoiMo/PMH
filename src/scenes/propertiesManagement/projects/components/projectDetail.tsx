@@ -15,6 +15,8 @@ import ProjectStore from "@stores/projects/projectStore";
 import UnitStore from "@stores/projects/unitStore";
 import { RouteComponentProps } from "react-router-dom";
 import Leases from "@scenes/leaseContractsManagement/lease";
+import { LeftOutlined } from "@ant-design/icons";
+import { portalLayouts } from "@components/Layout/Router/router.config";
 interface IProjectsDetailProps extends RouteComponentProps {
   projectStore: ProjectStore;
   unitStore: UnitStore;
@@ -46,7 +48,10 @@ class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
   componentDidMount = async () => {
     await console.log(this.props.projectStore);
   };
-
+  goBack = () => {
+    const { history } = this.props;
+    history.push(portalLayouts.properties.path);
+  };
   changeTab = (tabKey) => {
     this.setState({ tabActiveKey: tabKey });
   };
@@ -56,6 +61,17 @@ class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
       <>
         <div className="container-element">
           <div className="modul-lable-name">
+            <a onClick={this.goBack} style={{ color: "black" }}>
+              <LeftOutlined
+                style={{
+                  backgroundColor: "#F3F5F6",
+                  borderRadius: "8px",
+                  padding: "6px",
+                }}
+              />{" "}
+              Back
+            </a>
+            <br />
             <strong>
               {this.props.projectStore.editProject?.name ?? "Create"}
             </strong>

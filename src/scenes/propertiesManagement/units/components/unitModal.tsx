@@ -1,17 +1,22 @@
 import { inject, observer } from "mobx-react";
-import React from "react";
+import * as React from "react";
 import CustomDrawer from "@components/Drawer/CustomDrawer";
-import { useForm } from "antd/es/form/Form";
 import { Card, Tabs } from "antd";
 import { L } from "@lib/abpUtility";
 import TabInfo from "./tabInfo";
+import withRouter from "@components/Layout/Router/withRouter";
+import Stores from "@stores/storeIdentifier";
+import UnitStore from "@stores/projects/unitStore";
 
 type Props = {
   visible: boolean;
   id: any;
-  title: string;
   //   genFeeStore: GenFeeStore
   onCancel: () => void;
+  unitStore: UnitStore;
+};
+type State = {
+  tabActiveKey: any;
 };
 const tabKeys = {
   tabInfo: "TAB_INFO",
@@ -22,37 +27,57 @@ const tabKeys = {
   tabInquiries: "TAB_INQUIRIES",
   tabDocuments: "TAB_DOCUMENTS",
 };
-const UnitModal = inject()(
-  observer((props: Props) => {
-    const [form] = useForm();
-    const [tabActiveKey, setTabActiveKey] = React.useState(tabKeys.tabInfo);
-    React.useEffect(() => {
-      if (props.id) {
-        console.log("init");
-        //   form.setFieldsValue(data)
-      } else {
-        form.resetFields();
-      }
-      console.log(props.title);
-    }, [props.visible]);
-    const changeTab = (tabKey) => {
-      setTabActiveKey(tabKey);
+@inject(Stores.UnitStore)
+@observer
+class UnitModal extends React.Component<Props, State> {
+  form: any = React.createRef();
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      tabActiveKey: tabKeys.tabInfo,
     };
+    this.changeTab = this.changeTab.bind(this);
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.id !== prevProps.id) {
+      if (this.props.id) {
+        this.getDetail(this.props.id);
+      } else {
+        this.form.resetFields();
+      }
+    }
+  }
+  getDetail = async (id) => {
+    await this.props.unitStore.getUnitRes(id);
+  };
+  changeTab(tabKey: string) {
+    this.setState({
+      tabActiveKey: tabKey,
+    });
+  }
+
+  render() {
+    const {
+      visible,
+      unitStore: { editUnitRes },
+    } = this.props;
+    const { tabActiveKey } = this.state;
     return (
       <CustomDrawer
         useBottomAction
-        title={props.title}
-        visible={props.visible}
+        title={editUnitRes?.unitName}
+        visible={visible}
         onClose={() => {
-          form.resetFields(), props.onCancel();
+          this.props.onCancel();
         }}
         onSave={() => console.log(1)}
         getContainer={false}
       >
-        {" "}
         <Tabs
           activeKey={tabActiveKey}
-          onTabClick={changeTab}
+          onTabClick={this.changeTab}
           className={"antd-tab-cusstom h-100"}
           type="card"
         >
@@ -70,7 +95,7 @@ const UnitModal = inject()(
             tab={L(tabKeys.tabActivity)}
             key={tabKeys.tabActivity}
           ></Tabs.TabPane>
-          {/* <Tabs.TabPane
+          <Tabs.TabPane
             tab={L(tabKeys.tabBooking)}
             key={tabKeys.tabBooking}
           ></Tabs.TabPane>{" "}
@@ -89,11 +114,10 @@ const UnitModal = inject()(
           <Tabs.TabPane
             tab={L(tabKeys.tabDocuments)}
             key={tabKeys.tabDocuments}
-          ></Tabs.TabPane> */}
+          ></Tabs.TabPane>
         </Tabs>
       </CustomDrawer>
     );
-  })
-);
-
-export default UnitModal;
+  }
+}
+export default withRouter(UnitModal);

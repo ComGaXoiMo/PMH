@@ -19,6 +19,7 @@ import { inject } from "mobx-react";
 import Stores from "@stores/storeIdentifier";
 import AppComponentBase from "@components/AppComponentBase";
 import withRouter from "@components/Layout/Router/withRouter";
+import UnitModal from "./unitModal";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -57,6 +58,7 @@ export interface IProjectStackingPlanProps {
   unitStore: UnitStore;
   appDataStore: AppDataStore;
   loading: any;
+  goDetail: () => void;
 }
 @inject(Stores.AppDataStore, Stores.ProjectStore, Stores.UnitStore)
 class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
@@ -65,6 +67,7 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
     floors: [],
     projectId: undefined,
     unitGroups: {},
+    unitId: undefined,
     selectedUnit: null,
     modalVisible: false,
     statisticFilter: { projectId: this.props.projectId },
@@ -73,56 +76,28 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
   componentDidMount = async () => {
     await this.fetchData();
   };
-
-  hideOrShowModal = () => {
-    this.setState({
-      modalVisible: !this.state.modalVisible,
-    });
+  componentDidUpdate = async (prevProps, prevState) => {
+    if (prevProps.projectId !== this.state.projectId) {
+      await this.setState({ projectId: this.props.projectId });
+      await this.fetchData();
+    }
   };
 
   showCreateOrUpdateModalOpen = async (id?) => {
     if (!id) {
       await this.props.projectStore.createProjectUnit();
     } else {
-      await this.props.projectStore.getProjectUnit(id);
+      // await this.props.projectStore.getProjectUnit(id);
+      this.setState({ unitId: id });
     }
 
     this.setState({ unitId: id, modalVisible: true }, () => {
-      setTimeout(() => {
-        this.formRef.current.setFieldsValue({
-          ...this.props.projectStore.editProjectUnit,
-        });
-      }, 500);
+      //   setTimeout(() => {
+      //     this.formRef.current.setFieldsValue({
+      //       ...this.props.projectStore.editProjectUnit,
+      //     });
+      //   }, 500);
     });
-  };
-
-  handleCreateOrUpdate = async () => {
-    try {
-      const form = this.formRef.current;
-      if (!form) {
-        return;
-      }
-      // Update case
-      form.validateFields().then(async (values: any) => {
-        if (this.props.projectStore.editProjectUnit?.id) {
-          await this.props.projectStore.updateUnit({
-            ...this.props.projectStore.editProjectUnit,
-            ...values,
-          });
-        } else {
-          await this.props.projectStore.createUnit({
-            ...values,
-            projectId: this.props.projectId,
-          });
-        }
-
-        await this.fetchData();
-        this.hideOrShowModal();
-        this.setState({ editingRowKey: "" });
-      });
-    } catch (errInfo) {
-      console.log("Validate Failed:", errInfo);
-    }
   };
 
   onDragEnd = async ({ source: src, destination: des }: DropResult) => {
@@ -161,7 +136,7 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
   sort = (a, b) => a.order - b.order;
 
   fetchData = async () => {
-    const { projectId } = this.props;
+    const { projectId } = this.state;
     await this.props.projectStore.getFloors(projectId, {});
     await this.props.projectStore.getUnits(projectId, {});
     const floors = this.props.projectStore.floors.sort(this.sort);
@@ -271,10 +246,11 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
 
   render() {
     const { floors } = this.state;
+    // const { editProjectUnit } = this.props.projectStore;
     return (
       <>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <Card className="stacking-plan">
+          <Card style={{ marginTop: "20px" }} className="stacking-plan">
             <Alert message={L("CLICK_TO_EDIT_UNIT_MESSAGE")} type="info" />
             <div className="d-flex mt-3">
               <Droppable droppableId="floor" direction="vertical">
@@ -313,6 +289,13 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
               </div>
             </div>
           </Card>
+          <UnitModal
+            id={this.state.unitId}
+            visible={this.state.modalVisible}
+            onCancel={() => {
+              this.setState({ modalVisible: false });
+            }}
+          />
         </DragDropContext>
       </>
     );

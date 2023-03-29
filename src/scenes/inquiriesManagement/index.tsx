@@ -10,8 +10,8 @@ export interface IInquiriesProps {}
 
 export interface IInquiriesState {}
 const tabKeys = {
-  tabInquiriesList: "TAB_INQUIRIES_LIST",
-  tabReports: "TAB_REPORTS",
+  tabInquiriesList: L("TAB_INQUIRIES_LIST"),
+  tabReports: L("TAB_REPORTS"),
 };
 @inject()
 @observer

@@ -49,9 +49,15 @@ class Units extends React.Component<any> {
     skipCount: 0,
     projectId: 0,
     projectProvinces: [],
-    filters: {},
+    unitId: undefined,
+    filters: {
+      time: "",
+      projectId: 0,
+      floorId: 0,
+      typeId: 0,
+      statusId: 0,
+    },
     visible: false,
-    title: L("CREATE"),
     tabView: tabKeys.gridView,
   };
 
@@ -74,10 +80,13 @@ class Units extends React.Component<any> {
       async () => await this.getAll()
     );
   };
-  gotoDetail = (id?, title?) => {
+  handleFilterChange = async (filters) => {
+    await this.setState({ filters }, this.getAll);
+  };
+
+  gotoDetail = (id?) => {
     if (id) {
-      this.setState({ title: title });
-      this.setState({ visible: true });
+      this.setState({ unitId: id, visible: true });
     } else {
       // this.setState({ idBatch: null })
       this.setState({ visible: true });
@@ -105,7 +114,7 @@ class Units extends React.Component<any> {
             className="ml-1"
             shape="circle"
             icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id, item.name)}
+            onClick={() => this.gotoDetail(item.id)}
           />
           {/* )} */}
           {/* {this.isGranted(appPermissions.a.delete) && ( */}
@@ -126,6 +135,7 @@ class Units extends React.Component<any> {
           <UnitFilterPanel
             tabKeys={tabKeys}
             changeTab={this.changeTab}
+            handleSearch={this.handleFilterChange}
             onCreate={() => {
               this.gotoDetail(null);
             }}
@@ -155,13 +165,15 @@ class Units extends React.Component<any> {
             </DataTable>
           )}
           {this.state.tabView === tabKeys.gridView && (
-            <div>
-              <StackPland loading={isLoading} projectId={82} />
+            <div style={{ maxHeight: "75vh", overflow: "scroll" }}>
+              <StackPland
+                loading={isLoading}
+                projectId={this.state.filters?.projectId}
+              />
             </div>
           )}
           <UnitModal
-            title={this.state.title}
-            id={1}
+            id={this.state.unitId}
             visible={this.state.visible}
             onCancel={() => {
               this.getAll(), this.setState({ visible: false });

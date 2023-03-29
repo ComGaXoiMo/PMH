@@ -75,7 +75,9 @@ class infoInquiry extends AppComponentListBase<
 
         }
         `}</style>
-          <strong>More</strong>
+          <div style={{ padding: "14px" }}>
+            <strong>More</strong>
+          </div>
           <Tabs
             activeKey={this.state.tabActiveKey}
             onTabClick={this.changeTab}

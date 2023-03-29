@@ -77,6 +77,10 @@ const typeF = [
     borderColorCode: "#5d2feb30",
   },
 ];
+const tabKeys = {
+  boardView: L("BOARD_VIEW"),
+  listView: L("LIST_VIEW"),
+};
 @inject()
 @observer
 class AllTask extends React.Component<IAllTaskProps, IAllTaskState> {
@@ -159,7 +163,7 @@ class AllTask extends React.Component<IAllTaskProps, IAllTaskState> {
               this.toggleModal();
             }}
           />
-          {this.state.tabView === "LIST_VIEW" && (
+          {this.state.tabView === tabKeys.listView && (
             <DataTable
               // extraFilterComponent={filterComponent}
               // onRefresh={this.getAll}
@@ -182,7 +186,7 @@ class AllTask extends React.Component<IAllTaskProps, IAllTaskState> {
               />
             </DataTable>
           )}
-          {this.state.tabView === "BOARD_VIEW" && (
+          {this.state.tabView === tabKeys.boardView && (
             <Row gutter={[16, 10]} className="mt-3 wrap-pipeline-flex">
               <Col
                 sm={{ span: 24, offset: 0 }}

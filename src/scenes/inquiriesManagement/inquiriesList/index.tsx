@@ -40,6 +40,10 @@ export interface IInquiriesListtate {
   title: string;
   tabView: string;
 }
+const selectKeys = {
+  boardView: L("BOARD_VIEW"),
+  listView: L("LIST_VIEW"),
+};
 
 @inject(Stores.AppDataStore, Stores.InquiryStore)
 @observer
@@ -53,7 +57,7 @@ class InquiriesList extends React.Component<any> {
     filters: {},
     visible: false,
     title: L("CREATE"),
-    tabView: "BOARD_VIEW",
+    tabView: selectKeys.boardView,
   };
 
   async componentDidMount() {
@@ -131,7 +135,7 @@ class InquiriesList extends React.Component<any> {
       <>
         <div>
           <UnitFilterPanel changeTab={this.changeTab} />
-          {this.state.tabView === "LIST_VIEW" && (
+          {this.state.tabView === selectKeys.listView && (
             <DataTable
               // extraFilterComponent={filterComponent}
               // onRefresh={this.getAll}
@@ -154,7 +158,7 @@ class InquiriesList extends React.Component<any> {
               />
             </DataTable>
           )}
-          {this.state.tabView === "BOARD_VIEW" && (
+          {this.state.tabView === selectKeys.boardView && (
             <Row gutter={[16, 10]} className="mt-3 iqr-wrap-pipeline-flex">
               <Col
                 sm={{ span: 24, offset: 0 }}
