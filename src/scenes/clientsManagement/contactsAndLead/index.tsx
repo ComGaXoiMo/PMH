@@ -14,7 +14,7 @@ import ContactStore from "@stores/clientManagement/contactStore";
 import Stores from "@stores/storeIdentifier";
 import withRouter from "@components/Layout/Router/withRouter";
 import CreateContractModal from "./components/createContractModal";
-import ContractModal from "./components/contractModal";
+import ContractDetailModal from "./components/contractDetailModal";
 
 const { align } = AppConsts;
 export interface IContactProps {
@@ -83,9 +83,9 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
       async () => await this.getAll()
     );
   };
-  gotoDetail = (id?, title?) => {
+  gotoDetail = async (id) => {
     if (id) {
-      this.setState({ title: title });
+      await this.props.contactStore.get(id, false);
       this.setState({ visible: true });
     } else {
       // this.setState({ idBatch: null })
@@ -114,7 +114,7 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
             className="ml-1"
             shape="circle"
             icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id, item.name)}
+            onClick={() => this.gotoDetail(item.id)}
           />
           {/* )} */}
           {/* {this.isGranted(appPermissions.a.delete) && ( */}
@@ -158,9 +158,9 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
           />
         </DataTable>
-        <ContractModal
+        <ContractDetailModal
           title={this.state.title}
-          id={1}
+          data={this.props.contactStore?.editContact}
           visible={this.state.visible}
           onCancel={() => {
             this.getAll(), this.setState({ visible: false });

@@ -67,7 +67,7 @@ class CompanyModal extends AppComponentListBase<Props, States> {
         title={this.props.data?.businessName ?? "CREATE"}
         visible={this.props.visible}
         onClose={this.handleClose}
-        onSave={this.handleSave}
+        onFullView={this.handleSave}
         getContainer={false}
       >
         <div className="padding-modal h-100">
