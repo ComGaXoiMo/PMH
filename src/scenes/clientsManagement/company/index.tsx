@@ -39,8 +39,6 @@ export interface IContactState {
 @inject()
 @observer
 class Company extends React.Component<IContactProps, IContactState> {
-  formRef: any = React.createRef();
-
   state = {
     maxResultCount: 10,
     skipCount: 0,
@@ -70,7 +68,7 @@ class Company extends React.Component<IContactProps, IContactState> {
       ...this.state.filters,
     });
   };
-  gotoDetail = async (id?, title?) => {
+  gotoDetail = async (id) => {
     if (id) {
       await this.props.companyStore.get(id);
 
@@ -115,7 +113,7 @@ class Company extends React.Component<IContactProps, IContactState> {
             className="ml-1"
             shape="circle"
             icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id, item.name)}
+            onClick={() => this.gotoDetail(item.id)}
           />
           {/* )} */}
           {/* {this.isGranted(appPermissions.a.delete) && ( */}

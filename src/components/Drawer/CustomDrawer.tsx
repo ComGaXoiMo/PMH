@@ -1,13 +1,15 @@
 import { L } from "@lib/abpUtility";
-import { Button, Drawer, Space } from "antd";
+import { Button, Drawer, Row } from "antd";
 import React, { ReactNode } from "react";
 import type { PortalProps } from "@rc-component/portal";
+import { CloseCircleFilled } from "@ant-design/icons";
 
 type Props = {
   title?: string;
   visible: boolean;
-  onClose: () => void;
-  onSave: () => void;
+  onClose?: () => void;
+  onFullView?: () => void;
+  onShare?: () => void;
   useBottomAction?: boolean;
   extraBottomContent?: ReactNode;
   loading?: boolean;
@@ -17,58 +19,55 @@ type Props = {
 const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
   return (
     <Drawer
-      title={<span style={{ fontWeight: 800 }}>{props.title}</span>}
+      title={
+        <span style={{ fontWeight: 800, justifyItems: "start" }}>
+          {props.title}
+        </span>
+      }
       placement="right"
       closable={false}
       onClose={props.onClose}
       open={props.visible}
       width={window.innerWidth < 600 ? "100%" : "50%"}
       extra={
-        // !props.useBottomAction && (
-        <Space>
-          <Button onClick={props.onClose} size="small" shape="round">
-            {L("BTN_CANCEL")}
-          </Button>
-          <Button
-            type="primary"
-            onClick={props.onSave}
-            size="small"
-            shape="round"
-          >
-            {L("BTN_SAVE")}
-          </Button>
-        </Space>
-        // )
+        <>
+          <Row>
+            {props.onShare && (
+              <Button
+                className="custom-buttom-drawe"
+                onClick={props.onShare}
+                size="small"
+                shape="round"
+              >
+                {L("BTN_SHARE")}
+              </Button>
+            )}
+            {props.onFullView && (
+              <Button
+                className="custom-buttom-drawe"
+                onClick={props.onFullView}
+                size="small"
+                shape="round"
+              >
+                {L("BTN_FULL_VIEW")}
+              </Button>
+            )}
+            <Button
+              className="custom-buttom-drawe"
+              onClick={props.onClose}
+              size="small"
+              shape="round"
+            >
+              <CloseCircleFilled />
+              {L("BTN_CLOSE")}
+            </Button>
+          </Row>
+        </>
       }
       getContainer={props.getContainer}
     >
       {props.children}
-      {/* {props.useBottomAction && (
-        <>
-          <div style={{ height: 60 }} />
-          <div className="bottom-action-style">
-            <div className="w-100 h-100 d-flex justify-content-between align-items-center">
-              <div className="pl-3 pt-2">{props.extraBottomContent}</div>
-              <div>
-                <Button onClick={props.onClose} shape="round">
-                  {L("BTN_CANCEL")}
-                </Button>
-                {props.onSave && (
-                  <Button
-                    loading={props.loading}
-                    type="primary"
-                    className="mx-3"
-                    onClick={props.onSave}
-                    shape="round"
-                  >
-                    {L("BTN_SAVE")}
-                  </Button>
-                )}
-              </div>
-            </div>
-          </div>
-        </>
-      )} */}
+
       <style scoped>{`
       .ant-drawer-content {
         position: relative !important;

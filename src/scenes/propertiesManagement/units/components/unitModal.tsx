@@ -46,7 +46,7 @@ const UnitModal = inject()(
         onClose={() => {
           form.resetFields(), props.onCancel();
         }}
-        onSave={() => console.log(1)}
+        onFullView={() => console.log(1)}
         getContainer={false}
       >
         {" "}
