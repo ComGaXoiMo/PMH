@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { Button, Col, Modal, Row, Table } from "antd";
-import { EyeOutlined, CloseOutlined } from "@ant-design/icons";
+import { Col, Dropdown, Menu, Modal, Row, Table } from "antd";
+import { EllipsisOutlined } from "@ant-design/icons";
 import { inject, observer } from "mobx-react";
 
 import AppComponentBase from "../../../components/AppComponentBase";
@@ -11,15 +11,12 @@ import { L, LNotification } from "../../../lib/abpUtility";
 import Stores from "../../../stores/storeIdentifier";
 import LanguageStore from "../../../stores/administrator/languageStore";
 import DataTable from "../../../components/DataTable";
-import AppConsts, { appPermissions } from "../../../lib/appconst";
+import { appPermissions } from "../../../lib/appconst";
 import { portalLayouts } from "../../../components/Layout/Router/router.config";
 import debounce from "lodash/debounce";
 import getColumns from "./columns";
 import Search from "antd/es/input/Search";
 import withRouter from "@components/Layout/Router/withRouter";
-
-const { align } = AppConsts;
-
 export interface ILanguageProps {
   history: any;
   languageStore: LanguageStore;
@@ -160,30 +157,49 @@ class Language extends AppComponentBase<ILanguageProps, ILanguageState> {
   public render() {
     const { languages } = this.props.languageStore;
     const columns = getColumns({
-      title: L("ACTIONS"),
-      width: 150,
-      align: align.right,
+      title: L("LANGUAGE_FLAG"),
+      dataIndex: "icon",
+      key: "icon",
+      width: "15%",
       render: (text: string, item: any) => (
-        <div>
-          {this.isGranted(appPermissions.adminLanguage.changeText) && (
-            <Button
-              size="small"
-              className="ml-1"
-              shape="circle"
-              icon={<EyeOutlined />}
-              onClick={() => this.gotoLanguageText(item.name)}
-            />
-          )}
-          {this.isGranted(appPermissions.adminLanguage.update) && (
-            <Button
-              size="small"
-              className="ml-1"
-              shape="circle"
-              icon={<CloseOutlined />}
-              onClick={() => this.delete({ id: item.id })}
-            />
-          )}
-        </div>
+        <Row>
+          <Col sm={{ span: 21, offset: 0 }}>
+            <a
+              onClick={
+                this.isGranted(appPermissions.adminLanguage.changeText)
+                  ? () => this.gotoLanguageText(item.name)
+                  : () => console.log()
+              }
+              className="link-text-table"
+            >
+              <div>
+                <i className={text} />
+              </div>
+            </a>
+          </Col>
+          <Col sm={{ span: 3, offset: 0 }}>
+            <Dropdown
+              trigger={["click"]}
+              overlay={
+                <Menu>
+                  {this.isGranted(appPermissions.adminLanguage.update) && (
+                    <Menu.Item
+                      key={1}
+                      onClick={() => this.delete({ id: item.id })}
+                    >
+                      {L(item.isActive ? "BTN_DEACTIVATE" : "BTN_ACTIVATE")}
+                    </Menu.Item>
+                  )}
+                </Menu>
+              }
+              placement="bottomLeft"
+            >
+              <button className="button-action-hiden-table-cell">
+                <EllipsisOutlined />
+              </button>
+            </Dropdown>
+          </Col>
+        </Row>
       ),
     });
 
@@ -203,7 +219,7 @@ class Language extends AppComponentBase<ILanguageProps, ILanguageState> {
         >
           <Table
             size="middle"
-            className="custom-ant-table"
+            className="custom-ant-table custom-ant-row"
             rowKey={(record) => record.id.toString()}
             columns={columns}
             pagination={false}

@@ -11,6 +11,7 @@ const columns = (actionColumn?) => {
       width: "5%",
       render: (id) => <>{id}</>,
     },
+    actionColumn,
     {
       title: L("CONTACTS_NAME"),
       dataIndex: "contactName",
@@ -81,8 +82,6 @@ const columns = (actionColumn?) => {
       width: "10%",
       render: () => <>{}</>,
     },
-
-    actionColumn,
   ];
 
   return data;

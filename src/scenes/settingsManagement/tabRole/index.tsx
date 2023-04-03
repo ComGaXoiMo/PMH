@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button, Col, Input, Modal, Row, Table } from "antd";
+import { Col, Dropdown, Input, Menu, Modal, Row, Table } from "antd";
 import { inject, observer } from "mobx-react";
 
 import AppComponentBase from "../../../components/AppComponentBase";
@@ -10,13 +10,11 @@ import { L, LNotification } from "../../../lib/abpUtility";
 import RoleStore from "../../../stores/administrator/roleStore";
 import Stores from "../../../stores/storeIdentifier";
 import DataTable from "../../../components/DataTable";
-import AppConst, { appPermissions } from "../../../lib/appconst";
-import { CloseOutlined, EditOutlined } from "@ant-design/icons";
+import { appPermissions } from "../../../lib/appconst";
+import { EllipsisOutlined } from "@ant-design/icons";
 import debounce from "lodash/debounce";
 import getColumns from "./columns";
 import withRouter from "@components/Layout/Router/withRouter";
-
-const { align } = AppConst;
 
 export interface IRoleProps {
   roleStore: RoleStore;
@@ -156,30 +154,47 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
   public render() {
     const { allPermissions, roles } = this.props.roleStore;
     const columns = getColumns({
-      title: L("ACTIONS"),
-      width: 150,
-      align: align.right,
+      title: L("ST_ROLE_UNIQUE_NAME"),
+      dataIndex: "name",
+      key: "name",
+      width: "15%",
       render: (text: string, item: any) => (
-        <div>
-          {this.isGranted(appPermissions.adminRole.update) && (
-            <Button
-              size="small"
-              className="ml-1"
-              shape="circle"
-              icon={<EditOutlined />}
-              onClick={() => this.createOrUpdateModalOpen(item.id)}
-            />
-          )}
-          {this.isGranted(appPermissions.adminRole.delete) && (
-            <Button
-              size="small"
-              className="ml-1"
-              shape="circle"
-              icon={<CloseOutlined />}
-              onClick={() => this.delete({ id: item.id })}
-            />
-          )}
-        </div>
+        <Row>
+          <Col sm={{ span: 21, offset: 0 }}>
+            <a
+              onClick={
+                this.isGranted(appPermissions.adminRole.update)
+                  ? () => this.createOrUpdateModalOpen(item.id)
+                  : () => console.log()
+              }
+              className="link-text-table"
+            >
+              {text}
+            </a>
+          </Col>
+          <Col sm={{ span: 3, offset: 0 }}>
+            <Dropdown
+              trigger={["click"]}
+              overlay={
+                <Menu>
+                  {this.isGranted(appPermissions.adminRole.delete) && (
+                    <Menu.Item
+                      key={1}
+                      onClick={() => this.delete({ id: item.id })}
+                    >
+                      {L(item.isActive ? "BTN_DEACTIVATE" : "BTN_ACTIVATE")}
+                    </Menu.Item>
+                  )}
+                </Menu>
+              }
+              placement="bottomLeft"
+            >
+              <button className="button-action-hiden-table-cell">
+                <EllipsisOutlined />
+              </button>
+            </Dropdown>
+          </Col>
+        </Row>
       ),
     });
     return (
@@ -198,7 +213,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
         >
           <Table
             size="middle"
-            className="custom-ant-table"
+            className="custom-ant-table custom-ant-row"
             rowKey="id"
             pagination={false}
             columns={columns}

@@ -11,14 +11,7 @@ const columns = (actionColumn?) => {
       width: "5%",
       render: (id) => <>{id}</>,
     },
-    {
-      title: L("BOOKING_CODE"),
-      dataIndex: "",
-      key: "",
-      width: "15%",
-      ellipsis: true,
-      render: () => <>{}</>,
-    },
+    actionColumn,
     {
       title: L("UNIT_NO"),
       dataIndex: "",
@@ -91,8 +84,6 @@ const columns = (actionColumn?) => {
       ellipsis: true,
       render: () => <>{}</>,
     },
-
-    actionColumn,
   ];
 
   return data;

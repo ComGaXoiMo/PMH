@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Col, Dropdown, Input, Menu, Modal, Row, Table } from "antd";
-import { MoreOutlined } from "@ant-design/icons";
+import { EllipsisOutlined } from "@ant-design/icons";
 import { inject, observer } from "mobx-react";
 
 import { AppComponentListBase } from "../../../components/AppComponentBase";
@@ -11,12 +11,10 @@ import { L, LNotification } from "@lib/abpUtility";
 import Stores from "../../../stores/storeIdentifier";
 import UserStore from "../../../stores/administrator/userStore";
 import DataTable from "../../../components/DataTable";
-import AppConsts, { appPermissions } from "../../../lib/appconst";
+import { appPermissions } from "../../../lib/appconst";
 import debounce from "lodash/debounce";
 import getColumns from "./columns";
 import withRouter from "@components/Layout/Router/withRouter";
-
-const { align } = AppConsts;
 
 export interface IUserProps {
   userStore: UserStore;
@@ -154,39 +152,55 @@ class User extends AppComponentListBase<IUserProps, IUserState> {
   public render() {
     const { users } = this.props.userStore;
     const columns = getColumns({
-      title: L("ACTIONS"),
-      dataIndex: "operation",
-      key: "operation",
-      fixed: align.right,
-      align: align.right,
-      width: 90,
-      render: (text: string, item: any) => (
-        <div>
-          <Dropdown
-            trigger={["click"]}
-            overlay={
-              <Menu>
-                {this.isGranted(appPermissions.staff.update) && (
-                  <Menu.Item
-                    onClick={() =>
-                      this.createOrUpdateModalOpen({ id: item.id })
-                    }
-                  >
-                    {L("BTN_EDIT")}
-                  </Menu.Item>
-                )}
-                {this.isGranted(appPermissions.staff.delete) && (
-                  <Menu.Item onClick={() => this.delete({ id: item.id })}>
-                    {L(item.isActive ? "BTN_DEACTIVATE" : "BTN_ACTIVATE")}
-                  </Menu.Item>
-                )}
-              </Menu>
-            }
-            placement="bottomLeft"
-          >
-            <MoreOutlined />
-          </Dropdown>
-        </div>
+      title: L("USER_NAME"),
+      dataIndex: "userName",
+      key: "userName",
+      ellipsis: true,
+      width: "20%",
+      render: (userName: string, item: any) => (
+        <Row>
+          <Col sm={{ span: 21, offset: 0 }}>
+            <a
+              onClick={
+                // this.isGranted(appPermissions.unit.update)
+                //   ? () => this.gotoDetail(item.id)
+                //   : () => console.log()
+                () => this.createOrUpdateModalOpen({ id: item.id })
+              }
+              className="link-text-table"
+            >
+              {userName}
+            </a>
+          </Col>
+          <Col sm={{ span: 3, offset: 0 }}>
+            <Dropdown
+              trigger={["click"]}
+              overlay={
+                <Menu>
+                  {this.isGranted(appPermissions.staff.update) && (
+                    <Menu.Item
+                      onClick={() =>
+                        this.createOrUpdateModalOpen({ id: item.id })
+                      }
+                    >
+                      {L("BTN_EDIT")}
+                    </Menu.Item>
+                  )}
+                  {this.isGranted(appPermissions.staff.delete) && (
+                    <Menu.Item onClick={() => this.delete({ id: item.id })}>
+                      {L(item.isActive ? "BTN_DEACTIVATE" : "BTN_ACTIVATE")}
+                    </Menu.Item>
+                  )}
+                </Menu>
+              }
+              placement="bottomLeft"
+            >
+              <button className="button-action-hiden-table-cell">
+                <EllipsisOutlined />
+              </button>
+            </Dropdown>
+          </Col>
+        </Row>
       ),
     });
 
@@ -205,7 +219,7 @@ class User extends AppComponentListBase<IUserProps, IUserState> {
         >
           <Table
             size="middle"
-            className="custom-ant-table"
+            className="custom-ant-table custom-ant-row"
             rowKey={(record) => record.id.toString()}
             columns={columns}
             pagination={false}

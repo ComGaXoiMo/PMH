@@ -3,12 +3,10 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import DataTable from "@components/DataTable";
 import gettColumns from "./components/companyColumn";
-import { Button, Table } from "antd";
+import { Col, Dropdown, Menu, Row, Table } from "antd";
 import AppDataStore from "@stores/appDataStore";
 import { L } from "@lib/abpUtility";
-import AppConsts from "@lib/appconst";
-import { EditOutlined } from "@ant-design/icons";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons/lib/icons";
+import { EllipsisOutlined } from "@ant-design/icons/lib/icons";
 import Stores from "@stores/storeIdentifier";
 import withRouter from "@components/Layout/Router/withRouter";
 import CompanyFilterPanel from "./components/companyFilterPanel";
@@ -16,7 +14,6 @@ import CompanyStore from "@stores/clientManagement/companyStore";
 import CompanyModal from "./components/companyModal";
 import CompanyCreateModal from "./components/companyCreateModal";
 
-const { align } = AppConsts;
 export interface IContactProps {
   history: any;
   appDataStore: AppDataStore;
@@ -100,32 +97,50 @@ class Company extends React.Component<IContactProps, IContactState> {
       companyStore: { isLoading, tableData },
     } = this.props;
     const columns = gettColumns({
-      title: L("ACTIONS"),
-      dataIndex: "operation",
-      key: "operation",
-      align: align.right,
-      width: "10%",
-      render: (text: string, item: any) => (
-        <div>
-          {/* {this.isGranted(appPermissions.a.update) && ( */}
-          <Button
-            size="small"
-            className="ml-1"
-            shape="circle"
-            icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id)}
-          />
-          {/* )} */}
-          {/* {this.isGranted(appPermissions.a.delete) && ( */}
-          <Button
-            size="small"
-            className="ml-1"
-            shape="circle"
-            icon={item.isActive ? <CloseOutlined /> : <CheckOutlined />}
-            // onClick={() => this.activateOrDeactivate(item.id, !item.isActive)}
-          />
-          {/* )} */}
-        </div>
+      title: L("COMPANY_NAME"),
+      dataIndex: "businessName",
+      key: "businessName",
+      width: "15%",
+      render: (businessName: string, item: any) => (
+        <Row>
+          <Col sm={{ span: 21, offset: 0 }}>
+            <a
+              onClick={
+                // this.isGranted(appPermissions.unit.update)
+                //   ? () => this.gotoDetail(item.id)
+                //   : () => console.log()
+                () => this.gotoDetail(item.id)
+              }
+              className="link-text-table"
+            >
+              {businessName}
+            </a>
+          </Col>
+          <Col sm={{ span: 3, offset: 0 }}>
+            <Dropdown
+              trigger={["click"]}
+              overlay={
+                <Menu>
+                  {/* {this.isGranted(appPermissions.unit.delete) && ( */}
+                  <Menu.Item
+                    key={1}
+                    // onClick={() =>
+                    //   this.activateOrDeactivate(item.id, !item.isActive)
+                    // }
+                  >
+                    {L(item.isActive ? "BTN_DEACTIVATE" : "BTN_ACTIVATE")}
+                  </Menu.Item>
+                  {/* )} */}
+                </Menu>
+              }
+              placement="bottomLeft"
+            >
+              <button className="button-action-hiden-table-cell">
+                <EllipsisOutlined />
+              </button>
+            </Dropdown>
+          </Col>
+        </Row>
       ),
     });
     return (
@@ -146,7 +161,7 @@ class Company extends React.Component<IContactProps, IContactState> {
         >
           <Table
             size="middle"
-            className=""
+            className="custom-ant-row"
             rowKey={(record) => record.id}
             columns={columns}
             pagination={false}

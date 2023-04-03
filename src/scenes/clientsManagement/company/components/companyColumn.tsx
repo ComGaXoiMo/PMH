@@ -11,14 +11,7 @@ const columns = (actionColumn?) => {
       width: "5%",
       render: (id) => <>{id}</>,
     },
-    {
-      title: L("COMPANY_NAME"),
-      dataIndex: "businessName",
-      key: "businessName",
-      width: "15%",
-      ellipsis: true,
-      render: (businessName) => <>{businessName}</>,
-    },
+    actionColumn,
     {
       title: L("INDUSTRY"),
       dataIndex: "industry",
@@ -56,8 +49,6 @@ const columns = (actionColumn?) => {
       width: "10%",
       render: () => <>{}</>,
     },
-
-    actionColumn,
   ];
 
   return data;
