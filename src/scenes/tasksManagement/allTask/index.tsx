@@ -93,7 +93,7 @@ class AllTask extends React.Component<IAllTaskProps, IAllTaskState> {
     filters: {},
     visible: false,
     title: L("CREATE"),
-    tabView: "BOARD_VIEW",
+    tabView: tabKeys.boardView,
     modalVisible: false,
   };
 

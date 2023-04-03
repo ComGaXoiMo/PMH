@@ -12,7 +12,6 @@ import {
   EditOutlined,
 } from "@ant-design/icons/lib/icons";
 import DataTable from "@components/DataTable";
-import { withRouter } from "react-router-dom";
 import InquiriesBoardView from "./components/inquiriesBoardView";
 // import { Table } from "antd";
 const { align } = AppConsts;
@@ -22,15 +21,18 @@ import Stores from "@stores/storeIdentifier";
 import InquiryStore from "@stores/communication/inquiryStore";
 import ListingStore from "@stores/projects/listingStore";
 import UnitStore from "@stores/projects/unitStore";
-export interface IUnitProps {
+import { AppComponentListBase } from "@components/AppComponentBase";
+import withRouter from "@components/Layout/Router/withRouter";
+export interface IInquiriesListProps {
   history: any;
   appDataStore: AppDataStore;
   inquiryStore: InquiryStore;
   listingStore: ListingStore;
   unitStore: UnitStore;
+  projectId?: any;
 }
 
-export interface IInquiriesListtate {
+export interface IInquiriesListState {
   maxResultCount: number;
   skipCount: number;
   filters: any;
@@ -47,7 +49,10 @@ const selectKeys = {
 
 @inject(Stores.AppDataStore, Stores.InquiryStore)
 @observer
-class InquiriesList extends React.Component<any> {
+class InquiriesList extends AppComponentListBase<
+  IInquiriesListProps,
+  IInquiriesListState
+> {
   formRef: any = React.createRef();
   state = {
     maxResultCount: 10,
@@ -76,7 +81,7 @@ class InquiriesList extends React.Component<any> {
   }
   getAll = async () => {
     this.props.appDataStore.getInquirySourceAndStatus();
-    this.props.inquiryStore.getAll("");
+    this.props.inquiryStore.getAll({ ProjectId: this.props.projectId });
   };
   handleTableChange = (pagination: any) => {
     this.setState(

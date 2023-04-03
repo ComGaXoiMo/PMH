@@ -14,15 +14,16 @@ import {
 import DataTable from "@components/DataTable";
 import Stores from "@stores/storeIdentifier";
 import UnitStore from "@stores/projects/unitStore";
-import { withRouter } from "react-router-dom";
 import UnitModal from "./components/unitModal";
 import StackPland from "./components/stackPland";
+import { AppComponentListBase } from "@components/AppComponentBase";
+import withRouter from "@components/Layout/Router/withRouter";
 // import { Table } from "antd";
 const { align } = AppConsts;
 
 export interface IUnitProps {
   history: any;
-
+  projectId: any;
   unitStore: UnitStore;
 }
 
@@ -31,10 +32,9 @@ export interface IUnitState {
   skipCount: number;
   filters: any;
   projectProvinces: any[];
-  projectId: number;
   visible: boolean;
-  title: string;
   tabView: string;
+  unitId: any;
 }
 const tabKeys = {
   gridView: L("GRID_VIEW"),
@@ -42,17 +42,16 @@ const tabKeys = {
 };
 @inject(Stores.UnitStore)
 @observer
-class Units extends React.Component<any> {
+class Units extends AppComponentListBase<IUnitProps, IUnitState> {
   formRef: any = React.createRef();
   state = {
     maxResultCount: 10,
     skipCount: 0,
-    projectId: 0,
     projectProvinces: [],
-    unitId: undefined,
+    unitId: null,
     filters: {
       time: "",
-      projectId: 0,
+      projectId: this.props.projectId ?? undefined,
       floorId: 0,
       typeId: 0,
       statusId: 0,
@@ -69,6 +68,7 @@ class Units extends React.Component<any> {
 
   getAll = async () => {
     await this.props.unitStore.getAllRes({
+      ProjectId: this.props.projectId,
       maxResultCount: this.state.maxResultCount,
       skipCount: this.state.skipCount,
       ...this.state.filters,
@@ -133,6 +133,7 @@ class Units extends React.Component<any> {
       <>
         <div>
           <UnitFilterPanel
+            projectId={this.props.projectId}
             tabKeys={tabKeys}
             changeTab={this.changeTab}
             handleSearch={this.handleFilterChange}

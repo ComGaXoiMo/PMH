@@ -18,7 +18,7 @@ const tabKeys = {
 class Tasks extends AppComponentListBase<ITasksProps, ITasksState> {
   formRef: any = React.createRef();
   state = {
-    tabActiveKey: tabKeys.tabMyTask,
+    tabActiveKey: tabKeys.tabAll,
   };
 
   changeTab = (tabKey) => {

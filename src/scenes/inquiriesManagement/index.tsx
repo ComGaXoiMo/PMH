@@ -5,6 +5,7 @@ import { AppComponentListBase } from "@components/AppComponentBase";
 import { Tabs } from "antd";
 import { L } from "@lib/abpUtility";
 import InquiriesList from "./inquiriesList";
+import InquiriesReport from "@scenes/dashboardsManagement/components/inquiriesReport/inquiriesReport";
 
 export interface IInquiriesProps {}
 
@@ -44,10 +45,9 @@ class Inquiries extends AppComponentListBase<IInquiriesProps, IInquiriesState> {
             >
               <InquiriesList />
             </Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabReports)}
-              key={tabKeys.tabReports}
-            ></Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabReports)} key={tabKeys.tabReports}>
+              <InquiriesReport />
+            </Tabs.TabPane>
           </Tabs>
         </div>
       </>

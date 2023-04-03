@@ -7,6 +7,7 @@ import { L } from "@lib/abpUtility";
 import Lease from "./lease";
 import Deposit from "./deposit";
 import Payment from "./payment";
+import ContractsReport from "@scenes/dashboardsManagement/components/contractsReport/contractsReport";
 
 export interface ILeaseContractsProps {}
 
@@ -57,10 +58,9 @@ class LeaseContracts extends AppComponentListBase<
             <Tabs.TabPane tab={L(tabKeys.tabPayment)} key={tabKeys.tabPayment}>
               <Payment />
             </Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabReport)}
-              key={tabKeys.tabReport}
-            ></Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabReport)} key={tabKeys.tabReport}>
+              <ContractsReport />
+            </Tabs.TabPane>
           </Tabs>
         </div>
       </>

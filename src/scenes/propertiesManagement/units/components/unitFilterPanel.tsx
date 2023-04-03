@@ -14,6 +14,7 @@ type Props = {
   tabKeys: any;
   filter: any;
   changeTab: any;
+  projectId;
   onCreate: () => void;
 };
 
@@ -32,7 +33,7 @@ class UnitsFilterPanel extends React.Component<Props, any> {
     listFloor: [],
     filters: {
       time: "",
-      projectId: 0,
+      projectId: this.props.projectId,
       floorId: 0,
       typeId: 0,
       statusId: 0,
@@ -84,25 +85,25 @@ class UnitsFilterPanel extends React.Component<Props, any> {
           <Col sm={{ span: 4, offset: 0 }}>
             <Search size="middle" placeholder={L("FILTER_KEYWORD")} />
           </Col>
-
-          <Col sm={{ span: 2, offset: 0 }}>
-            <Select
-              placeholder={L("PROJECT")}
-              filterOption={false}
-              className="w-100"
-              onChange={(value) => {
-                this.handleChange("projectId", value),
-                  this.getFloorResult(value, "");
-              }}
-              onSearch={(value) => this.getProject(value)}
-              allowClear
-              showSearch
-            >
-              {" "}
-              {renderOptions(this.state.listProject)}
-            </Select>
-          </Col>
-
+          {!this.props.projectId && (
+            <Col sm={{ span: 2, offset: 0 }}>
+              <Select
+                placeholder={L("PROJECT")}
+                filterOption={false}
+                className="w-100"
+                onChange={(value) => {
+                  this.handleChange("projectId", value),
+                    this.getFloorResult(value, "");
+                }}
+                onSearch={(value) => this.getProject(value)}
+                allowClear
+                showSearch
+              >
+                {" "}
+                {renderOptions(this.state.listProject)}
+              </Select>
+            </Col>
+          )}
           {this.state.selectedType === this.props.tabKeys.gridView && (
             <Col sm={{ span: 2, offset: 0 }}>
               <Select

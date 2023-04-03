@@ -17,6 +17,7 @@ import {
 import UploadButton from "@components/FileUpload/UploadButton";
 import { renderDocuments } from "@components/FileUpload/FileDocuments";
 import FileImages from "@components/FileUpload/FileImages";
+import withRouter from "@components/Layout/Router/withRouter";
 
 const { TextArea } = Input;
 
@@ -54,7 +55,7 @@ const Editor = ({
         htmlType="submit"
         loading={loading}
         onClick={onSubmit}
-        size="large"
+        size="middle"
         shape="round"
         type="primary"
         icon={<SendOutlined />}
@@ -185,12 +186,12 @@ class CommentList extends AppComponentBase<ICommentProps> {
             style={{ padding: 0 }}
             avatar={
               <Avatar
-                src={this.props.sessionStore.profilePicture}
-                alt={this.props.sessionStore.currentLogin.user.name}
+                src={this.props.sessionStore?.profilePicture}
+                alt={this.props.sessionStore?.currentLogin.user.name}
                 size="large"
               >
                 {getFirstLetterAndUpperCase(
-                  this.props.sessionStore.currentLogin.user.name
+                  this.props.sessionStore?.currentLogin.user.name
                 )}
               </Avatar>
             }
@@ -251,4 +252,4 @@ class CommentList extends AppComponentBase<ICommentProps> {
   }
 }
 
-export default CommentList;
+export default withRouter(CommentList);

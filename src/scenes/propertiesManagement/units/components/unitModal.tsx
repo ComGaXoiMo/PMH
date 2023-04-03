@@ -3,10 +3,11 @@ import * as React from "react";
 import CustomDrawer from "@components/Drawer/CustomDrawer";
 import { Card, Tabs } from "antd";
 import { L } from "@lib/abpUtility";
-import TabInfo from "./tabInfo";
+// import TabInfo from "./tabInfo";
 import withRouter from "@components/Layout/Router/withRouter";
 import Stores from "@stores/storeIdentifier";
 import UnitStore from "@stores/projects/unitStore";
+import UnitCreate from "./tabInfo/unitResDetail";
 
 type Props = {
   visible: boolean;
@@ -45,7 +46,7 @@ class UnitModal extends React.Component<Props, State> {
       if (this.props.id) {
         this.getDetail(this.props.id);
       } else {
-        this.form.resetFields();
+        this.form.current.resetFields();
       }
     }
   }
@@ -88,7 +89,8 @@ class UnitModal extends React.Component<Props, State> {
             style={{ paddingBottom: "10px" }}
           >
             <Card className="card-detail w-100 h-100">
-              <TabInfo />
+              {/* <TabInfo /> */}
+              <UnitCreate id={this.props.id} />
             </Card>
           </Tabs.TabPane>
           <Tabs.TabPane

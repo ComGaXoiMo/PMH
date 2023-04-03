@@ -23,7 +23,7 @@ const data = {
   datasets: [
     {
       data: [3, 10, 10, 10],
-      backgroundColor: ["#27AE60", "#FEC20C", "#F2994A", "#666699"],
+      backgroundColor: ["#27AE60", "#FEC20C", "#F2994A", "#2284aa"],
       display: true,
       //   borderColor: "#D1D6DC",
     },

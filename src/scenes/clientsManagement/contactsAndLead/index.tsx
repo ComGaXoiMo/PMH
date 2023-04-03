@@ -159,7 +159,6 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
           />
         </DataTable>
         <ContractDetailModal
-          title={this.state.title}
           data={this.props.contactStore?.editContact}
           visible={this.state.visible}
           onCancel={() => {

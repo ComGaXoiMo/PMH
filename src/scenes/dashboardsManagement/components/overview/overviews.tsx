@@ -2,9 +2,9 @@ import * as React from "react";
 
 import { inject, observer } from "mobx-react";
 import { AppComponentListBase } from "@components/AppComponentBase";
-import { Row, Col, Card } from "antd";
-import Doughnut from "./overview/doughnutChart";
-import BarChart from "./overview/barChart";
+import { Row, Col } from "antd";
+import Doughnut from "./doughnutChart";
+import BarChart from "./barChart";
 
 export interface IOverviewProps {}
 
@@ -42,13 +42,17 @@ class Overviews extends AppComponentListBase<IOverviewProps, IOverviewState> {
             <Col sm={{ span: 8, offset: 0 }}>
               <Doughnut Title="Payment" />
             </Col>
-            <Col sm={{ span: 16, offset: 0 }}>
-              <Card />
-            </Col>
+            {/* <Col sm={{ span: 16, offset: 0 }}>
+              <Card  />
+            </Col> */}
             <Col sm={{ span: 8, offset: 0 }}>
               <Doughnut Title="Inquiries" />
             </Col>
-            <Col sm={{ span: 24, offset: 0 }}>
+            <Col sm={{ span: 16, offset: 0 }}></Col>
+            <Col sm={{ span: 16, offset: 0 }}>
+              <BarChart Title="Inquiries" />
+            </Col>
+            <Col sm={{ span: 8, offset: 0 }}>
               <BarChart Title="Inquiries" />
             </Col>
           </Row>

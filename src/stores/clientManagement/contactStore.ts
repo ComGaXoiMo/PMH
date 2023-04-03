@@ -7,6 +7,7 @@ import { AddressModel } from "@models/common/addressModel";
 class ContactStore {
   @observable isLoading!: boolean;
   @observable tableData!: PagedResultDto<any>;
+  @observable contactInCompany!: PagedResultDto<any>;
   @observable editContact!: any;
 
   constructor() {
@@ -65,6 +66,14 @@ class ContactStore {
       .getAll(params)
       .finally(() => (this.isLoading = false));
     this.tableData = result;
+  }
+  @action
+  async getAllinCompany(params: any) {
+    this.isLoading = true;
+    let result = await contactService
+      .getAll(params)
+      .finally(() => (this.isLoading = false));
+    this.contactInCompany = result;
   }
 }
 

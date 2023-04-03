@@ -170,7 +170,11 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
     }
     const sumUnits = sum(units.map((unit) => unit.size));
     const percentUnits = 100 - (sumUnits / floor.size) * 100;
-
+    const getColor = (id) => {
+      const color = Math.floor(14000000 + id * 1379).toString(16);
+      console.log(color);
+      return "#" + color;
+    };
     return (
       <>
         {units.map((unit, inx) => (
@@ -179,34 +183,46 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
             draggableId={`u-${unit.id}`}
             index={inx}
           >
-            {(dragProvided) => (
-              <div
-                ref={dragProvided.innerRef}
-                {...dragProvided.draggableProps}
-                {...dragProvided.dragHandleProps}
-                className={`unit-item ${unit.color || "unit-empty"}`}
-                style={{
-                  ...dragProvided.draggableProps.style,
-                  flex: `0 1 ${(unit.size / floor.size) * 100}%`,
-                }}
-                onClick={() => this.showCreateOrUpdateModalOpen(unit.id)}
-              >
-                <p className="mb-0 text-truncate">
-                  {unit.unitName} - <small>{unit.statusName}</small>
-                </p>
-                <small>
-                  {formatNumber(unit.size)} m<sup>2</sup>
-                </small>
-                <p className="mb-0 text-truncate">
-                  <small>{unit.orgTenantBusinessName}</small>
-                </p>
-                {unit.expiredDate && (
-                  <div className="text-truncate">
-                    {L("AVAILABLE")}: {renderDate(unit.expiredDate)}
+            {(dragProvided) => {
+              const colorByStatus = getColor(unit.statusId);
+              return (
+                <div
+                  ref={dragProvided.innerRef}
+                  {...dragProvided.draggableProps}
+                  {...dragProvided.dragHandleProps}
+                  className={`unit-item ${unit.color || "unit-empty"}`}
+                  style={{
+                    ...dragProvided.draggableProps.style,
+                    flex: `0 1 ${(unit.size / floor.size) * 100}%`,
+                  }}
+                  onClick={() => this.showCreateOrUpdateModalOpen(unit.id)}
+                >
+                  <div
+                    className="unit-item-info"
+                    style={{ position: "relative", zIndex: 1 }}
+                  >
+                    <p className="mb-0 text-truncate">
+                      {unit.unitName} - <small>{unit.statusName}</small>
+                    </p>
+                    <small>
+                      {formatNumber(unit.size)} m<sup>2</sup>
+                    </small>
+                    <p className="mb-0 text-truncate">
+                      <small>{unit.orgTenantBusinessName}</small>
+                    </p>
+                    {unit.expiredDate && (
+                      <div className="text-truncate">
+                        {L("AVAILABLE")}: {renderDate(unit.expiredDate)}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            )}
+                  <div
+                    className="unit-item-bg"
+                    style={{ backgroundColor: colorByStatus }}
+                  ></div>
+                </div>
+              );
+            }}
           </Draggable>
         ))}
         {/*<UnitDiv className="unit-item p-0">{placeholder}</UnitDiv>*/}

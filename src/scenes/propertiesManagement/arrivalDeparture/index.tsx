@@ -79,7 +79,7 @@ class ArrivalDeparture extends React.Component<any> {
             rowKey={(record) => record.id}
             columns={columns}
             pagination={false}
-            // dataSource={tableData === undefined ? [] : tableData.items}
+            dataSource={dataFake === undefined ? [] : dataFake.items}
             bordered
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
           />
@@ -89,3 +89,44 @@ class ArrivalDeparture extends React.Component<any> {
   }
 }
 export default withRouter(ArrivalDeparture);
+
+const dataFake = {
+  items: [
+    {
+      id: 32,
+      bookingCode: "29122022 - 01",
+      type: "Check - In",
+      unit: "2302",
+      typesUnit: "2BR",
+      propertyManagement: "Mr. Takuda",
+      nationality: "JAPANESE",
+      date: "3-Feb-23",
+      dDate: "4-Feb-23",
+      remark: "BILLS TO GUEST - 35% OFF",
+    },
+    {
+      id: 33,
+      bookingCode: "29122022 - 01",
+      type: "Check - In",
+      unit: "2303",
+      typesUnit: "2BR",
+      propertyManagement: "Ms. Lan",
+      nationality: "VIETNAMESE",
+      date: "3-Feb-23",
+      dDate: "4-Feb-23",
+      remark: "BILLS TO GUEST - 35% OFF",
+    },
+    {
+      id: 34,
+      bookingCode: "29122022 - 01",
+      type: "Check - In",
+      unit: "2304",
+      typesUnit: "1BR",
+      propertyManagement: "Mr. Takuda",
+      nationality: "JAPANESE",
+      date: "3-Feb-23",
+      dDate: "4-Feb-23",
+      remark: "BILLS TO GUEST - 35% OFF",
+    },
+  ],
+};

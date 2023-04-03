@@ -28,7 +28,8 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
       closable={false}
       onClose={props.onClose}
       open={props.visible}
-      width={window.innerWidth < 600 ? "100%" : "50%"}
+      style={{ marginTop: "-16px" }}
+      width={window.innerWidth < 600 ? "100%" : "55%"}
       extra={
         <>
           <Row>
@@ -36,27 +37,26 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
               <Button
                 className="custom-buttom-drawe"
                 onClick={props.onShare}
-                size="small"
-                shape="round"
+                size="middle"
               >
                 {L("BTN_SHARE")}
               </Button>
             )}
+            &ensp;
             {props.onFullView && (
               <Button
                 className="custom-buttom-drawe"
                 onClick={props.onFullView}
-                size="small"
-                shape="round"
+                size="middle"
               >
                 {L("BTN_FULL_VIEW")}
               </Button>
             )}
+            &ensp;
             <Button
               className="custom-buttom-drawe"
               onClick={props.onClose}
-              size="small"
-              shape="round"
+              size="middle"
             >
               <CloseCircleFilled />
               {L("BTN_CLOSE")}
@@ -72,8 +72,14 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
       .ant-drawer-content {
         position: relative !important;
       }
+      .ant-drawer-content {
+        background: #f2f4f8;
+      }
+      .ant-drawer-header {
+        background-color: white;
+      }
       .ant-drawer-body {
-        padding: 4px 0px 0px 0px !important;
+        padding: 0px 0px 0px 0px !important;
       }
       .bottom-action-style {
         position: absolute  !important;
@@ -82,6 +88,10 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
         right: 0;
         height: 60px;
         background-color: #FAF8EE
+      }
+      .ant-drawer-right > .ant-drawer-content-wrapper {
+        min-height: calc(100vh - 139px);
+      max-height: calc(100vh - 139px);
       }
       `}</style>
     </Drawer>

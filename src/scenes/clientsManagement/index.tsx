@@ -7,6 +7,7 @@ import { L } from "@lib/abpUtility";
 import ContactsAndLead from "./contactsAndLead";
 import Company from "./company";
 import Tenants from "./tenants";
+import ClientsReport from "@scenes/dashboardsManagement/components/clientsReport/clientsReport";
 
 export interface IClientsProps {}
 
@@ -54,10 +55,9 @@ class Clients extends AppComponentListBase<IClientsProps, IClientsState> {
             <Tabs.TabPane tab={L(tabKeys.tabTenant)} key={tabKeys.tabTenant}>
               <Tenants />
             </Tabs.TabPane>
-            <Tabs.TabPane
-              tab={L(tabKeys.tabReport)}
-              key={tabKeys.tabReport}
-            ></Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabReport)} key={tabKeys.tabReport}>
+              <ClientsReport />
+            </Tabs.TabPane>
           </Tabs>
         </div>
       </>
