@@ -54,7 +54,7 @@ class UnitCreate extends AppComponentListBase<Props, State> {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.id !== this.props.id) {
+    if (prevProps.id !== this.props?.id) {
       let callAPI = Promise.all([
         this.setState({ loading: true }),
         this.props.appDataStore.getUnitCategories({}),
@@ -62,7 +62,7 @@ class UnitCreate extends AppComponentListBase<Props, State> {
         this.props.unitStore?.getFacilities(),
         this.props.unitStore?.getView(),
         this.props.appDataStore.getCountryFull(),
-        this.getDetail(this.props.id),
+        this.getDetail(this.props?.id),
       ]);
       callAPI.finally(() => this.setState({ loading: false }));
     }
@@ -90,26 +90,31 @@ class UnitCreate extends AppComponentListBase<Props, State> {
     this.setState({ floorResult: res });
   };
 
-  getDetail = async (id) => {
-    await this.props.unitStore.getUnitRes(id);
-    this.form.current.setFieldsValue(this.props.unitStore.editUnitRes);
-    let newFloorResult = [
-      ...this.state.floorResult,
-      {
-        id: this.props.unitStore.editUnitRes?.floorId,
-        name: this.props.unitStore.editUnitRes?.floorName,
-      },
-    ];
-    this.setState({ floorResult: newFloorResult });
-    this.setState({
-      projects: [
+  getDetail = async (id?) => {
+    if (id) {
+      await this.props.unitStore.getUnitRes(id);
+      this.form.current.setFieldsValue(this.props.unitStore.editUnitRes);
+      let newFloorResult = [
+        ...this.state.floorResult,
         {
-          id: this.props.unitStore.editUnitRes?.projectId,
-          name: this.props.unitStore.editUnitRes?.projectName,
+          id: this.props.unitStore.editUnitRes?.floorId,
+          name: this.props.unitStore.editUnitRes?.floorName,
         },
-      ],
-    });
-    this.setState({ projectId: this.props.unitStore.editUnitRes?.projectId });
+      ];
+      this.setState({ floorResult: newFloorResult });
+      this.setState({
+        projects: [
+          {
+            id: this.props.unitStore.editUnitRes?.projectId,
+            name: this.props.unitStore.editUnitRes?.projectName,
+          },
+        ],
+      });
+      this.setState({ projectId: this.props.unitStore.editUnitRes?.projectId });
+    } else {
+      this.form.current.resetFields();
+      await this.props.unitStore.createUnit();
+    }
   };
 
   render() {

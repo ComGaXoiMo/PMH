@@ -42,7 +42,7 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
     maxResultCount: 10,
     skipCount: 0,
     projectProvinces: [],
-    unitId: null,
+    unitId: undefined,
     filters: {
       time: "",
       projectId: this.props.projectId ?? undefined,
@@ -83,7 +83,7 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
       this.setState({ unitId: id, visible: true });
     } else {
       // this.setState({ idBatch: null })
-      this.setState({ visible: true });
+      this.setState({ unitId: undefined, visible: true });
     }
   };
   changeTab = async (value) => {
@@ -161,7 +161,7 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
             changeTab={this.changeTab}
             handleSearch={this.handleFilterChange}
             onCreate={() => {
-              this.gotoDetail(null);
+              this.gotoDetail(undefined);
             }}
           />
           {this.state.tabView === tabKeys.listView && (

@@ -46,15 +46,14 @@ class UnitModal extends React.Component<Props, State> {
     this.changeTab = this.changeTab.bind(this);
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate = async (prevProps: Props) => {
     if (this.props.id !== prevProps.id) {
       if (this.props.id) {
-        this.getDetail(this.props.id);
+        await this.getDetail(this.props.id);
       } else {
-        this.form.current.resetFields();
       }
     }
-  }
+  };
   getDetail = async (id) => {
     await this.props.unitStore.getUnitRes(id);
   };
@@ -95,7 +94,7 @@ class UnitModal extends React.Component<Props, State> {
           >
             <Card className="card-detail w-100 h-100">
               {/* <TabInfo /> */}
-              <UnitCreate id={this.props.id} />
+              <UnitCreate id={this.props.id} unitRes={editUnitRes} />
             </Card>
           </Tabs.TabPane>
           <Tabs.TabPane tab={L(tabKeys.tabActivity)} key={tabKeys.tabActivity}>
