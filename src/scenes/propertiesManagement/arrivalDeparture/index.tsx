@@ -3,11 +3,13 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import DataTable from "@components/DataTable";
 import gettColumns from "./components/arrivalDepartureColumn";
-import { Table } from "antd";
+import { Col, Dropdown, Menu, Row, Table } from "antd";
 import ProjectFilterPanel from "./components/arrivalDepartureFilterPanel";
 import AppDataStore from "@stores/appDataStore";
 import ProjectStore from "@stores/projects/projectStore";
 import { withRouter } from "react-router-dom";
+import { MoreOutlined } from "@ant-design/icons";
+import { L } from "@lib/abpUtility";
 
 export interface IProjectProps {
   history: any;
@@ -59,7 +61,61 @@ class ArrivalDeparture extends React.Component<any> {
       // projectStore: { tableData },
     } = this.props;
 
-    const columns = gettColumns({});
+    const columns = gettColumns({
+      title: L("BOOKING_CODE"),
+      dataIndex: "bookingCode",
+      key: "bookingCode",
+      width: "15%",
+      ellipsis: true,
+      // render: (bookingCode) => <>{bookingCode}</>,
+      // title: L("PROPERTY"),
+      // dataIndex: "projectName",
+      // key: "projectName",
+      // width: "15%",
+      // ellipsis: true,
+
+      render: (bookingCode: string, item: any) => (
+        <Row>
+          <Col sm={{ span: 21, offset: 0 }}>
+            <a
+              onClick={
+                // this.isGranted(appPermissions.unit.update)
+                //   ? () => this.gotoDetail(item.id)
+                //   : () => console.log()
+                () => this.gotoDetail(item.id)
+              }
+              className="link-text-table"
+            >
+              {bookingCode}
+            </a>
+          </Col>
+          <Col sm={{ span: 3, offset: 0 }}>
+            <Dropdown
+              trigger={["click"]}
+              overlay={
+                <Menu>
+                  {/* {this.isGranted(appPermissions.unit.delete) && ( */}
+                  <Menu.Item
+                    key={1}
+                    // onClick={() =>
+                    //   this.activateOrDeactivate(item.id, !item.isActive)
+                    // }
+                  >
+                    {L(item.isActive ? "BTN_DEACTIVATE" : "BTN_ACTIVATE")}
+                  </Menu.Item>
+                  {/* )} */}
+                </Menu>
+              }
+              placement="bottomLeft"
+            >
+              <button className="button-action-hiden-table-cell">
+                <MoreOutlined />
+              </button>
+            </Dropdown>
+          </Col>
+        </Row>
+      ),
+    });
     return (
       <>
         <ProjectFilterPanel />
@@ -75,7 +131,7 @@ class ArrivalDeparture extends React.Component<any> {
         >
           <Table
             size="middle"
-            className=""
+            className="custom-ant-row"
             rowKey={(record) => record.id}
             columns={columns}
             pagination={false}

@@ -3,14 +3,9 @@ import gettColumns from "./components/unitColumn";
 
 import { inject, observer } from "mobx-react";
 import UnitFilterPanel from "./components/unitFilterPanel";
-import AppConsts from "@lib/appconst";
 import { L } from "@lib/abpUtility";
-import { Button, Table } from "antd";
-import {
-  CheckOutlined,
-  CloseOutlined,
-  EditOutlined,
-} from "@ant-design/icons/lib/icons";
+import { Col, Dropdown, Menu, Row, Table } from "antd";
+import { MoreOutlined } from "@ant-design/icons/lib/icons";
 import DataTable from "@components/DataTable";
 import Stores from "@stores/storeIdentifier";
 import UnitStore from "@stores/projects/unitStore";
@@ -19,7 +14,6 @@ import StackPland from "./components/stackPland";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import withRouter from "@components/Layout/Router/withRouter";
 // import { Table } from "antd";
-const { align } = AppConsts;
 
 export interface IUnitProps {
   history: any;
@@ -57,7 +51,7 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
       statusId: 0,
     },
     visible: false,
-    tabView: tabKeys.gridView,
+    tabView: tabKeys.listView,
   };
 
   async componentDidMount() {
@@ -101,33 +95,62 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
       unitStore: { isLoading, tableData },
     } = this.props;
     const columns = gettColumns({
-      title: L("ACTIONS"),
-      dataIndex: "operation",
-      key: "operation",
-      align: align.right,
-      width: "150px",
-      render: (text: string, item: any) => (
-        <div>
-          {/* {this.isGranted(appPermissions.a.update) && ( */}
-          <Button
-            size="small"
-            className="ml-1"
-            shape="circle"
-            icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id)}
-          />
-          {/* )} */}
-          {/* {this.isGranted(appPermissions.a.delete) && ( */}
-          <Button
-            size="small"
-            className="ml-1"
-            shape="circle"
-            icon={item.isActive ? <CloseOutlined /> : <CheckOutlined />}
-            // onClick={() => this.activateOrDeactivate(item.id, !item.isActive)}
-          />
-          {/* )} */}
-        </div>
-      ),
+      // title: L("PROPERTY"),
+      // dataIndex: "projectName",
+      // key: "projectName",
+      // width: "15%",
+      // ellipsis: true,
+      title: L("UNIT"),
+      children: [
+        {
+          dataIndex: "unitName",
+          key: "unitName",
+          fixed: "left",
+          width: "250px",
+          // ellipsis: true,
+          render: (unitName: string, item: any) => (
+            <Row>
+              <Col sm={{ span: 20, offset: 0 }}>
+                <a
+                  onClick={
+                    // this.isGranted(appPermissions.unit.update)
+                    //   ? () => this.gotoDetail(item.id)
+                    //   : () => console.log()
+                    () => this.gotoDetail(item.id)
+                  }
+                  className="link-text-table"
+                >
+                  {unitName}
+                </a>
+              </Col>
+              <Col sm={{ span: 3, offset: 0 }}>
+                <Dropdown
+                  trigger={["click"]}
+                  overlay={
+                    <Menu>
+                      {/* {this.isGranted(appPermissions.unit.delete) && ( */}
+                      <Menu.Item
+                        key={1}
+                        // onClick={() =>
+                        //   this.activateOrDeactivate(item.id, !item.isActive)
+                        // }
+                      >
+                        {L(item.isActive ? "BTN_DEACTIVATE" : "BTN_ACTIVATE")}
+                      </Menu.Item>
+                      {/* )} */}
+                    </Menu>
+                  }
+                  placement="bottomLeft"
+                >
+                  <button className="button-action-hiden-table-cell">
+                    <MoreOutlined />
+                  </button>
+                </Dropdown>
+              </Col>
+            </Row>
+          ),
+        },
+      ],
     });
     return (
       <>
@@ -154,7 +177,7 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
             >
               <Table
                 size="middle"
-                className=""
+                className="custom-ant-row"
                 rowKey={(record) => record.id}
                 columns={columns}
                 loading={isLoading}
@@ -168,19 +191,20 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
           {this.state.tabView === tabKeys.gridView && (
             <div style={{ maxHeight: "75vh", overflow: "scroll" }}>
               <StackPland
+                goDetail={this.gotoDetail}
                 loading={isLoading}
                 projectId={this.state.filters?.projectId}
               />
             </div>
           )}
-          <UnitModal
-            id={this.state.unitId}
-            visible={this.state.visible}
-            onCancel={() => {
-              this.getAll(), this.setState({ visible: false });
-            }}
-          />
         </div>
+        <UnitModal
+          id={this.state.unitId}
+          visible={this.state.visible}
+          onCancel={() => {
+            this.getAll(), this.setState({ visible: false });
+          }}
+        />
       </>
     );
   }

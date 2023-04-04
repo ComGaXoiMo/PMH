@@ -17,6 +17,7 @@ import TabDocument from "./tabDocument";
 import TabLeaseAgreement from "./tabLeaseAgreement";
 import TabSiteVisit from "./tabSiteVisit";
 import TabBooking from "./tabBooking";
+import TabMatching from "./tabMatching";
 
 export interface IinfoInquiryProps {}
 
@@ -26,6 +27,7 @@ export interface IinfoInquiryState {
 const tabKeys = {
   tabActivity: "TAB_ACTIVITY",
   tabTask: "TAB_TASK",
+  tabMatching: "TAB_MATCHING",
   tabMail: "TAB_MAIL",
   tabCall: "TAB_CALL",
   tabProposal: "TAB_PROPOSAL",
@@ -90,6 +92,13 @@ class infoInquiry extends AppComponentListBase<
               className={"color-tab"}
             >
               <TabActivity />
+            </Tabs.TabPane>
+            <Tabs.TabPane
+              tab={L(tabKeys.tabMatching)}
+              key={tabKeys.tabMatching}
+              className={"color-tab"}
+            >
+              <TabMatching />
             </Tabs.TabPane>
             <Tabs.TabPane
               tab={L(tabKeys.tabTask)}

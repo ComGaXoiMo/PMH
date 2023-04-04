@@ -11,7 +11,7 @@ import RoleStore from "../../../stores/administrator/roleStore";
 import Stores from "../../../stores/storeIdentifier";
 import DataTable from "../../../components/DataTable";
 import { appPermissions } from "../../../lib/appconst";
-import { EllipsisOutlined } from "@ant-design/icons";
+import { MoreOutlined } from "@ant-design/icons";
 import debounce from "lodash/debounce";
 import getColumns from "./columns";
 import withRouter from "@components/Layout/Router/withRouter";
@@ -190,7 +190,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
               placement="bottomLeft"
             >
               <button className="button-action-hiden-table-cell">
-                <EllipsisOutlined />
+                <MoreOutlined />
               </button>
             </Dropdown>
           </Col>

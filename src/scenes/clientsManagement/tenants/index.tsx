@@ -9,7 +9,7 @@ import ProjectStore from "@stores/projects/projectStore";
 import { withRouter } from "react-router-dom";
 import { L } from "@lib/abpUtility";
 
-import { EllipsisOutlined } from "@ant-design/icons/lib/icons";
+import { MoreOutlined } from "@ant-design/icons/lib/icons";
 import TenantsFilterPanel from "./components/tenantsFilterPanel";
 
 export interface IProjectProps {
@@ -68,7 +68,7 @@ class Tenants extends React.Component<any> {
       width: "15%",
       render: (bookingCode: string, item: any) => (
         <Row>
-          <Col sm={{ span: 21, offset: 0 }}>
+          <Col sm={{ span: 19, offset: 0 }}>
             <a
               onClick={
                 // this.isGranted(appPermissions.unit.update)
@@ -81,7 +81,7 @@ class Tenants extends React.Component<any> {
               {bookingCode}
             </a>
           </Col>
-          <Col sm={{ span: 3, offset: 0 }}>
+          <Col sm={{ span: 5, offset: 0 }}>
             <Dropdown
               trigger={["click"]}
               overlay={
@@ -101,7 +101,7 @@ class Tenants extends React.Component<any> {
               placement="bottomLeft"
             >
               <button className="button-action-hiden-table-cell">
-                <EllipsisOutlined />
+                <MoreOutlined />
               </button>
             </Dropdown>
           </Col>
@@ -126,7 +126,7 @@ class Tenants extends React.Component<any> {
             rowKey={(record) => record.id}
             columns={columns}
             pagination={false}
-            // dataSource={tableData === undefined ? [] : tableData.items}
+            dataSource={dataFake === undefined ? [] : dataFake.items}
             bordered
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
           />
@@ -136,3 +136,60 @@ class Tenants extends React.Component<any> {
   }
 }
 export default withRouter(Tenants);
+
+const dataFake = {
+  items: [
+    {
+      id: 31,
+      bookingCode: "29122022 - 01",
+      unitNo: "The Antonia",
+      unit: 302,
+      unitType: "2BR",
+      tenantName: "Mr. Takuda",
+      nationality: "JAPANESE",
+      arrivalDate: "3-Feb-23",
+      derpartureDate: "4-Feb-23",
+      contractStatus: "Complete",
+      remark: "BILLS TO GUEST - 35% OFF",
+    },
+    {
+      id: 32,
+      bookingCode: "24112022 - 01",
+      unitNo: "The Antonia",
+      unit: 303,
+      unitType: "2BR",
+      tenantName: "MR. PARK",
+      nationality: "KOREAN",
+      arrivalDate: "3-Feb-23",
+      derpartureDate: "4-Feb-23",
+      contractStatus: "Complete",
+      remark: "BILLS TO GUEST - 35% OFF",
+    },
+    {
+      id: 33,
+      bookingCode: "29112022 -02",
+      unitNo: "The Antonia",
+      unit: 403,
+      unitType: "2BR",
+      tenantName: "Mr. Takuda",
+      nationality: "JAPANESE",
+      arrivalDate: "3-Feb-23",
+      derpartureDate: "4-Feb-23",
+      contractStatus: "Complete",
+      remark: "BILLS TO GUEST - 35% OFF",
+    },
+    {
+      id: 34,
+      bookingCode: "29112022 - 11",
+      unitNo: "The Antonia",
+      unit: 502,
+      unitType: "2BR",
+      tenantName: "Ms. Lan",
+      nationality: "VIETNAMESE",
+      arrivalDate: "3-Feb-23",
+      derpartureDate: "4-Feb-23",
+      contractStatus: "Complete",
+      remark: "BILLS TO GUEST - 35% OFF",
+    },
+  ],
+};

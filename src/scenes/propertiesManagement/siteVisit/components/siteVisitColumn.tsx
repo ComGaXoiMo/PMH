@@ -11,27 +11,28 @@ const columns = (actionColumn?) => {
       width: "5%",
       render: (id) => <>{id}</>,
     },
-    {
-      title: L("PROPERTY"),
-      dataIndex: "property",
-      key: "property",
-      width: "15%",
-      ellipsis: true,
-      render: () => <>{}</>,
-    },
+    actionColumn,
+    // {
+    //   title: L("PROPERTY"),
+    //   dataIndex: "property",
+    //   key: "property",
+    //   width: "15%",
+    //   ellipsis: true,
+    //   render: (property) => <>{property}</>,
+    // },
     {
       title: L("UNIT_NAME"),
       dataIndex: "unit",
       key: "unit",
       width: "10%",
-      render: () => <>{}</>,
+      render: (unit) => <>{unit}</>,
     },
     {
       title: L("AGENT"),
       dataIndex: "agent",
-      key: "agemt",
+      key: "agent",
       width: "10%",
-      render: () => <>{}</>,
+      render: (agent) => <>{agent}</>,
     },
 
     {
@@ -40,10 +41,8 @@ const columns = (actionColumn?) => {
       key: "date",
       width: "10%",
       ellipsis: true,
-      render: () => <>{}</>,
+      render: (date) => <>{date}</>,
     },
-
-    actionColumn,
   ];
 
   return data;

@@ -90,8 +90,8 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
         background-color: #FAF8EE
       }
       .ant-drawer-right > .ant-drawer-content-wrapper {
-        min-height: calc(100vh - 139px);
-      max-height: calc(100vh - 139px);
+        min-height: calc(100vh - 180px);
+      max-height: calc(100vh - 180px);
       }
       `}</style>
     </Drawer>

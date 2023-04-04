@@ -11,14 +11,15 @@ const columns = (actionColumn?) => {
       width: "5%",
       render: (id) => <>{id}</>,
     },
-    {
-      title: L("PROPERTY"),
-      dataIndex: "projectName",
-      key: "projectName",
-      width: "15%",
-      ellipsis: true,
-      render: (projectName) => <>{projectName}</>,
-    },
+    actionColumn,
+    // {
+    //   title: L("PROPERTY"),
+    //   dataIndex: "projectName",
+    //   key: "projectName",
+    //   width: "15%",
+    //   ellipsis: true,
+    //   render: (projectName) => <>{projectName}</>,
+    // },
     {
       title: L("LOCATION"),
       dataIndex: "projectAddress",
@@ -73,8 +74,6 @@ const columns = (actionColumn?) => {
       width: "10%",
       render: (YearBuild) => <>{YearBuild?.name}</>,
     },
-
-    actionColumn,
   ];
 
   return data;

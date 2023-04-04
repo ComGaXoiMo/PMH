@@ -44,7 +44,7 @@ class Monition extends AppComponentListBase<IMonitionProps, IMonitionState> {
               {this.props.data?.type === 2 && <MailOutlined />}
             </div>
             {/* <div style={{position:'relative' ,top: 0, right: 0 }}>
-              <EllipsisOutlined />
+              <MoreOutlined />
             </div> */}
             <div className="monition-content">
               <strong>{this.props.data?.title}</strong>

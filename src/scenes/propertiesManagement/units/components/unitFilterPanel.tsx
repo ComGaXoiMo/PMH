@@ -28,7 +28,7 @@ class UnitsFilterPanel extends React.Component<Props, any> {
     super(props);
   }
   state = {
-    selectedType: this.props.tabKeys.gridView,
+    selectedType: this.props.tabKeys.listView,
     listProject: [],
     listFloor: [],
     filters: {

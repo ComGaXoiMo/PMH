@@ -11,10 +11,12 @@ const columns = (actionColumn?) => {
           dataIndex: "id",
           key: "id",
           width: "80px",
+          fixed: "left",
           render: (id?) => <>{id}</>,
         },
       ],
     },
+    actionColumn,
     {
       title: L("FLOOR"),
       children: [
@@ -26,17 +28,17 @@ const columns = (actionColumn?) => {
         },
       ],
     },
-    {
-      title: L("UNIT"),
-      children: [
-        {
-          dataIndex: "unitName",
-          key: "unitName",
-          width: "150px",
-          render: (unitName?) => <>{unitName}</>,
-        },
-      ],
-    },
+    // {
+    //   title: L("UNIT"),
+    //   children: [
+    //     {
+    //       dataIndex: "unitName",
+    //       key: "unitName",
+    //       width: "150px",
+    //       render: (unitName?) => <>{unitName}</>,
+    //     },
+    //   ],
+    // },
 
     {
       title: L("TOTAL_AREA"),
@@ -263,7 +265,6 @@ const columns = (actionColumn?) => {
         },
       ],
     },
-    actionColumn,
   ];
 
   return data;

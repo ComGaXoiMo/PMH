@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Col, Dropdown, Menu, Modal, Row, Table } from "antd";
-import { EllipsisOutlined } from "@ant-design/icons";
+import { MoreOutlined } from "@ant-design/icons";
 import { inject, observer } from "mobx-react";
 
 import AppComponentBase from "../../../components/AppComponentBase";
@@ -195,7 +195,7 @@ class Language extends AppComponentBase<ILanguageProps, ILanguageState> {
               placement="bottomLeft"
             >
               <button className="button-action-hiden-table-cell">
-                <EllipsisOutlined />
+                <MoreOutlined />
               </button>
             </Dropdown>
           </Col>

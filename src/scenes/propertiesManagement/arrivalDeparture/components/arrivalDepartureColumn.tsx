@@ -11,14 +11,15 @@ const columns = (actionColumn?) => {
       width: "5%",
       render: (id) => <>{id}</>,
     },
-    {
-      title: L("BOOKING_CODE"),
-      dataIndex: "bookingCode",
-      key: "bookingCode",
-      width: "15%",
-      ellipsis: true,
-      render: (bookingCode) => <>{bookingCode}</>,
-    },
+    actionColumn,
+    // {
+    //   title: L("BOOKING_CODE"),
+    //   dataIndex: "bookingCode",
+    //   key: "bookingCode",
+    //   width: "15%",
+    //   ellipsis: true,
+    //   render: (bookingCode) => <>{bookingCode}</>,
+    // },
     {
       title: L("TYPE"),
       dataIndex: "type",
@@ -78,8 +79,6 @@ const columns = (actionColumn?) => {
       width: "10%",
       render: (remark) => <>{remark}</>,
     },
-
-    actionColumn,
   ];
 
   return data;

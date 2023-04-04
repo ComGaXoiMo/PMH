@@ -12,19 +12,20 @@ const columns = (actionColumn?) => {
       render: (id) => <>{id}</>,
     },
     actionColumn,
-    {
-      title: L("CONTACTS_NAME"),
-      dataIndex: "contactName",
-      key: "contactName",
-      width: "15%",
-      ellipsis: true,
-      render: (contactName) => <>{contactName}</>,
-    },
+    // {
+    //   title: L("CONTACTS_NAME"),
+    //   dataIndex: "contactName",
+    //   key: "contactName",
+    //   width: "15%",
+    //   ellipsis: true,
+    //   render: (contactName) => <>{contactName}</>,
+    // },
     {
       title: L("COMPANY"),
       dataIndex: "companyContact",
       key: "companyContact",
       width: "10%",
+      ellipsis: true,
       render: (companyContact) => (
         <>
           {companyContact.map((item) => item?.company?.businessName).join(", ")}
@@ -36,6 +37,7 @@ const columns = (actionColumn?) => {
       dataIndex: "title",
       key: "title",
       width: "10%",
+      ellipsis: true,
       render: (title) => <>{title}</>,
     },
     {

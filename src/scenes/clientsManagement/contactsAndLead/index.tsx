@@ -7,7 +7,7 @@ import { Col, Dropdown, Menu, Row, Table } from "antd";
 import AppDataStore from "@stores/appDataStore";
 import { L } from "@lib/abpUtility";
 
-import { EllipsisOutlined } from "@ant-design/icons/lib/icons";
+import { MoreOutlined } from "@ant-design/icons/lib/icons";
 import ContactsAndLeadFilterPanel from "./components/contactsAndLeadFilterPanel";
 import ContactStore from "@stores/clientManagement/contactStore";
 import Stores from "@stores/storeIdentifier";
@@ -138,7 +138,7 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
               placement="bottomLeft"
             >
               <button className="button-action-hiden-table-cell">
-                <EllipsisOutlined />
+                <MoreOutlined />
               </button>
             </Dropdown>
           </Col>

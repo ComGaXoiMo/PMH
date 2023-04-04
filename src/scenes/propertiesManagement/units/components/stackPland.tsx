@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Card } from "antd";
+import { Card, Col, Row, Spin } from "antd";
 import {
   DragDropContext,
   Droppable,
@@ -19,7 +19,6 @@ import { inject } from "mobx-react";
 import Stores from "@stores/storeIdentifier";
 import AppComponentBase from "@components/AppComponentBase";
 import withRouter from "@components/Layout/Router/withRouter";
-import UnitModal from "./unitModal";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -58,7 +57,7 @@ export interface IProjectStackingPlanProps {
   unitStore: UnitStore;
   appDataStore: AppDataStore;
   loading: any;
-  goDetail: () => void;
+  goDetail: (id) => void;
 }
 @inject(Stores.AppDataStore, Stores.ProjectStore, Stores.UnitStore)
 class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
@@ -195,7 +194,7 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
                     ...dragProvided.draggableProps.style,
                     flex: `0 1 ${(unit.size / floor.size) * 100}%`,
                   }}
-                  onClick={() => this.showCreateOrUpdateModalOpen(unit.id)}
+                  onClick={() => this.props.goDetail(unit.id)}
                 >
                   <div
                     className="unit-item-info"
@@ -265,54 +264,79 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
     // const { editProjectUnit } = this.props.projectStore;
     return (
       <>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Card style={{ marginTop: "20px" }} className="stacking-plan">
-            <Alert message={L("CLICK_TO_EDIT_UNIT_MESSAGE")} type="info" />
-            <div className="d-flex mt-3">
-              <Droppable droppableId="floor" direction="vertical">
-                {(providedFloor) => (
-                  <div
-                    style={{ flex: "0 0 100px" }}
-                    ref={providedFloor.innerRef}
-                    {...providedFloor.droppableProps}
-                  >
-                    {this.renderFloors()}
-                    {providedFloor.placeholder}
-                  </div>
-                )}
-              </Droppable>
-              <div style={{ flex: "0 1 100%" }} className="overflow-x">
-                {floors.map((floor: any) => (
-                  <Droppable
-                    key={`f-drop-${floor.id}`}
-                    droppableId={`f-${floor.id}`}
-                    direction="horizontal"
-                  >
-                    {(providedUnit) => (
-                      <div
-                        className="d-flex wrap-units overflow-x mb-2"
-                        ref={providedUnit.innerRef}
-                        {...providedUnit.droppableProps}
-                      >
-                        {this.renderUnitInFloor(
-                          floor,
-                          providedUnit.placeholder
-                        )}
-                      </div>
-                    )}
-                  </Droppable>
-                ))}
+        <Spin spinning={false}>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <Card style={{ marginTop: "20px" }} className="stacking-plan">
+              <Row gutter={[16, 0]}>
+                <Col sm={12}>
+                  {/* <Card className="ant-card-border-25" bordered={false}> */}
+                  <h4>
+                    {L("PROJECT")} |{" "}
+                    <span className="text-muted">{L("STATUS")}</span>
+                  </h4>
+                  <Row gutter={[8, 8]}>
+                    {/* {dataStatus.map((item, index) => (
+                <Col sm={8} key={index}>
+                  <Row gutter={[8, 0]}>
+                    <Col
+                      sm={2}
+                      style={{
+                        backgroundColor: item.color ? item.color : '#ffffff',
+                        borderRadius: 6
+                      }}
+                    />
+                    <Col sm={13}>{item.name}</Col>
+                    <Col sm={9}>
+                      {((item.value / totalStatus) * 100).toFixed(1)}%
+                    </Col>
+                  </Row>
+                </Col>
+              ))} */}
+                  </Row>
+                  {/* </Card> */}
+                  <br />
+                </Col>
+              </Row>
+              <Alert message={L("CLICK_TO_EDIT_UNIT_MESSAGE")} type="info" />
+              <div className="d-flex mt-3">
+                <Droppable droppableId="floor" direction="vertical">
+                  {(providedFloor) => (
+                    <div
+                      style={{ flex: "0 0 100px" }}
+                      ref={providedFloor.innerRef}
+                      {...providedFloor.droppableProps}
+                    >
+                      {this.renderFloors()}
+                      {providedFloor.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+                <div style={{ flex: "0 1 100%" }} className="overflow-x">
+                  {floors.map((floor: any) => (
+                    <Droppable
+                      key={`f-drop-${floor.id}`}
+                      droppableId={`f-${floor.id}`}
+                      direction="horizontal"
+                    >
+                      {(providedUnit) => (
+                        <div
+                          className="d-flex wrap-units overflow-x mb-2"
+                          ref={providedUnit.innerRef}
+                          {...providedUnit.droppableProps}
+                        >
+                          {this.renderUnitInFloor(
+                            floor,
+                            providedUnit.placeholder
+                          )}
+                        </div>
+                      )}
+                    </Droppable>
+                  ))}
+                </div>
               </div>
-            </div>
-          </Card>
-          <UnitModal
-            id={this.state.unitId}
-            visible={this.state.modalVisible}
-            onCancel={() => {
-              this.setState({ modalVisible: false });
-            }}
-          />
-        </DragDropContext>
+            </Card>
+          </DragDropContext>{" "}
+        </Spin>
       </>
     );
   }

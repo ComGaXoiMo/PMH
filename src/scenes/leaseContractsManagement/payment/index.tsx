@@ -3,18 +3,15 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import DataTable from "@components/DataTable";
 import gettColumns from "./components/paymentColumn";
-import { Button, Table } from "antd";
+import { Col, Dropdown, Menu, Row, Table } from "antd";
 import AppDataStore from "@stores/appDataStore";
 import { L } from "@lib/abpUtility";
-import AppConsts from "@lib/appconst";
-import { EditOutlined } from "@ant-design/icons";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons/lib/icons";
+import { MoreOutlined } from "@ant-design/icons/lib/icons";
 import PaymentFilterPanel from "./components/paymentFilterPanel";
 
 import Stores from "@stores/storeIdentifier";
 import withRouter from "@components/Layout/Router/withRouter";
 
-const { align } = AppConsts;
 export interface IPaymentProps {
   history: any;
   appDataStore: AppDataStore;
@@ -76,32 +73,52 @@ class Payments extends React.Component<IPaymentProps, IPaymentState> {
   public render() {
     const {} = this.props;
     const columns = gettColumns({
-      title: L("ACTIONS"),
-      dataIndex: "operation",
-      key: "operation",
-      align: align.right,
-      width: "100px",
-      render: (text: string, item: any) => (
-        <div>
-          {/* {this.isGranted(appPermissions.a.update) && ( */}
-          <Button
-            size="small"
-            className="ml-1"
-            shape="circle"
-            icon={<EditOutlined />}
-            onClick={() => this.gotoDetail(item.id)}
-          />
-          {/* )} */}
-          {/* {this.isGranted(appPermissions.a.delete) && ( */}
-          <Button
-            size="small"
-            className="ml-1"
-            shape="circle"
-            icon={item.isActive ? <CloseOutlined /> : <CheckOutlined />}
-            // onClick={() => this.activateOrDeactivate(item.id, !item.isActive)}
-          />
-          {/* )} */}
-        </div>
+      title: L("CONTACTS_NUMBER"),
+      dataIndex: "contractNumber",
+      key: "contractNumber",
+      width: "200px",
+      ellipsis: true,
+
+      render: (contractNumber: string, item: any) => (
+        <Row>
+          <Col sm={{ span: 20, offset: 0 }}>
+            <a
+              onClick={
+                // this.isGranted(appPermissions.unit.update)
+                //   ? () => this.gotoDetail(item.id)
+                //   : () => console.log()
+                () => this.gotoDetail(item.id)
+              }
+              className="link-text-table"
+            >
+              {contractNumber}
+            </a>
+          </Col>
+          <Col sm={{ span: 3, offset: 0 }}>
+            <Dropdown
+              trigger={["click"]}
+              overlay={
+                <Menu>
+                  {/* {this.isGranted(appPermissions.unit.delete) && ( */}
+                  <Menu.Item
+                    key={1}
+                    // onClick={() =>
+                    //   this.activateOrDeactivate(item.id, !item.isActive)
+                    // }
+                  >
+                    {L(item.isActive ? "BTN_DEACTIVATE" : "BTN_ACTIVATE")}
+                  </Menu.Item>
+                  {/* )} */}
+                </Menu>
+              }
+              placement="bottomLeft"
+            >
+              <button className="button-action-hiden-table-cell">
+                <MoreOutlined />
+              </button>
+            </Dropdown>
+          </Col>
+        </Row>
       ),
     });
     return (
@@ -119,11 +136,11 @@ class Payments extends React.Component<IPaymentProps, IPaymentState> {
         >
           <Table
             size="middle"
-            className=""
+            className="custom-ant-row"
             rowKey={(record) => record.id}
             columns={columns}
             pagination={false}
-            // dataSource={tableData === undefined ? [] : tableData.items}
+            dataSource={dataFake === undefined ? [] : dataFake.items}
             bordered
             scroll={{ x: 1000, scrollToFirstRowOnChange: true }}
           />
@@ -133,3 +150,43 @@ class Payments extends React.Component<IPaymentProps, IPaymentState> {
   }
 }
 export default withRouter(Payments);
+const dataFake = {
+  items: [
+    {
+      id: 31,
+      contractNumber: "CT00000001",
+      tenant: "Maria Saris",
+      project: "The Horizon",
+      unit: 323,
+      priceDeposit: "150.000",
+      endDate: "30/01/2022",
+      princeRent: "450.000",
+      paymentStatus: "Wait for pay",
+      depositStatus: "Wait for pay",
+    },
+    {
+      id: 11,
+      contractNumber: "CT00000002",
+      tenant: "Julia Aris",
+      project: "The Antonia",
+      unit: 331,
+      priceDeposit: "150.000",
+      endDate: "30/01/2022",
+      princeRent: "350.000",
+      paymentStatus: "Payment Overdue",
+      depositStatus: "Payment Overdue",
+    },
+    {
+      id: 32,
+      contractNumber: "CT00000003",
+      tenant: "Marilyn Calzoni",
+      project: "The Antonia",
+      unit: 311,
+      priceDeposit: "150.000",
+      endDate: "30/01/2022",
+      princeRent: "900.000",
+      paymentStatus: "Wait for pay",
+      depositStatus: "Wait for pay",
+    },
+  ],
+};

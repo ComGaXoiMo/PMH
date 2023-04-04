@@ -8,6 +8,7 @@ import withRouter from "@components/Layout/Router/withRouter";
 import Stores from "@stores/storeIdentifier";
 import UnitStore from "@stores/projects/unitStore";
 import UnitCreate from "./tabInfo/unitResDetail";
+import TabActivity from "./tabActivity";
 
 type Props = {
   visible: boolean;
@@ -93,10 +94,9 @@ class UnitModal extends React.Component<Props, State> {
               <UnitCreate id={this.props.id} />
             </Card>
           </Tabs.TabPane>
-          <Tabs.TabPane
-            tab={L(tabKeys.tabActivity)}
-            key={tabKeys.tabActivity}
-          ></Tabs.TabPane>
+          <Tabs.TabPane tab={L(tabKeys.tabActivity)} key={tabKeys.tabActivity}>
+            <TabActivity />
+          </Tabs.TabPane>
           <Tabs.TabPane
             tab={L(tabKeys.tabBooking)}
             key={tabKeys.tabBooking}
