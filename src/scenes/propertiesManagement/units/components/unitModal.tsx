@@ -11,6 +11,8 @@ import UnitCreate from "./tabInfo/unitResDetail";
 import TabActivity from "./tabActivity";
 import TabBooking from "./tabBooking";
 import TabSiteVisit from "./tabSiteVisit";
+import TabContract from "./tabContract";
+import TabDocument from "@scenes/inquiriesManagement/inquiriesList/components/detailInquiry/tabDocument";
 
 type Props = {
   visible: boolean;
@@ -111,15 +113,19 @@ class UnitModal extends React.Component<Props, State> {
           <Tabs.TabPane
             tab={L(tabKeys.tabContracts)}
             key={tabKeys.tabContracts}
-          ></Tabs.TabPane>{" "}
+          >
+            <TabContract />
+          </Tabs.TabPane>
           <Tabs.TabPane
             tab={L(tabKeys.tabInquiries)}
             key={tabKeys.tabInquiries}
-          ></Tabs.TabPane>{" "}
+          ></Tabs.TabPane>
           <Tabs.TabPane
             tab={L(tabKeys.tabDocuments)}
             key={tabKeys.tabDocuments}
-          ></Tabs.TabPane>
+          >
+            <TabDocument />
+          </Tabs.TabPane>
         </Tabs>
       </CustomDrawer>
     );

@@ -14,7 +14,7 @@ type Props = {
   onCreate: () => void;
 };
 
-class SiteVisitFilterPanel extends AppComponentListBase<Props> {
+class ContractFilterPanel extends AppComponentListBase<Props> {
   constructor(props: Props) {
     super(props);
   }
@@ -53,4 +53,4 @@ class SiteVisitFilterPanel extends AppComponentListBase<Props> {
   }
 }
 
-export default withRouter(SiteVisitFilterPanel);
+export default withRouter(ContractFilterPanel);
