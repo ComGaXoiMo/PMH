@@ -80,6 +80,7 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
       }
       .ant-drawer-body {
         padding: 0px 0px 0px 0px !important;
+        display: table;
       }
       .bottom-action-style {
         position: absolute  !important;

@@ -27,7 +27,7 @@ class SiteVisitBoardItem extends AppComponentListBase<
 
     return (
       <>
-        <Card className="card-detail-modal">
+        <Card className="card-item-detail-modal">
           <div className="h-100 board-item">
             <strong>29122022 - 12</strong>
             <label>Time: 29/12/2022 - 12:00</label>

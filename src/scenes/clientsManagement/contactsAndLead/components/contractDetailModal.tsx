@@ -15,6 +15,9 @@ import {
   PlusSquareFilled,
 } from "@ant-design/icons";
 import InquirieContact from "./tabInquire";
+import TabContract from "@scenes/propertiesManagement/units/components/tabContract";
+import TabDocument from "@scenes/inquiriesManagement/inquiriesList/components/detailInquiry/tabDocument";
+import TabAP from "./tabAP";
 
 const fakedata = [
   {
@@ -172,15 +175,12 @@ class ContractDetailModal extends AppComponentListBase<Props> {
             tab={L(tabKeys.tabContactInfo)}
             key={tabKeys.tabContactInfo}
           >
-            <Card
-              className="card-detail w-100 h-100"
-              style={{ overflow: "scroll" }}
-            >
+            <Card className="card-detail-modal">
               <ContractInfo id={this.props.data?.id} />
             </Card>
           </Tabs.TabPane>
           <Tabs.TabPane tab={L(tabKeys.tabActivity)} key={tabKeys.tabActivity}>
-            <Card className="card-detail w-100 h-100">
+            <Card className="card-detail-modal">
               {fakedata.map((item) => (
                 <ContactActivity data={item.data} />
               ))}
@@ -195,15 +195,21 @@ class ContractDetailModal extends AppComponentListBase<Props> {
           <Tabs.TabPane
             tab={L(tabKeys.tabContracts)}
             key={tabKeys.tabContracts}
-          ></Tabs.TabPane>{" "}
+          >
+            <TabContract />
+          </Tabs.TabPane>{" "}
           <Tabs.TabPane
             tab={L(tabKeys.tabDocuments)}
             key={tabKeys.tabDocuments}
-          ></Tabs.TabPane>
+          >
+            <TabDocument />
+          </Tabs.TabPane>
           <Tabs.TabPane
             tab={L(tabKeys.tabAssociateParty)}
             key={tabKeys.tabAssociateParty}
-          ></Tabs.TabPane>
+          >
+            <TabAP />
+          </Tabs.TabPane>
         </Tabs>
       </CustomDrawer>
     );

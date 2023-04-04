@@ -29,7 +29,7 @@ class MatchingItem extends AppComponentListBase<
 
     return (
       <>
-        <Card className="card-detail-modal">
+        <Card className="card-item-detail-modal">
           <div className="h-100 board-item">
             <strong>{data?.name}</strong>
             <label>Area: {data?.area ?? "-"}</label>

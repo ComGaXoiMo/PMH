@@ -27,7 +27,7 @@ class ProposalBoardItem extends AppComponentListBase<
 
     return (
       <>
-        <Card className="card-detail-modal">
+        <Card className="card-item-detail-modal">
           <div className="h-100 board-item">
             <strong>CT10000000</strong>
             <label>Create by: You</label>

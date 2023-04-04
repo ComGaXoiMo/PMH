@@ -4,7 +4,6 @@ import { inject, observer } from "mobx-react";
 
 import { Card } from "antd";
 import { AppComponentListBase } from "@components/AppComponentBase";
-import { L } from "@lib/abpUtility";
 // import { Table } from "antd";
 
 export interface IInquiriItemProps {
@@ -29,12 +28,9 @@ class InquiriItem extends AppComponentListBase<
 
     return (
       <>
-        <Card className="card-detail-modal">
+        <Card className="card-item-detail-modal">
           <div className="h-100 board-item">
-            <label>
-              {" "}
-              {L("BY")} {data.name}
-            </label>
+            <label>by:{data.name}</label>
             <label>Tenant's Name: Mr. Takuda</label>
             <label>Waiting in line: 1</label>
             <label>Nationality: JAPANESE</label>

@@ -52,7 +52,9 @@ class UnitCreate extends AppComponentListBase<Props, State> {
       floorResult: [],
     };
   }
-
+  componentDidMount(): void {
+    this.getDetail(this.props?.id);
+  }
   componentDidUpdate(prevProps) {
     if (prevProps.id !== this.props?.id) {
       let callAPI = Promise.all([

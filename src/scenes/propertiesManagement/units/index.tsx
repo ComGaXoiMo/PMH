@@ -189,7 +189,7 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
             </DataTable>
           )}
           {this.state.tabView === tabKeys.gridView && (
-            <div style={{ maxHeight: "75vh", overflow: "scroll" }}>
+            <div style={{ maxHeight: "75vh", overflowY: "scroll" }}>
               <StackPland
                 goDetail={this.gotoDetail}
                 loading={isLoading}

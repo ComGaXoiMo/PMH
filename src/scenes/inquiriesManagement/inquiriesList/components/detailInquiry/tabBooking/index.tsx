@@ -82,15 +82,7 @@ class Booking extends AppComponentListBase<IBookingProps, IBookingState> {
 
         <Row gutter={[8, 0]}>
           <Col sm={{ span: 24 }}>
-            <Card
-              style={{
-                backgroundColor: "white",
-                minHeight: "60vh",
-                height: "max-content",
-                padding: "10px",
-                borderRadius: "16px",
-              }}
-            >
+            <Card className="card-detail-modal">
               <Row>
                 {fakedata.map((item) => (
                   <Col sm={{ span: 24 }}>

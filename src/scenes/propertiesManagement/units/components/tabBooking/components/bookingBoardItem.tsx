@@ -27,7 +27,7 @@ class BookingBoardItem extends AppComponentListBase<
 
     return (
       <>
-        <Card className="card-detail-modal">
+        <Card className="card-item-detail-modal">
           <div className="h-100 board-item">
             <strong>29122022 - 12</strong>
             <label>Arrival Date: 3-Feb-23 Departure Date: 4-Feb-23</label>

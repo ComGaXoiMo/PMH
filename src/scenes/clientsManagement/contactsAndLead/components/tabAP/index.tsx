@@ -10,49 +10,30 @@ import FileStore from "@stores/common/fileStore";
 import UnitStore from "@stores/projects/unitStore";
 import withRouter from "@components/Layout/Router/withRouter";
 import AppDataStore from "@stores/appDataStore";
-import ActivityFilter from "./components/mailFilter";
-import MailBoardItem from "./components/mailBoardItem";
-import CreateMailModal from "./components/createMailModal";
+import ActivityFilter from "./components/associatePartyFilter";
+import AssociatePartyBoardItem from "./components/associatePartyBoardItem";
 
-export interface IMailProps {
+export interface IAssociatePartyProps {
   projectStore: ProjectStore;
   unitStore: UnitStore;
   params: any;
   appDataStore: AppDataStore;
   fileStore: FileStore;
 }
-export interface IMailState {
+export interface IAssociatePartyState {
   modalVisible: boolean;
 }
-const fakedata = [
-  {
-    data: {
-      title: "Booking Confirmation",
-      link: "https://mail.google.com/mail/u/0/#inbox/FMfcgzGrbvJjGgpnmqmxSFx",
-      file: "BOC-22012023.PDF",
-      color: "#27AE60",
-      type: 2,
-    },
-  },
-
-  {
-    data: {
-      title: "Update",
-      link: "https://mail.google.com/mail/u/0/#inbox/FMfcgzGrbvJjGgpnmqmxSFx",
-      file: "",
-      color: "#F2994A",
-      type: 1,
-    },
-  },
-];
 
 @inject(Stores.ProjectStore, Stores.UnitStore, Stores.AppDataStore)
 @observer
-class Mail extends AppComponentListBase<IMailProps, IMailState> {
+class AssociateParty extends AppComponentListBase<
+  IAssociatePartyProps,
+  IAssociatePartyState
+> {
   formRef: any = React.createRef();
   formRefProjectAddress: any = React.createRef();
 
-  constructor(props: IMailProps) {
+  constructor(props: IAssociatePartyProps) {
     super(props);
     this.state = {
       modalVisible: false,
@@ -86,21 +67,49 @@ class Mail extends AppComponentListBase<IMailProps, IMailState> {
               <Row>
                 {fakedata.map((item) => (
                   <Col sm={{ span: 24 }}>
-                    <MailBoardItem />
+                    <AssociatePartyBoardItem data={item.data} />
                   </Col>
                 ))}
               </Row>
             </Card>
           </Col>
         </Row>
-        <CreateMailModal
-          visible={this.state.modalVisible}
-          onClose={this.toggleModal}
-          onOk={this.handleImport}
-        />
       </>
     );
   }
 }
 
-export default withRouter(Mail);
+export default withRouter(AssociateParty);
+const fakedata = [
+  {
+    data: {
+      avt: "https://pict.sindonews.net/dyn/850/pena/news/2022/08/16/53/857833/kehidupan-liar-masa-muda-ronaldo-usia-14-tahun-dikeluarkan-dari-sekolah-xgk.jpg",
+      name: "Alex Nguyễn",
+      deal: "$ 100.000",
+      feeType: "Percentage (%)",
+      otherFee: "$750.00",
+      type: "Can Edit",
+    },
+  },
+
+  {
+    data: {
+      avt: "https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/bltf4eb6706ceb9fae4/63a55c06b6f2166a77aaa1db/GettyImages-1435623465.jpg",
+      name: "Cristofer Rhiel Madsen",
+      deal: "$ 100.000",
+      feeType: "Percentage (%)",
+      otherFee: "$750.00",
+      type: "Can View 01",
+    },
+  },
+  {
+    data: {
+      avt: "https://s.hs-data.com/bilder/spieler/gross/26622.jpg",
+      name: "Miracle Passaquindici Arcand",
+      deal: "$ 100.000",
+      feeType: "Percentage (%)",
+      otherFee: "$750.00",
+      type: "Owner",
+    },
+  },
+];

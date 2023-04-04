@@ -27,7 +27,7 @@ class AllTaskBoardItem extends AppComponentListBase<
 
     return (
       <>
-        <Card className="card-detail-modal">
+        <Card className="card-item-detail-modal">
           <div className="h-100 board-item">
             <strong>Task Name 02</strong>
             <label>Inquiries:CT Name</label>
