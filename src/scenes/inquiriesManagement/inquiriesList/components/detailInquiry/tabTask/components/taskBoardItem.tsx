@@ -27,16 +27,7 @@ class AllTaskBoardItem extends AppComponentListBase<
 
     return (
       <>
-        <Card
-          style={{
-            display: "flex",
-            textAlign: "left",
-            padding: "8px",
-            marginBottom: "10px",
-            borderRadius: "12px",
-            backgroundColor: "#F2F4F8",
-          }}
-        >
+        <Card className="card-detail-modal">
           <div className="h-100 board-item">
             <strong>Task Name 02</strong>
             <label>Inquiries:CT Name</label>

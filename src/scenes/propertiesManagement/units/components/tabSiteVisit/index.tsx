@@ -10,25 +10,24 @@ import FileStore from "@stores/common/fileStore";
 import UnitStore from "@stores/projects/unitStore";
 import withRouter from "@components/Layout/Router/withRouter";
 import AppDataStore from "@stores/appDataStore";
-import ActivityFilter from "./components/bookingFilter";
-import BookingBoardItem from "./components/bookingBoardItem";
-import CreateBookingModal from "./components/createBookingModal";
+import ActivityFilter from "./components/siteVisitFilter";
+import SiteVisitBoardItem from "./components/siteVisitBoardItem";
 
-export interface IBookingProps {
+export interface ISiteVisitProps {
   projectStore: ProjectStore;
   unitStore: UnitStore;
   params: any;
   appDataStore: AppDataStore;
   fileStore: FileStore;
 }
-export interface IBookingState {
+export interface ISiteVisitState {
   modalVisible: boolean;
 }
 const fakedata = [
   {
     data: {
-      title: "Booking Confirmation",
-      link: "https://Booking.google.com/Booking/u/0/#inbox/FMfcgzGrbvJjGgpnmqmxSFx",
+      title: "SiteVisit Confirmation",
+      link: "https://SiteVisit.google.com/SiteVisit/u/0/#inbox/FMfcgzGrbvJjGgpnmqmxSFx",
       file: "BOC-22012023.PDF",
       color: "#27AE60",
       type: 2,
@@ -38,7 +37,7 @@ const fakedata = [
   {
     data: {
       title: "Update",
-      link: "https://Booking.google.com/Booking/u/0/#inbox/FMfcgzGrbvJjGgpnmqmxSFx",
+      link: "https://SiteVisit.google.com/SiteVisit/u/0/#inbox/FMfcgzGrbvJjGgpnmqmxSFx",
       file: "",
       color: "#F2994A",
       type: 1,
@@ -48,11 +47,11 @@ const fakedata = [
 
 @inject(Stores.ProjectStore, Stores.UnitStore, Stores.AppDataStore)
 @observer
-class Booking extends AppComponentListBase<IBookingProps, IBookingState> {
+class SiteVisit extends AppComponentListBase<ISiteVisitProps, ISiteVisitState> {
   formRef: any = React.createRef();
   formRefProjectAddress: any = React.createRef();
 
-  constructor(props: IBookingProps) {
+  constructor(props: ISiteVisitProps) {
     super(props);
     this.state = {
       modalVisible: false,
@@ -94,21 +93,16 @@ class Booking extends AppComponentListBase<IBookingProps, IBookingState> {
               <Row>
                 {fakedata.map((item) => (
                   <Col sm={{ span: 24 }}>
-                    <BookingBoardItem />
+                    <SiteVisitBoardItem />
                   </Col>
                 ))}
               </Row>
             </Card>
           </Col>
         </Row>
-        <CreateBookingModal
-          visible={this.state.modalVisible}
-          onClose={this.toggleModal}
-          onOk={this.handleImport}
-        />
       </>
     );
   }
 }
 
-export default withRouter(Booking);
+export default withRouter(SiteVisit);

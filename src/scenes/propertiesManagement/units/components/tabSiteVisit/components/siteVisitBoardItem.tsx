@@ -7,15 +7,15 @@ import withRouter from "@components/Layout/Router/withRouter";
 import { AppComponentListBase } from "@components/AppComponentBase";
 // import { Table } from "antd";
 
-export interface IProposalItemProps {}
+export interface ISiteVisitItemProps {}
 
-export interface IProposalItemState {}
+export interface ISiteVisitItemState {}
 
 @inject()
 @observer
-class ProposalBoardItem extends AppComponentListBase<
-  IProposalItemProps,
-  IProposalItemState
+class SiteVisitBoardItem extends AppComponentListBase<
+  ISiteVisitItemProps,
+  ISiteVisitItemState
 > {
   formRef: any = React.createRef();
   state = {};
@@ -29,11 +29,10 @@ class ProposalBoardItem extends AppComponentListBase<
       <>
         <Card className="card-detail-modal">
           <div className="h-100 board-item">
-            <strong>Call Name</strong>
-            <label>Log By:CT Name</label>
-            <label>Name Log: Zaire Dorwart</label>
-            <label>Time Log: 01/01/2023</label>
-            <label>Note: https://123.com</label>
+            <strong>29122022 - 12</strong>
+            <label>Time: 29/12/2022 - 12:00</label>
+            <label>unit: B-08-4</label>
+            <label>Remark: BILLS TO GUEST - 35% OFF</label>
           </div>
         </Card>
       </>
@@ -41,4 +40,4 @@ class ProposalBoardItem extends AppComponentListBase<
   }
 }
 
-export default withRouter(ProposalBoardItem);
+export default withRouter(SiteVisitBoardItem);

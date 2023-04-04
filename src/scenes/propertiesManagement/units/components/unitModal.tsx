@@ -9,6 +9,8 @@ import Stores from "@stores/storeIdentifier";
 import UnitStore from "@stores/projects/unitStore";
 import UnitCreate from "./tabInfo/unitResDetail";
 import TabActivity from "./tabActivity";
+import TabBooking from "./tabBooking";
+import TabSiteVisit from "./tabSiteVisit";
 
 type Props = {
   visible: boolean;
@@ -97,14 +99,15 @@ class UnitModal extends React.Component<Props, State> {
           <Tabs.TabPane tab={L(tabKeys.tabActivity)} key={tabKeys.tabActivity}>
             <TabActivity />
           </Tabs.TabPane>
-          <Tabs.TabPane
-            tab={L(tabKeys.tabBooking)}
-            key={tabKeys.tabBooking}
-          ></Tabs.TabPane>{" "}
+          <Tabs.TabPane tab={L(tabKeys.tabBooking)} key={tabKeys.tabBooking}>
+            <TabBooking />
+          </Tabs.TabPane>{" "}
           <Tabs.TabPane
             tab={L(tabKeys.tabSiteVisit)}
             key={tabKeys.tabSiteVisit}
-          ></Tabs.TabPane>{" "}
+          >
+            <TabSiteVisit />
+          </Tabs.TabPane>
           <Tabs.TabPane
             tab={L(tabKeys.tabContracts)}
             key={tabKeys.tabContracts}

@@ -30,7 +30,7 @@ export default class CreateTaskModal extends React.PureComponent<Props, State> {
       <Modal
         open={visible}
         destroyOnClose
-        title={L("NEW_TASK")}
+        title={L("NEW_BOOKING")}
         cancelText={L("BTN_CANCEL")}
         onCancel={() => {
           onClose();
@@ -45,7 +45,7 @@ export default class CreateTaskModal extends React.PureComponent<Props, State> {
         >
           <Row gutter={[16, 8]}>
             <Col sm={{ span: 24 }}>
-              <Form.Item label={L("MAIL_INFOR")} name="">
+              <Form.Item label={L("Booking_INFOR")} name="">
                 <Input placeholder={L("ENTER_INFOMATION")}></Input>
               </Form.Item>
             </Col>
