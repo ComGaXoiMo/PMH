@@ -14,6 +14,7 @@ import {
   StarFilled,
   PlusSquareFilled,
 } from "@ant-design/icons";
+import InquirieContact from "./tabInquire";
 
 const fakedata = [
   {
@@ -188,7 +189,9 @@ class ContractDetailModal extends AppComponentListBase<Props> {
           <Tabs.TabPane
             tab={L(tabKeys.tabInquiries)}
             key={tabKeys.tabInquiries}
-          ></Tabs.TabPane>
+          >
+            <InquirieContact />
+          </Tabs.TabPane>
           <Tabs.TabPane
             tab={L(tabKeys.tabContracts)}
             key={tabKeys.tabContracts}
