@@ -31,7 +31,7 @@ class ContractBoardItem extends AppComponentListBase<
       <>
         <Card
           className="card-item-detail-modal"
-          style={{ border: "1px solid black" }}
+          style={{ border: "1px solid #1b1b1b68" }}
         >
           {/* <div className="h-100 board-item"> */}
           <Row gutter={[16, 16]}>

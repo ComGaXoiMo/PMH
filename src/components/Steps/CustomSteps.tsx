@@ -55,6 +55,9 @@ const CustomSteps = (props: React.PropsWithChildren<StepsProps>) => {
     .ant-steps-vertical > .ant-steps-item > .ant-steps-item-container > .ant-steps-item-tail {
       left: 23px;
     }
+    .ant-steps-item-title{
+      font-weight: bold;
+    }
     .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
       color: #fff;
       width: 25px;

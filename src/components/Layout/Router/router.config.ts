@@ -567,7 +567,7 @@ export const portalLayouts: any = {
     // permission: appPermissions.company.create,
     layout: layouts.portalLayout,
     component: LoadableComponent(
-      () => import("../../../scenes/proposal/components/proposalCreate")
+      () => import("../../../scenes/proposal/proposalCreate")
     ),
   },
   map: {

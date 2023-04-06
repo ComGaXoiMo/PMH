@@ -64,7 +64,7 @@ class SiteVisit extends React.Component<any> {
       title: L("PROPERTY"),
       dataIndex: "property",
       key: "property",
-      width: "10%",
+      width: "20%",
       ellipsis: true,
 
       render: (property: string, item: any) => (

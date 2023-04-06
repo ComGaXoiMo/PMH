@@ -31,7 +31,7 @@ const tabKeys = {
   tabBooking: "TAB_BOOKING",
   tabSiteVisit: "TAB_SITE_VISITS",
   tabContracts: "TAB_CONTRACTS",
-  tabInquiries: "TAB_INQUIRIES",
+  tabInquiriesMatching: "TAB_INQUIRIES_MATCHING",
   tabDocuments: "TAB_DOCUMENTS",
 };
 @inject(Stores.UnitStore)
@@ -98,6 +98,12 @@ class UnitModal extends React.Component<Props, State> {
               <UnitCreate id={this.props.id} unitRes={editUnitRes} />
             </Card>
           </Tabs.TabPane>
+          <Tabs.TabPane
+            tab={L(tabKeys.tabInquiriesMatching)}
+            key={tabKeys.tabInquiriesMatching}
+          >
+            <TabInquire />
+          </Tabs.TabPane>
           <Tabs.TabPane tab={L(tabKeys.tabActivity)} key={tabKeys.tabActivity}>
             <TabActivity />
           </Tabs.TabPane>
@@ -115,12 +121,6 @@ class UnitModal extends React.Component<Props, State> {
             key={tabKeys.tabContracts}
           >
             <TabContract />
-          </Tabs.TabPane>
-          <Tabs.TabPane
-            tab={L(tabKeys.tabInquiries)}
-            key={tabKeys.tabInquiries}
-          >
-            <TabInquire />
           </Tabs.TabPane>
           <Tabs.TabPane
             tab={L(tabKeys.tabDocuments)}

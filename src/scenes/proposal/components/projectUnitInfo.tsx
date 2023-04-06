@@ -16,35 +16,44 @@ const unitItems = [
   {
     id: 1,
     unitName: "River Park Premier - A - 302",
-    unit: "a1",
-    type: "open",
-    totalArea: 2000,
-    balconyArea: 100,
-    view: "beach",
-    carParkingSlot: 1,
-    MotoParkingSlot: 4,
+    moreInfor: {
+      unit: "u4-1i-13",
+      type: "open",
+      totalArea: "7000m2",
+      balconyArea: "600m2",
+      view: "beach",
+      carParkingSlot: "1",
+      MotoParkingSlot: "44",
+      MotoParkingFee: "300000đ",
+    },
   },
   {
     id: 2,
     unitName: "River Park Premier - A - 201",
-    unit: "a1",
-    type: "open",
-    totalArea: 2000,
-    balconyArea: 100,
-    view: "beach",
-    carParkingSlot: 1,
-    MotoParkingSlot: 4,
+    moreInfor: {
+      unit: "e2-9-31",
+      type: "close",
+      totalArea: "3000m2",
+      balconyArea: "130m2",
+      view: "mounth",
+      carParkingSlot: "13",
+      MotoParkingSlot: 4,
+      MotoParkingFee: undefined,
+    },
   },
   {
     id: 3,
     unitName: "River Park Premier - A - 122",
-    unit: "a1",
-    type: "open",
-    totalArea: 2000,
-    balconyArea: 100,
-    view: "beach",
-    carParkingSlot: 1,
-    MotoParkingSlot: 4,
+    moreInfor: {
+      unit: "a1-2-31",
+      type: "open",
+      totalArea: "2000m2",
+      balconyArea: "100m2",
+      view: "bridge",
+      carParkingSlot: "12",
+      MotoParkingSlot: 24,
+      MotoParkingFee: undefined,
+    },
   },
 ];
 const typeItems = [
@@ -144,7 +153,7 @@ class ProjectUnitInfo extends AppComponentListBase<
               ))}
             </Row>
             <Divider />
-            <Row>
+            <Row gutter={[16, 0]}>
               {unitItems.map((item, index) => (
                 <Col sm={{ span: 6 }} key={index}>
                   <UnitItem value={item} />

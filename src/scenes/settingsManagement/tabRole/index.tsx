@@ -88,6 +88,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
       grantedPermissions:
         this.props.roleStore.roleEdit.grantedPermissionNames || [],
     });
+    console.log(this.formRef);
   }
 
   delete(input: EntityDto) {

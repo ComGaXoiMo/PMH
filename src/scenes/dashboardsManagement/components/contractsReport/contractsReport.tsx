@@ -15,7 +15,7 @@ const columns = [
     title: "No.",
     dataIndex: "",
     key: "",
-    width: "",
+    width: "5%",
     render: () => <>{}</>,
   },
   {

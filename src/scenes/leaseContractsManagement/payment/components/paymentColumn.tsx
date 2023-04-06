@@ -8,7 +8,7 @@ const columns = (actionColumn?) => {
       title: L("ID"),
       dataIndex: "id",
       key: "id",
-      width: "150px",
+      width: "70px",
       render: (id) => <>{id}</>,
     },
     actionColumn,

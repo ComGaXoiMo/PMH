@@ -16,31 +16,31 @@ import withRouter from "@components/Layout/Router/withRouter";
 export interface IBarChartHorizontalProps {
   Title: any;
 }
-const lb = ["unit01", "unit02", "unit03", "unit04"];
+const lb = ["project 01", "project 02", "project 03", "project 04"];
 const dt = [
   {
-    name: "unit01",
+    name: "project 01",
     Leased: 1,
     Vacant: 10,
     Showroom: 0,
     Renovation: 2,
   },
   {
-    name: "unit02",
+    name: "project 02",
     Leased: 1,
     Vacant: 0,
     Showroom: 2,
     Renovation: 2,
   },
   {
-    name: "unit03",
+    name: "project 03",
     Leased: 3,
     Vacant: 2,
     Showroom: 0,
     Renovation: 2,
   },
   {
-    name: "unit04",
+    name: "project 04",
     Leased: 1,
     Vacant: 1,
     Showroom: 0,
@@ -54,7 +54,7 @@ const data = {
   datasets: [
     {
       label: "Leased",
-      backgroundColor: "#FFF5D6",
+      backgroundColor: "#7c9c89",
       data: lb.map((label) => {
         const res = dt.find((data) => data.name === label);
         console.log(label);
@@ -64,7 +64,7 @@ const data = {
     },
     {
       label: "Vacant",
-      backgroundColor: "#FEC20C",
+      backgroundColor: "#A4C3A2",
       data: lb.map((label) => {
         const res = dt.find((data) => data.name === label);
         return res?.Vacant ?? 0;
@@ -73,7 +73,7 @@ const data = {
     },
     {
       label: "Showroom",
-      backgroundColor: "#760505",
+      backgroundColor: "#B0D4B8",
       data: lb.map((label) => {
         const res = dt.find((data) => data.name === label);
         return res?.Showroom ?? 0;
@@ -82,7 +82,7 @@ const data = {
     },
     {
       label: "Renovation",
-      backgroundColor: "#440303",
+      backgroundColor: "#8ac9e6",
       data: lb.map((label) => {
         const res = dt.find((data) => data.name === label);
         return res?.Renovation ?? 0;

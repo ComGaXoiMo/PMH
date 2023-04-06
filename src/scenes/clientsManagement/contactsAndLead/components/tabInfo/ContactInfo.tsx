@@ -71,7 +71,13 @@ class ContactDetail extends AppComponentBase<IContactFormProps> {
     isShowFull: false,
   };
   formRef: any = React.createRef();
-
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.id !== this.props.id) {
+      this.getDetail(this.props.id);
+      await this.getDetail(this.props.id);
+      await this.initData();
+    }
+  };
   async componentDidMount() {
     if (!this.props.match?.params?.id) {
       this.setState({ isShowFull: true });

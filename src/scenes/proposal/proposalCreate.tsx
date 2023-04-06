@@ -5,12 +5,15 @@ import { AppComponentListBase } from "@components/AppComponentBase";
 
 import { L } from "@lib/abpUtility";
 import { Button, Col, Row } from "antd";
-import ProspectInfo from "./prospectInfo";
+import ProspectInfo from "./components/prospectInfo";
 import withRouter from "@components/Layout/Router/withRouter";
 import CustomSteps from "@components/Steps/CustomSteps";
-import ProjectUnitInfo from "./projectUnitInfo";
+import ProjectUnitInfo from "./components/projectUnitInfo";
+import EditProposal from "./components/editProposal";
 
-export interface IProposalCreateProps {}
+export interface IProposalCreateProps {
+  history: any;
+}
 
 export interface IProposalCreateState {
   current: number;
@@ -19,11 +22,14 @@ const items = [
   {
     title: L("CLIENTS"),
   },
-  {
-    title: L("YOU"),
-  },
+  // {
+  //   title: L("YOU"),
+  // },
   {
     title: L("PROJECT_UNIT_INFOR"),
+  },
+  {
+    title: L("REVIEW"),
   },
 ];
 @inject()
@@ -42,6 +48,9 @@ class ProposalCreate extends AppComponentListBase<
   prev = () => {
     this.setState({ current: this.state.current - 1 });
   };
+  onSave = () => {
+    this.props.history.goBack();
+  };
   onChange = (value: number) => {
     console.log("onChange:", value);
     this.setState({ current: value });
@@ -54,15 +63,21 @@ class ProposalCreate extends AppComponentListBase<
         </div>
         <div className="proposal-create-body">
           <Row className="h-100" gutter={[0, 0]}>
-            <Col className="h-100" sm={{ span: 20 }}>
+            <Col
+              style={{ overflowY: "scroll" }}
+              className="h-100"
+              sm={{ span: 20 }}
+            >
               {this.state.current === 0 && <ProspectInfo />}
-              {this.state.current === 2 && <ProjectUnitInfo />}
+              {this.state.current === 1 && <ProjectUnitInfo />}
+              {this.state.current === 2 && <EditProposal />}
             </Col>
             <Col
               style={{
                 backgroundColor: "#EAB001",
                 padding: "20px",
                 borderRadius: "0px 24px 24px 0px",
+                display: "block",
               }}
               sm={{ span: 4 }}
             >
@@ -86,12 +101,20 @@ class ProposalCreate extends AppComponentListBase<
                     {L("BACK")}
                   </Button>
                 )}
-                {this.state.current < 3 && (
+                {this.state.current < 2 && (
                   <Button
                     style={{ borderRadius: "8px", backgroundColor: "#Ffffff" }}
                     onClick={() => this.next()}
                   >
                     {L("NEXT")}
+                  </Button>
+                )}
+                {this.state.current >= 2 && (
+                  <Button
+                    style={{ borderRadius: "8px", backgroundColor: "#Ffffff" }}
+                    onClick={() => this.onSave()}
+                  >
+                    {L("SAVE")}
                   </Button>
                 )}
               </div>

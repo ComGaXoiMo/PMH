@@ -90,6 +90,13 @@ class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
             >
               <Summary />
             </Tabs.TabPane>
+            <Tabs.TabPane tab={L(tabKeys.tabFloors)} key={tabKeys.tabFloors}>
+              <ProjectFloors
+                appDataStore={this.props.appDataStore}
+                projectStore={this.props.projectStore}
+                projectId={this.props.projectStore.editProject?.id}
+              />
+            </Tabs.TabPane>
             {this.props.projectStore.editProject?.name && (
               <Tabs.TabPane tab={L(tabKeys.tabUnits)} key={tabKeys.tabUnits}>
                 <Units projectId={this.props.projectStore.editProject?.id} />
@@ -139,13 +146,6 @@ class ProjectsDetail extends AppComponentListBase<IProjectsDetailProps, any> {
                 </Card>
               </Tabs.TabPane>
             )}
-            <Tabs.TabPane tab={L(tabKeys.tabFloors)} key={tabKeys.tabFloors}>
-              <ProjectFloors
-                appDataStore={this.props.appDataStore}
-                projectStore={this.props.projectStore}
-                projectId={this.props.projectStore.editProject?.id}
-              />
-            </Tabs.TabPane>
           </Tabs>
         </div>
       </>

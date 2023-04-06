@@ -118,7 +118,7 @@ class ProjectFloors extends AppComponentListBase<IProjectAddressProps, any> {
         title: L("FLOOR_NAME"),
         dataIndex: "floorName",
         key: "floorName",
-        width: 150,
+        width: "10%",
         render: (text: string) => <>{text}</>,
         onCell: (record) =>
           buildEditableCell(
@@ -133,8 +133,8 @@ class ProjectFloors extends AppComponentListBase<IProjectAddressProps, any> {
         title: L("FLOOR_SIZE"),
         dataIndex: "size",
         key: "size",
-        width: 150,
-        align: align.right,
+        width: "10%",
+        // align: align.right,
         render: (text: string) => <>{formatNumber(text)}</>,
         onCell: (record) =>
           buildEditableCell(
@@ -151,15 +151,15 @@ class ProjectFloors extends AppComponentListBase<IProjectAddressProps, any> {
         title: L("IS_ACTIVE"),
         dataIndex: "isActive",
         key: "isActive",
-        width: 100,
+        width: "10%",
         align: align.center,
         render: renderIsActive,
       },
       {
         title: L("ACTIONS"),
         dataIndex: "action",
-        width: 100,
-        align: align.right,
+        width: "10%",
+        align: align.center,
         fixed: align.right,
         render: (_: any, record: any) => {
           const editable = this.isEditing(record);
@@ -198,6 +198,14 @@ class ProjectFloors extends AppComponentListBase<IProjectAddressProps, any> {
           );
         },
       },
+      {
+        title: L(""),
+        dataIndex: "",
+        key: "",
+        width: "",
+        // align: align.right,
+        render: () => <></>,
+      },
     ];
 
     const { floors } = this.state;
@@ -223,6 +231,7 @@ class ProjectFloors extends AppComponentListBase<IProjectAddressProps, any> {
               pagination={false}
               dataSource={floors || []}
               scroll={{ x: 800 }}
+              bordered
               components={{
                 body: {
                   cell: EditableCell,

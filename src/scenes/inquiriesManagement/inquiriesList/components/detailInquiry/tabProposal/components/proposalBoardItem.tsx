@@ -5,9 +5,12 @@ import { inject, observer } from "mobx-react";
 import { Card } from "antd";
 import withRouter from "@components/Layout/Router/withRouter";
 import { AppComponentListBase } from "@components/AppComponentBase";
+import { portalLayouts } from "@components/Layout/Router/router.config";
 // import { Table } from "antd";
 
-export interface ICallItemProps {}
+export interface ICallItemProps {
+  history: any;
+}
 
 export interface ICallItemState {}
 
@@ -21,13 +24,21 @@ class CallBoardItem extends AppComponentListBase<
   state = {};
 
   async componentDidMount() {}
-
+  goProposal = (id?) => {
+    const { history } = this.props;
+    id
+      ? history.push(portalLayouts.proposals.path)
+      : history.push(portalLayouts.proposalCreate.path);
+  };
   public render() {
     const {} = this.props;
 
     return (
       <>
-        <Card className="card-item-detail-modal">
+        <Card
+          className="card-item-detail-modal"
+          onClick={() => this.goProposal()}
+        >
           <div className="h-100 board-item">
             <strong>Proposal name</strong>
             <label>Create By: You</label>

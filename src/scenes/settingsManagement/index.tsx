@@ -8,6 +8,8 @@ import User from "./tabUser";
 import Role from "./tabRole";
 import TabLanguage from "./tabLanguage";
 import TabDepartment from "./tabDepartment";
+import TabUnitSetting from "./tabUnitSetting";
+import TabInquiriesSetting from "./tabInquiriesSetting";
 
 export interface ISettingsProps {}
 
@@ -17,6 +19,8 @@ const tabKeys = {
   tabRole: "TAB_ROLE",
   tabLanguage: "TAB_LANGUAGE",
   tabDepartment: "TAB_DEPARTMENT",
+  tabUnitSetting: "TAB_UNIT_SETTING",
+  tabInquiriesSetting: "TAB_INQUIRIES_SETTING",
 };
 @inject()
 @observer
@@ -63,6 +67,18 @@ class Settings extends AppComponentListBase<ISettingsProps, ISettingsState> {
               key={tabKeys.tabDepartment}
             >
               <TabDepartment />
+            </Tabs.TabPane>
+            <Tabs.TabPane
+              tab={L(tabKeys.tabUnitSetting)}
+              key={tabKeys.tabUnitSetting}
+            >
+              <TabUnitSetting />
+            </Tabs.TabPane>
+            <Tabs.TabPane
+              tab={L(tabKeys.tabInquiriesSetting)}
+              key={tabKeys.tabInquiriesSetting}
+            >
+              <TabInquiriesSetting />
             </Tabs.TabPane>
           </Tabs>
         </div>
