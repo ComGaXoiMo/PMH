@@ -67,7 +67,7 @@ class SiteVisit extends AppComponentListBase<ISiteVisitProps, ISiteVisitState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   public render() {

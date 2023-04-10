@@ -45,9 +45,11 @@ class InquiriesBoardItem extends React.Component<
             key={""}
           >
             <div className="h-100 board-item">
-              <strong>{this.props.data?.toPrice}$</strong>
+              <strong>Inquiri Name {this.props.data?.id}</strong>
               <label>Type: {this.props.data?.propertyType.name}</label>
+              <label>Project: ---</label>
               <label>Contact: {this.props.data?.contact.contactName}</label>
+              <label>Price: {this.props.data?.toPrice}$</label>
             </div>
           </Card>
         </a>

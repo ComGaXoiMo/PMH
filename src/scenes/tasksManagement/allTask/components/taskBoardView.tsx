@@ -37,7 +37,7 @@ class AllTaskBoardView extends React.Component<
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   public render() {
@@ -64,7 +64,7 @@ class AllTaskBoardView extends React.Component<
         <CreatetaskModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

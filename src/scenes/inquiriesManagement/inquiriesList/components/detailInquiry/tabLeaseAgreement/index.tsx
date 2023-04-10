@@ -71,7 +71,7 @@ class LeaseAgreement extends AppComponentListBase<
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   public render() {
@@ -99,7 +99,7 @@ class LeaseAgreement extends AppComponentListBase<
         <CreateLeaseAgreementModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

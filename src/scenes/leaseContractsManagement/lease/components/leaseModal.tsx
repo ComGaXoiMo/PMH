@@ -45,12 +45,12 @@ export default class LeaseModal extends React.PureComponent<Props, State> {
           <Row gutter={[16, 0]}>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("LEASING_LEAD")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("SHARING")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
 
@@ -59,27 +59,27 @@ export default class LeaseModal extends React.PureComponent<Props, State> {
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("INQUIRIES_DEAL_NAME")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("PROJECT")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("SPACE_UNIT")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("LANDLORD_COMPANY")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("LANDLORD_CONTRACT")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
@@ -87,12 +87,12 @@ export default class LeaseModal extends React.PureComponent<Props, State> {
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("DEAL_COMMISSION")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("OTHER_FEE")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
@@ -100,23 +100,17 @@ export default class LeaseModal extends React.PureComponent<Props, State> {
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("LEASE_TERM")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("LEASE_COMMENECEMENT")} name="stage">
-                <DatePicker
-                  className="w-100"
-                  placeholder={L("ENTER_INFOMATION")}
-                ></DatePicker>
+                <DatePicker className="w-100" placeholder={L("")}></DatePicker>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("LEASE_EXPIRATION")} name="stage">
-                <DatePicker
-                  className="w-100"
-                  placeholder={L("ENTER_INFOMATION")}
-                ></DatePicker>
+                <DatePicker className="w-100" placeholder={L("")}></DatePicker>
               </Form.Item>
             </Col>
           </Row>

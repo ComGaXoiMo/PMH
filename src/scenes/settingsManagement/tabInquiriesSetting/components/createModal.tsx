@@ -51,23 +51,23 @@ export default class CreateInquiriesSettingModal extends React.PureComponent<
           <Row gutter={[16, 8]}>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("SUB_STAGE")} name="subStage">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
 
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("STATUS")} name="status">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("COLOR")} name="color">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("SORT")} name="sort">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
           </Row>

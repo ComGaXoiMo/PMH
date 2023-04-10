@@ -158,7 +158,7 @@ class CompanyModal extends AppComponentListBase<Props, States> {
         title={this.props.data?.businessName ?? "CREATE"}
         visible={this.props.visible}
         onClose={this.handleClose}
-        onFullView={this.handleSave}
+        onEdit={this.handleSave}
         getContainer={false}
       >
         <Tabs
@@ -168,10 +168,7 @@ class CompanyModal extends AppComponentListBase<Props, States> {
           type="card"
         >
           <TabPane tab={L(tabKeys.tabCompanyInfo)} key={tabKeys.tabCompanyInfo}>
-            <Card
-              className="card-detail w-100 h-100"
-              style={{ overflow: "scroll" }}
-            >
+            <Card className="card-detail-modal">
               <strong>{L("COMPANY_DETAIL")}</strong>
               <Form
                 ref={this.formRef}
@@ -405,10 +402,7 @@ class CompanyModal extends AppComponentListBase<Props, States> {
                             name="companyPhone"
                             rules={rules.companyPhone}
                           >
-                            <PhoneInput2
-                              phoneTypes={otherTypes.phoneTypes}
-                              countries={countries}
-                            />
+                            <PhoneInput2 />
                           </Form.Item>
                         </Col>
                       </Row>
@@ -528,10 +522,7 @@ class CompanyModal extends AppComponentListBase<Props, States> {
               tab={L(tabKeys.tabCompanyComments)}
               key={tabKeys.tabCompanyComments}
             >
-              <Card
-                className="card-detail w-100 h-100"
-                style={{ overflow: "scroll" }}
-              >
+              <Card className="card-detail-modal w-100 h-100">
                 <CommentList
                   moduleId={moduleIds.company}
                   parentId={this.props.companyStore.editCompany?.uniqueId}
@@ -546,10 +537,7 @@ class CompanyModal extends AppComponentListBase<Props, States> {
               tab={L(tabKeys.tabCompanyDocuments)}
               key={tabKeys.tabCompanyDocuments}
             >
-              <Card
-                className="card-detail w-100 h-100"
-                style={{ overflow: "scroll" }}
-              >
+              <Card className="card-detail-modal">
                 <FileUploadWrap
                   moduleId={moduleNames.company}
                   parentId={this.props.companyStore.editCompany?.uniqueId}

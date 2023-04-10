@@ -40,7 +40,7 @@ interface State {
   Stores.ListingStore
 )
 @observer
-class createInquiriesModal extends AppComponentListBase<Props, State> {
+class InquiriesCreateModal extends AppComponentListBase<Props, State> {
   form = React.createRef<FormInstance>();
 
   constructor(props) {
@@ -95,7 +95,7 @@ class createInquiriesModal extends AppComponentListBase<Props, State> {
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("SUB_STATUS")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
@@ -114,12 +114,12 @@ class createInquiriesModal extends AppComponentListBase<Props, State> {
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("PHONE")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("EMAIL")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
@@ -159,7 +159,7 @@ class createInquiriesModal extends AppComponentListBase<Props, State> {
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("PROPERTY")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
@@ -172,7 +172,7 @@ class createInquiriesModal extends AppComponentListBase<Props, State> {
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("BR_WC")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={6}>
@@ -233,4 +233,4 @@ class createInquiriesModal extends AppComponentListBase<Props, State> {
     );
   }
 }
-export default withRouter(createInquiriesModal);
+export default withRouter(InquiriesCreateModal);

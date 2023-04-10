@@ -58,7 +58,7 @@ class Proposal extends AppComponentListBase<IProposalProps, IProposalState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   public render() {
@@ -86,7 +86,7 @@ class Proposal extends AppComponentListBase<IProposalProps, IProposalState> {
         <CreateProposalModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

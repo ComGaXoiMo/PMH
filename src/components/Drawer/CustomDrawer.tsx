@@ -2,13 +2,13 @@ import { L } from "@lib/abpUtility";
 import { Button, Drawer, Row } from "antd";
 import React, { ReactNode } from "react";
 import type { PortalProps } from "@rc-component/portal";
-import { CloseCircleFilled } from "@ant-design/icons";
+import { CloseCircleFilled, EditOutlined } from "@ant-design/icons";
 
 type Props = {
   title?: string;
   visible: boolean;
   onClose?: () => void;
-  onFullView?: () => void;
+  onEdit?: () => void;
   onShare?: () => void;
   useBottomAction?: boolean;
   extraBottomContent?: ReactNode;
@@ -28,7 +28,6 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
       closable={false}
       onClose={props.onClose}
       open={props.visible}
-      style={{ marginTop: "-16px" }}
       width={window.innerWidth < 600 ? "100%" : "55%"}
       extra={
         <>
@@ -43,13 +42,13 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
               </Button>
             )}
             &ensp;
-            {props.onFullView && (
+            {props.onEdit && (
               <Button
                 className="custom-buttom-drawe"
-                onClick={props.onFullView}
+                onClick={props.onEdit}
                 size="middle"
               >
-                {L("BTN_FULL_VIEW")}
+                <EditOutlined /> {L("BTN_EDIT")}
               </Button>
             )}
             &ensp;
@@ -91,8 +90,10 @@ const CustomDrawer = (props: React.PropsWithChildren<Props>) => {
         background-color: #FAF8EE
       }
       .ant-drawer-right > .ant-drawer-content-wrapper {
-        min-height: calc(100vh - 180px);
-      max-height: calc(100vh - 180px);
+      //   min-height: calc(100vh - 180px);
+      // max-height: calc(100vh - 180px);
+      position:fixed;
+       top:46px
       }
       `}</style>
     </Drawer>

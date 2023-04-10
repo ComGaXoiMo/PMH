@@ -44,7 +44,8 @@ const DataTable: React.FunctionComponent<IDataTableProps> = ({
         </Row>
       )}
       <div className="d-flex justify-content-between my-1">
-        <h3 style={{ fontWeight: 600, margin: "0.75rem" }}>{title}</h3>
+        {/* <h3 style={{ fontWeight: 600, margin: "0.75rem" }}>{title}</h3> */}
+        <div></div>
         <div className="d-flex align-items-center">
           {actionComponent && actionComponent()}
           {onCreate && (!createPermission || isGranted(createPermission)) && (

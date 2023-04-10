@@ -5,11 +5,11 @@ const columns = (actionColumn?) => {
   let data = [
     actionColumn,
     {
-      title: L("STATUS"),
-      dataIndex: "status",
-      key: "status",
+      title: L("STAGE"),
+      dataIndex: "stage",
+      key: "stage",
       width: "15%",
-      render: (status: string) => <div>{status ?? "None"}</div>,
+      render: (stage: string) => <div>{stage ?? "None"}</div>,
     },
     {
       title: L("COLOR"),
@@ -22,7 +22,7 @@ const columns = (actionColumn?) => {
       title: L("SORT"),
       dataIndex: "sort",
       key: "sort",
-      width: "15%",
+      width: "",
       render: (sort: string) => <div>{sort ?? "None"}</div>,
     },
   ];

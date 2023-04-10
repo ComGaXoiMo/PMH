@@ -82,7 +82,7 @@ class UnitSetting extends AppComponentBase<
       this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
     }
   };
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
     await this.getAll();
   };
@@ -189,7 +189,7 @@ class UnitSetting extends AppComponentBase<
         <CreateUnitSettingModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
           data={this.state.data}
         />
       </>

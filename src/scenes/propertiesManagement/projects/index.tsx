@@ -79,11 +79,14 @@ class Projects extends React.Component<any> {
       dataIndex: "projectName",
       key: "projectName",
       width: "15%",
-      // ellipsis: true,
+      ellipsis: true,
 
       render: (projectName: string, item: any) => (
         <Row>
-          <Col sm={{ span: 21, offset: 0 }}>
+          <Col
+            sm={{ span: 21, offset: 0 }}
+            style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+          >
             <a
               onClick={
                 // this.isGranted(appPermissions.unit.update)

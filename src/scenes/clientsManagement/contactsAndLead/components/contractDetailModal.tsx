@@ -124,11 +124,11 @@ class ContractDetailModal extends AppComponentListBase<Props> {
         onClose={() => {
           onCancel();
         }}
-        onFullView={() => console.log(1)}
+        onEdit={() => console.log(1)}
         getContainer={false}
       >
         <div style={{ backgroundColor: "white" }}>
-          <Row gutter={[4, 8]} style={{ padding: 15 }}>
+          <Row gutter={[0, 0]} style={{ padding: 15 }}>
             <Col sm={{ span: 2, offset: 0 }}>
               <Avatar
                 size={64}

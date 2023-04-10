@@ -37,7 +37,7 @@ class InquiriesList extends AppComponentListBase<
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   gotoDetail = (id?) => {
@@ -70,7 +70,7 @@ class InquiriesList extends AppComponentListBase<
         <CreateInquiriesModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

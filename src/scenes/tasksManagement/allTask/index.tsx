@@ -113,7 +113,7 @@ class AllTask extends React.Component<IAllTaskProps, IAllTaskState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     await this.getAll();
     this.toggleModal();
   };
@@ -202,7 +202,7 @@ class AllTask extends React.Component<IAllTaskProps, IAllTaskState> {
         <AllTaskModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

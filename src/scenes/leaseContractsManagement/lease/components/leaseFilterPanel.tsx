@@ -1,7 +1,7 @@
 import React from "react";
 import withRouter from "@components/Layout/Router/withRouter";
 import { L } from "@lib/abpUtility";
-import { Select } from "antd";
+import { Button, Select } from "antd";
 import Col from "antd/lib/col";
 import Search from "antd/lib/input/Search";
 import Row from "antd/lib/row";
@@ -10,6 +10,7 @@ type Props = {
   handleSearch: any;
   filter: any;
   changeTab: any;
+  onCreate: () => void;
 };
 
 class LeasesFilterPanel extends React.Component<Props> {
@@ -39,7 +40,6 @@ class LeasesFilterPanel extends React.Component<Props> {
           <Col sm={{ span: 4, offset: 0 }}>
             <Search size="middle" placeholder={L("FILTER_KEYWORD")} />
           </Col>
-
           <Col sm={{ span: 2, offset: 0 }}>
             <Select
               placeholder={L("STATUS")}
@@ -47,7 +47,15 @@ class LeasesFilterPanel extends React.Component<Props> {
               allowClear
               // showSearch
             ></Select>
-          </Col>
+          </Col>{" "}
+          <div style={{ position: "absolute", right: 40 }}>
+            <Button
+              style={{ borderRadius: "8px", backgroundColor: "#FEC20C" }}
+              onClick={() => this.props.onCreate()}
+            >
+              {L("NEW_CONTRACT")}
+            </Button>
+          </div>
         </Row>
       </>
     );

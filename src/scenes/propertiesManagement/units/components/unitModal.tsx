@@ -78,7 +78,7 @@ class UnitModal extends React.Component<Props, State> {
         onClose={() => {
           this.props.onCancel();
         }}
-        onFullView={() => console.log(1)}
+        onEdit={() => console.log(1)}
         getContainer={false}
       >
         <Tabs

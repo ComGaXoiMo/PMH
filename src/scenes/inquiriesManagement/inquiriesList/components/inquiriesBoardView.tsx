@@ -6,7 +6,7 @@ import "./pipeline-view.less";
 import { Button, Card } from "antd";
 import withRouter from "@components/Layout/Router/withRouter";
 import InquiriesBoardItem from "./inquiriesBoardItem";
-import CreateInquiriesModal from "./createInquiriesModal";
+import CreateInquiriesModal from "./inquiriesCreateModal";
 import { portalLayouts } from "@components/Layout/Router/router.config";
 import { AppComponentListBase } from "@components/AppComponentBase";
 import Stores from "@stores/storeIdentifier";
@@ -47,7 +47,7 @@ class InquiriesList extends AppComponentListBase<
   handleOpenModal = async () => {
     await this.toggleModal();
   };
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   getAll = async () => {};
@@ -81,7 +81,7 @@ class InquiriesList extends AppComponentListBase<
         <CreateInquiriesModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

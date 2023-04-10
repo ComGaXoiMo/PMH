@@ -8,6 +8,7 @@ const columns = (actionColumn?) => {
       title: L("ID"),
       dataIndex: "id",
       key: "id",
+      ellipsis: true,
       width: "5%",
       render: (id) => <>{id}</>,
     },
@@ -44,6 +45,7 @@ const columns = (actionColumn?) => {
       title: L("PHONE"),
       dataIndex: "contactPhone",
       key: "contactPhone",
+      ellipsis: true,
       width: "10%",
       render: (contactPhone) => (
         <>
@@ -68,12 +70,14 @@ const columns = (actionColumn?) => {
       dataIndex: "status",
       key: "status",
       width: "10%",
+      ellipsis: true,
       render: () => <>{}</>,
     },
     {
       title: L("DEAL"),
       dataIndex: "deal",
       key: "deal",
+      ellipsis: true,
       width: "10%",
       render: () => <>{}</>,
     },
@@ -81,6 +85,7 @@ const columns = (actionColumn?) => {
       title: L("TASK"),
       dataIndex: "tasl",
       key: "task",
+      ellipsis: true,
       width: "10%",
       render: () => <>{}</>,
     },

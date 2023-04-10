@@ -49,27 +49,27 @@ export default class CreateDocumentModal extends React.PureComponent<
           <Row gutter={[16, 8]}>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("Project")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>{" "}
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("UNIT")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("APPOINTMENT_TIME")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("DATE")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("REMARK")} name="">
-                <TextArea placeholder={L("ENTER_INFOMATION")}></TextArea>
+                <TextArea placeholder={L("")}></TextArea>
               </Form.Item>
             </Col>
           </Row>

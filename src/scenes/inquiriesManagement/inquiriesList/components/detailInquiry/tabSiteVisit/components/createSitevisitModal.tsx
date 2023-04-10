@@ -49,23 +49,23 @@ export default class CreateSiteVisitModal extends React.PureComponent<
           <Row gutter={[16, 8]}>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("PROJECT")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
 
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("UNIT")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("ARRIVAL_DATE")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("NOTE")} name="">
-                <TextArea placeholder={L("ENTER_INFOMATION")}></TextArea>
+                <TextArea placeholder={L("")}></TextArea>
               </Form.Item>
             </Col>
           </Row>

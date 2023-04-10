@@ -5,6 +5,7 @@ import { AppComponentListBase } from "@components/AppComponentBase";
 import { Row, Col } from "antd";
 import Doughnut from "./doughnutChart";
 import BarChart from "./barChart";
+import InOutChart from "../leasingReport/inOutChart";
 
 export interface IOverviewProps {}
 
@@ -50,10 +51,10 @@ class Overviews extends AppComponentListBase<IOverviewProps, IOverviewState> {
             </Col>
             <Col sm={{ span: 16, offset: 0 }}></Col>
             <Col sm={{ span: 16, offset: 0 }}>
-              <BarChart Title="Inquiries" />
+              <BarChart Title="Leasing" />
             </Col>
             <Col sm={{ span: 8, offset: 0 }}>
-              <BarChart Title="Inquiries" />
+              <InOutChart Title="In - Out" />
             </Col>
           </Row>
         </div>

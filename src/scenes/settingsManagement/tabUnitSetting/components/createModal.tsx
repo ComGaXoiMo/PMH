@@ -62,18 +62,18 @@ class CreateUnitSettingModal extends AppComponentListBase<Props, State> {
           <Row gutter={[16, 8]}>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("STATUS")} name="name">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
 
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("COLOR")} name="color">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("SORT")} name="sortOrder">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
           </Row>

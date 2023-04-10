@@ -10,10 +10,10 @@ import FileStore from "@stores/common/fileStore";
 import UnitStore from "@stores/projects/unitStore";
 import withRouter from "@components/Layout/Router/withRouter";
 import AppDataStore from "@stores/appDataStore";
-import CreateInquiriContactModal from "./components/createInquiriContactModal";
 import InquiriFilter from "./components/inquiriFilter";
 import InquiriItem from "./components/inquiriItem";
 import { L } from "@lib/abpUtility";
+import InquiriesCreateModal from "@scenes/inquiriesManagement/inquiriesList/components/inquiriesCreateModal";
 
 export interface IBookingProps {
   projectStore: ProjectStore;
@@ -71,7 +71,7 @@ class InquirieContact extends AppComponentListBase<
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   public render() {
@@ -96,10 +96,10 @@ class InquirieContact extends AppComponentListBase<
             </Card>
           </Col>
         </Row>
-        <CreateInquiriContactModal
+        <InquiriesCreateModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

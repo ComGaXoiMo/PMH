@@ -15,7 +15,7 @@ const columns = (actionColumn?) => {
       title: L("SORT"),
       dataIndex: "sortOrder",
       key: "sortOrder",
-      // width: "15%",
+      width: "",
       render: (sortOrder) => <div>{sortOrder}</div>,
     },
   ];

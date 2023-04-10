@@ -78,7 +78,7 @@ class Company extends React.Component<IContactProps, IContactState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     await this.getAll();
     this.toggleModal();
   };
@@ -101,9 +101,13 @@ class Company extends React.Component<IContactProps, IContactState> {
       dataIndex: "businessName",
       key: "businessName",
       width: "15%",
+      ellipsis: true,
       render: (businessName: string, item: any) => (
         <Row>
-          <Col sm={{ span: 21, offset: 0 }}>
+          <Col
+            sm={{ span: 21, offset: 0 }}
+            style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+          >
             <a
               onClick={
                 // this.isGranted(appPermissions.unit.update)
@@ -185,7 +189,7 @@ class Company extends React.Component<IContactProps, IContactState> {
         <CompanyCreateModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

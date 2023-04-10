@@ -80,7 +80,7 @@ class Inquiries extends React.Component<any> {
     filters: {},
     visible: false,
     title: L("CREATE"),
-    tabView: "BOARD_VIEW",
+    tabView: L("BOARD_VIEW"),
   };
 
   async componentDidMount() {
@@ -150,7 +150,7 @@ class Inquiries extends React.Component<any> {
       <>
         <div>
           <UnitFilterPanel changeTab={this.changeTab} />
-          {this.state.tabView === "LIST_VIEW" && (
+          {this.state.tabView === L("LIST_VIEW") && (
             <DataTable
               // extraFilterComponent={filterComponent}
               // onRefresh={this.getAll}
@@ -173,7 +173,7 @@ class Inquiries extends React.Component<any> {
               />
             </DataTable>
           )}
-          {this.state.tabView === "BOARD_VIEW" && (
+          {this.state.tabView === L("BOARD_VIEW") && (
             <Row gutter={[16, 10]} className="mt-3 iqr-wrap-pipeline-flex">
               <Col
                 sm={{ span: 24, offset: 0 }}

@@ -12,7 +12,7 @@ import ContactsAndLeadFilterPanel from "./components/contactsAndLeadFilterPanel"
 import ContactStore from "@stores/clientManagement/contactStore";
 import Stores from "@stores/storeIdentifier";
 import withRouter from "@components/Layout/Router/withRouter";
-import CreateContractModal from "./components/createContractModal";
+import ContractCreateModal from "./components/contractCreateModal";
 import ContractDetailModal from "./components/contractDetailModal";
 
 export interface IContactProps {
@@ -26,7 +26,7 @@ export interface IContactState {
   skipCount: number;
   filters: any;
   projectProvinces: any[];
-  modalVisible: boolean;
+  modalCreateVisible: boolean;
   projectId: number;
   visible: boolean;
   title: string;
@@ -42,7 +42,7 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
   state = {
     maxResultCount: 10,
     skipCount: 0,
-    modalVisible: false,
+    modalCreateVisible: false,
     projectId: 0,
     projectProvinces: [],
     filters: {},
@@ -69,9 +69,11 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
     });
   };
   toggleModal = () =>
-    this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
+    this.setState((prevState) => ({
+      modalCreateVisible: !prevState.modalCreateVisible,
+    }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     await this.getAll();
     this.toggleModal();
   };
@@ -90,6 +92,11 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
       this.setState({ visible: true });
     }
   };
+  viewInfo = async (value) => {
+    // console.log(value);
+    await this.props.contactStore.get(value, false);
+    await this.setState({ modalCreateVisible: false, visible: true });
+  };
   handleFilterChange = (filters) => {
     this.setState({ filters }, this.getAll);
   };
@@ -103,9 +110,13 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
       dataIndex: "contactName",
       key: "contactName",
       width: "15%",
+      ellipsis: true,
       render: (contactName: string, item: any) => (
         <Row>
-          <Col sm={{ span: 21, offset: 0 }}>
+          <Col
+            sm={{ span: 21, offset: 0 }}
+            style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+          >
             <a
               onClick={
                 // this.isGranted(appPermissions.unit.update)
@@ -181,10 +192,11 @@ class ContactsAndLead extends React.Component<IContactProps, IContactState> {
             this.getAll(), this.setState({ visible: false });
           }}
         />
-        <CreateContractModal
-          visible={this.state.modalVisible}
+        <ContractCreateModal
+          visible={this.state.modalCreateVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
+          onViewInfo={this.viewInfo}
         />
       </>
     );

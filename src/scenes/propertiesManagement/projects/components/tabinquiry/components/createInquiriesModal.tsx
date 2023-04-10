@@ -49,12 +49,12 @@ export default class createInquiriesModal extends React.PureComponent<
           <Row gutter={[16, 4]}>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("STATUS")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("SUB_STATUS")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
@@ -62,37 +62,37 @@ export default class createInquiriesModal extends React.PureComponent<
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("CONTRACT")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("PHONE")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
               <Form.Item label={L("EMAIL")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("COMPANY_NAME")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("INQUIRIES_NAME")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("CATEGORY")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("SOURCE")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 24 }}>
@@ -100,47 +100,47 @@ export default class createInquiriesModal extends React.PureComponent<
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("PROPERTY")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("PROPERTY_TYPE")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("BR_WC")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("VIEW")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("SPECIAL_REQUEST")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("AREA")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("BUDGET")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("LOCATION")} name="">
-                <Select placeholder={L("ENTER_INFOMATION")}></Select>
+                <Select placeholder={L("")}></Select>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("OTHER_REQUIRMENT")} name="textArea">
-                <TextArea placeholder={L("ENTER_INFOMATION")}></TextArea>
+                <TextArea placeholder={L("")}></TextArea>
               </Form.Item>
             </Col>
           </Row>

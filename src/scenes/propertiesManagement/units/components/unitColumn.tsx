@@ -11,6 +11,7 @@ const columns = (actionColumn?) => {
           dataIndex: "id",
           key: "id",
           width: "80px",
+          ellipsis: true,
           fixed: "left",
           render: (id?) => <>{id}</>,
         },
@@ -23,6 +24,7 @@ const columns = (actionColumn?) => {
         {
           dataIndex: "floorName",
           key: "floorName",
+          ellipsis: true,
           width: "150px",
           render: (floorName?) => <>{floorName}</>,
         },
@@ -47,6 +49,7 @@ const columns = (actionColumn?) => {
           dataIndex: "totalArea",
           key: "totalArea",
           width: "150px",
+          ellipsis: true,
           render: (totalArea?) => <>{totalArea}</>,
         },
       ],
@@ -57,6 +60,7 @@ const columns = (actionColumn?) => {
         {
           dataIndex: "bacony",
           key: "bacony",
+          ellipsis: true,
           width: "150px",
           render: (bacony?) => <>{bacony}</>,
         },
@@ -68,6 +72,7 @@ const columns = (actionColumn?) => {
         {
           dataIndex: "actualArea",
           key: "actualArea",
+          ellipsis: true,
           width: "150px",
           render: (actualArea?) => <>{actualArea}</>,
         },
@@ -80,6 +85,7 @@ const columns = (actionColumn?) => {
           dataIndex: "views",
           key: "views",
           width: "150px",
+          ellipsis: true,
           render: (views?) => <>{views.map((item) => item.name).join(", ")}</>,
         },
       ],
@@ -89,6 +95,7 @@ const columns = (actionColumn?) => {
       children: [
         {
           dataIndex: "status",
+          ellipsis: true,
           key: "status",
           width: "150px",
           render: (status?) => <>{status?.name}</>,
@@ -100,6 +107,7 @@ const columns = (actionColumn?) => {
       children: [
         {
           title: L("START_DATE"),
+          ellipsis: true,
           dataIndex: "startDate",
           key: "startDate",
           width: "150px",
@@ -108,6 +116,7 @@ const columns = (actionColumn?) => {
         {
           title: L("END_DATE"),
           dataIndex: "endDate",
+          ellipsis: true,
           key: "endDate",
           width: "150px",
           render: (endDate?) => <>{endDate}</>,
@@ -120,6 +129,7 @@ const columns = (actionColumn?) => {
         {
           title: L("START_DATE"),
           dataIndex: "startDate",
+          ellipsis: true,
           key: "startDate",
           width: "150px",
           render: (startDate?) => <>{startDate}</>,
@@ -132,6 +142,7 @@ const columns = (actionColumn?) => {
         {
           title: L(""),
           dataIndex: "termination",
+          ellipsis: true,
           key: "termination",
           width: "150px",
           render: () => <>{}</>,
@@ -146,6 +157,7 @@ const columns = (actionColumn?) => {
           dataIndex: "lnclVAT",
           key: "lnclVAT",
           width: "150px",
+          ellipsis: true,
           render: () => <>{}</>,
         },
       ],
@@ -156,6 +168,7 @@ const columns = (actionColumn?) => {
         {
           title: L("VND"),
           dataIndex: "vnd",
+          ellipsis: true,
           key: "vnd",
           width: "150px",
           render: () => <>{}</>,
@@ -164,6 +177,7 @@ const columns = (actionColumn?) => {
           title: L("USA"),
           dataIndex: "usa",
           key: "usa",
+          ellipsis: true,
           width: "150px",
           render: () => <>{}</>,
         },
@@ -177,6 +191,7 @@ const columns = (actionColumn?) => {
           dataIndex: "VAT",
           key: "VAT",
           width: "150px",
+          ellipsis: true,
           render: () => <>{}</>,
         },
       ],
@@ -187,6 +202,7 @@ const columns = (actionColumn?) => {
         {
           title: L(""),
           dataIndex: "deposit",
+          ellipsis: true,
           key: "deposit",
           width: "150px",
           render: () => <>{}</>,
@@ -200,6 +216,7 @@ const columns = (actionColumn?) => {
           title: L(""),
           dataIndex: "tenant",
           key: "tenant",
+          ellipsis: true,
           width: "150px",
           render: () => <>{}</>,
         },
@@ -212,6 +229,7 @@ const columns = (actionColumn?) => {
           title: L(""),
           dataIndex: "nationality",
           key: "nationality",
+          ellipsis: true,
           width: "150px",
           render: () => <>{}</>,
         },
@@ -223,6 +241,7 @@ const columns = (actionColumn?) => {
         {
           title: L(""),
           dataIndex: "paynemt-authorized",
+          ellipsis: true,
           key: "paynemt-authorized",
           width: "150px",
           render: () => <>{}</>,
@@ -235,6 +254,7 @@ const columns = (actionColumn?) => {
         {
           title: L(""),
           dataIndex: "s",
+          ellipsis: true,
           key: "s",
           width: "150px",
           render: () => <>{}</>,
@@ -247,6 +267,7 @@ const columns = (actionColumn?) => {
         {
           title: L(""),
           dataIndex: "dealer",
+          ellipsis: true,
           key: "dealer",
           width: "150px",
           render: () => <>{}</>,
@@ -260,6 +281,7 @@ const columns = (actionColumn?) => {
           title: L(""),
           dataIndex: "term",
           key: "term",
+          ellipsis: true,
           width: "150px",
           render: () => <>{}</>,
         },

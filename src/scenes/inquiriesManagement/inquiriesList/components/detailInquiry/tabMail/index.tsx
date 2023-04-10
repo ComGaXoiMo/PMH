@@ -68,7 +68,7 @@ class Mail extends AppComponentListBase<IMailProps, IMailState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   public render() {
@@ -96,7 +96,7 @@ class Mail extends AppComponentListBase<IMailProps, IMailState> {
         <CreateMailModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

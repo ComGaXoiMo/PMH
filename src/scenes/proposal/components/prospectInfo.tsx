@@ -79,7 +79,7 @@ class ProspectInfo extends AppComponentListBase<
                       label={L("Contact Person Email")}
                       name="textArea"
                     >
-                      <TextArea placeholder={L("ENTER_INFOMATION")}></TextArea>
+                      <TextArea placeholder={L("")}></TextArea>
                     </Form.Item>
                   </Col>
                 </Row>{" "}

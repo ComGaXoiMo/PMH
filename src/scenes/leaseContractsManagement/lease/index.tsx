@@ -56,7 +56,7 @@ class Leases extends React.Component<ILeaseProps, ILeaseState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     await this.getAll();
     this.toggleModal();
   };
@@ -124,11 +124,15 @@ class Leases extends React.Component<ILeaseProps, ILeaseState> {
     });
     return (
       <>
-        <LeaseFilterPanel />
+        <LeaseFilterPanel
+          onCreate={() => {
+            this.toggleModal();
+          }}
+        />
         <DataTable
           // extraFilterComponent={filterComponent}
           // onRefresh={this.getAll}
-          onCreate={this.toggleModal}
+          // onCreate={this.toggleModal}
           pagination={{
             pageSize: this.state.maxResultCount,
             // total: tableData === undefined ? 0 : tableData.totalCount,
@@ -149,7 +153,7 @@ class Leases extends React.Component<ILeaseProps, ILeaseState> {
         <LeaseModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

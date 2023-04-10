@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Input, Select, Tooltip } from "antd";
+import { Input, Tooltip } from "antd";
 import { IPhoneModel, PhoneModel } from "../../../models/common/phoneModel";
 import isEqual from "lodash/isEqual";
 import {
@@ -8,17 +8,13 @@ import {
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons/lib";
-import { filterOptions, renderOptions } from "@lib/helper";
 import Button from "antd/es/button";
 import { L } from "@lib/abpUtility";
-const { Option } = Select;
 
 interface PhonesInputProps {
   value?: IPhoneModel[];
   onChange?: (value: IPhoneModel[]) => void;
   maxLength?: number;
-  phoneTypes?: any[];
-  countries?: any[];
   disableProps?: boolean;
 }
 
@@ -40,8 +36,6 @@ const PhonesInput2: React.FC<PhonesInputProps> = ({
     new PhoneModel("", defaultValue.countryId, defaultValue.phoneType, true),
   ],
   onChange,
-  phoneTypes,
-  countries,
   disableProps,
 }) => {
   const previousValue = usePrevious(value);
@@ -74,18 +68,6 @@ const PhonesInput2: React.FC<PhonesInputProps> = ({
   const onPhoneChange = (index, value) => {
     const values = [...currentValue];
     values[index].phone = value;
-    triggerChange(values);
-  };
-
-  const onPhoneTypeChange = (index, value) => {
-    const values = [...currentValue];
-    values[index].phoneTypeId = value;
-    triggerChange(values);
-  };
-
-  const onCountryCodeChange = (index, value) => {
-    const values = [...currentValue];
-    values[index].countryId = value;
     triggerChange(values);
   };
 
@@ -155,31 +137,9 @@ const PhonesInput2: React.FC<PhonesInputProps> = ({
             key={index}
             className="mb-1 d-flex justify-content-between w-100"
           >
-            <Select
-              style={{ width: "19%" }}
-              value={phone.phoneTypeId}
-              defaultValue={defaultValue.phoneType}
-              onChange={(value) => onPhoneTypeChange(index, value)}
-            >
-              {renderOptions(phoneTypes)}
-            </Select>
-            <Select
-              style={{ width: "29%" }}
-              value={phone.countryId}
-              defaultValue={defaultValue.countryId}
-              onChange={(value) => onCountryCodeChange(index, value)}
-              showSearch
-              filterOption={filterOptions}
-            >
-              {(countries || []).map((item, index) => (
-                <Option key={index} value={item.id}>
-                  {item.phoneCodeName}
-                </Option>
-              ))}
-            </Select>
             <Input
               disabled={disableProps}
-              style={{ width: "49%" }}
+              // style={{ width: "49%" }}
               value={phone.phone}
               suffix={phoneActions(phone, index)}
               onChange={(e) => onPhoneChange(index, e.target.value)}

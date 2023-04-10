@@ -61,7 +61,7 @@ class InquiriesSetting extends AppComponentBase<
 
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
     await this.getAll();
   };
@@ -106,14 +106,14 @@ class InquiriesSetting extends AppComponentBase<
     const {} = this.props;
     const columns = getColumns({
       title: L("INQUIRIES_SUB_STAGES"),
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "subStage",
+      key: "subStage",
       width: "15%",
-      render: (text: string, item: any) => (
+      render: (subStage: string, item: any) => (
         <Row>
           <Col sm={{ span: 21, offset: 0 }}>
             <a onClick={() => this.toggleModal()} className="link-text-table">
-              {text}
+              {subStage}
             </a>
           </Col>
           <Col sm={{ span: 3, offset: 0 }}>
@@ -158,13 +158,13 @@ class InquiriesSetting extends AppComponentBase<
             pagination={false}
             bordered
             columns={columns}
-            dataSource={[]}
+            dataSource={fakedata === undefined ? [] : fakedata}
           />
         </DataTable>
         <CreateInquiriesSettingModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );
@@ -172,3 +172,40 @@ class InquiriesSetting extends AppComponentBase<
 }
 
 export default withRouter(InquiriesSetting);
+const fakedata = [
+  {
+    id: 1,
+    subStage: "new",
+    stage: "Prospect",
+    color: "red",
+    sort: "1",
+  },
+  {
+    id: 2,
+    subStage: "potential",
+    stage: "Prospect",
+    color: "Orange",
+    sort: "2",
+  },
+  {
+    id: 3,
+    subStage: "offer",
+    stage: "Offer",
+    color: "yellow",
+    sort: "3",
+  },
+  {
+    id: 4,
+    subStage: "new",
+    stage: "Lease Agreement",
+    color: "blue",
+    sort: "4",
+  },
+  {
+    id: 1,
+    subStage: "old",
+    stage: "Lease Agreement",
+    color: "pink",
+    sort: "5",
+  },
+];

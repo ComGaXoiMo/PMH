@@ -94,7 +94,7 @@ class Task extends AppComponentListBase<ITaskProps, ITaskState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   public render() {
@@ -122,7 +122,7 @@ class Task extends AppComponentListBase<ITaskProps, ITaskState> {
         <CreateTaskModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

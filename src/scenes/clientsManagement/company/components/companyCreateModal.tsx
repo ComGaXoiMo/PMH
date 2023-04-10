@@ -48,12 +48,12 @@ export default class companyCreateModal extends React.PureComponent<
           <Row gutter={[16, 8]}>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("COMPANYNAME")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
             <Col sm={{ span: 12 }}>
               <Form.Item label={L("OWNER")} name="">
-                <Input placeholder={L("ENTER_INFOMATION")}></Input>
+                <Input placeholder={L("")}></Input>
               </Form.Item>
             </Col>
           </Row>

@@ -70,7 +70,7 @@ class Matching extends AppComponentListBase<IMatchingProps, IMatchingState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
   public render() {
@@ -98,7 +98,7 @@ class Matching extends AppComponentListBase<IMatchingProps, IMatchingState> {
         <CreateMatchingModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

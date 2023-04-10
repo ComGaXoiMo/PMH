@@ -68,7 +68,7 @@ class Document extends AppComponentListBase<IDocumentProps, IDocumentState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     this.toggleModal();
   };
 
@@ -132,7 +132,7 @@ class Document extends AppComponentListBase<IDocumentProps, IDocumentState> {
         <CreateDocumentModal
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
-          onOk={this.handleImport}
+          onOk={this.handleOk}
         />
       </>
     );

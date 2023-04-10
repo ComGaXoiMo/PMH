@@ -55,7 +55,7 @@ class Payments extends React.Component<IPaymentProps, IPaymentState> {
   toggleModal = () =>
     this.setState((prevState) => ({ modalVisible: !prevState.modalVisible }));
 
-  handleImport = async () => {
+  handleOk = async () => {
     await this.getAll();
     this.toggleModal();
   };

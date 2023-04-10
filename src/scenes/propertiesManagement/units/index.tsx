@@ -107,10 +107,13 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
           key: "unitName",
           fixed: "left",
           width: "250px",
-          // ellipsis: true,
+          ellipsis: true,
           render: (unitName: string, item: any) => (
             <Row>
-              <Col sm={{ span: 20, offset: 0 }}>
+              <Col
+                sm={{ span: 19, offset: 0 }}
+                style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+              >
                 <a
                   onClick={
                     // this.isGranted(appPermissions.unit.update)
@@ -123,6 +126,7 @@ class Units extends AppComponentListBase<IUnitProps, IUnitState> {
                   {unitName}
                 </a>
               </Col>
+              <Col sm={{ span: 1, offset: 0 }}></Col>
               <Col sm={{ span: 3, offset: 0 }}>
                 <Dropdown
                   trigger={["click"]}

@@ -170,7 +170,7 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
     const sumUnits = sum(units.map((unit) => unit.size));
     const percentUnits = 100 - (sumUnits / floor.size) * 100;
     const getColor = (id) => {
-      const color = Math.floor(14000000 + id * 1379).toString(16);
+      const color = Math.floor(11899999 + id * 1111).toString(16);
       console.log(color);
       return "#" + color;
     };

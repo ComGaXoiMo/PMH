@@ -213,6 +213,7 @@ input {
   }
 
   .ant-table-container {
+   
     border-radius: 16px;
     table > thead > tr > th {
       padding: 16px 8px !important;
@@ -245,9 +246,19 @@ input {
 
   .ant-table-pagination.ant-pagination {
     margin: 15px 6px 8px;
-  }
+  } 
+  
 }
-
+.ant-table.ant-table-middle .ant-table-thead > tr > th{  
+  
+  padding:  6px !important;
+  text-overflow: ellipsis;
+  font-weight: 650;
+  background:#f1f5ff
+}
+.ant-table.ant-table-middle .ant-table-tbody > tr:not(.ant-table-measure-row) > td {
+  padding:  6px !important;
+}
 /* PAGINATION */
 .ant-pagination {
   display: flex;
@@ -442,7 +453,7 @@ input {
       font-size: 12px;
       height: 12px;
       background: white;
-      margin: 0 4px;
+      margin: 0 4px;font-weight: 600;
       padding-right: 5px;
       text-transform: capitalize;
     }
@@ -698,11 +709,11 @@ input {
 }
 .card-detail-modal{
 
-                min-height: 40vh;
-                max-height: 55vh;
-                padding: 10px !important;
-                border-radius: 16px !important;
-                overflow-y: scroll;
+  min-height: 60vh;
+  max-height: 70vh;
+  padding: 10px !important;
+  border-radius: 16px !important;
+  overflow-y: scroll;
 
 }
 .card-item-detail-modal{

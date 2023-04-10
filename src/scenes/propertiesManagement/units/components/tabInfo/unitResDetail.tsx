@@ -132,7 +132,7 @@ class UnitCreate extends AppComponentListBase<Props, State> {
         layout={"vertical"}
         validateMessages={validateMessages}
       >
-        <Card bordered={false} id="unit-detail">
+        <Card bordered={false} className="card-detail-modal">
           <Row gutter={[8, 0]}>
             <Col sm={{ span: 24, offset: 0 }}>
               <Form.Item
@@ -222,12 +222,41 @@ class UnitCreate extends AppComponentListBase<Props, State> {
             </Col>
             <Col sm={{ span: 12, offset: 0 }}>
               <Form.Item
-                label={L("UNIT_SIZE")}
+                label={L("UNIT_TOTAL_SIZE")}
                 {...formVerticalLayout}
                 name="size"
                 rules={rules.size}
               >
                 <Input />
+              </Form.Item>
+            </Col>
+            <Col sm={{ span: 12, offset: 0 }}>
+              <Form.Item
+                label={L("UNIT_ACTUAL_SIZE")}
+                {...formVerticalLayout}
+                name="size"
+                rules={rules.size}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col sm={{ span: 6, offset: 0 }}>
+              <Form.Item
+                label={L("BALCONY")}
+                {...formVerticalLayout}
+                name="bancony"
+              >
+                <InputNumber className="w-100" />
+              </Form.Item>
+            </Col>
+            <Col sm={{ span: 6, offset: 0 }}>
+              <Form.Item
+                label={L("IS_PET")}
+                {...formVerticalLayout}
+                name="isPet"
+                valuePropName="checked"
+              >
+                <Checkbox />
               </Form.Item>
             </Col>
             <Col sm={{ span: 12, offset: 0 }}>
@@ -307,25 +336,7 @@ class UnitCreate extends AppComponentListBase<Props, State> {
                 <InputNumber className="w-100" />
               </Form.Item>
             </Col>
-            <Col sm={{ span: 6, offset: 0 }}>
-              <Form.Item
-                label={L("BALCONY")}
-                {...formVerticalLayout}
-                name="bancony"
-              >
-                <InputNumber className="w-100" />
-              </Form.Item>
-            </Col>
-            <Col sm={{ span: 6, offset: 0 }}>
-              <Form.Item
-                label={L("IS_PET")}
-                {...formVerticalLayout}
-                name="isPet"
-                valuePropName="checked"
-              >
-                <Checkbox />
-              </Form.Item>
-            </Col>
+
             <Col sm={{ span: 6, offset: 0 }}>
               <Form.Item
                 label={L("HELPER_ROOM")}

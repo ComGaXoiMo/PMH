@@ -27,9 +27,16 @@ const columns = (actionColumn?) => {
       title: L("ACTIVE_STATUS"),
       dataIndex: "isActive",
       key: "isActive",
-
+      width: "15%",
       align: align.center,
       render: renderIsActive,
+    },
+    {
+      title: L(""),
+      dataIndex: "",
+      key: "",
+
+      render: () => <>{}</>,
     },
   ];
 

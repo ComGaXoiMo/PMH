@@ -402,8 +402,8 @@ class ContactDetail extends AppComponentBase<IContactFormProps> {
                   >
                     <PhonesInput2
                       disableProps={!this.state.isShowFull}
-                      phoneTypes={otherTypes.phoneTypes}
-                      countries={countries}
+                      // phoneTypes={otherTypes.phoneTypes}
+                      // countries={countries}
                     />
                   </Form.Item>
                 </Col>
