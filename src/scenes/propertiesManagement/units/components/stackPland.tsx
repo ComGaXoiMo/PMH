@@ -162,7 +162,7 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
           width={100}
           size={floor.size}
           handleClick={() => {
-            this.setState({ modalVisible: true, selectedUnit: undefined });
+            this.setState({ modalVisible: false, selectedUnit: undefined });
           }}
         />
       );
@@ -230,7 +230,7 @@ class StackPland extends AppComponentBase<IProjectStackingPlanProps> {
             width={percentUnits}
             size={floor.size - sumUnits}
             handleClick={() => {
-              this.setState({ modalVisible: true, selectedUnit: undefined });
+              this.setState({ modalVisible: false, selectedUnit: undefined });
             }}
           />
         )}

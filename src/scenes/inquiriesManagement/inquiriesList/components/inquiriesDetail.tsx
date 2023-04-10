@@ -24,6 +24,7 @@ const tabKeys = {
 };
 export interface IInquiriessDetailProps {
   params: any;
+  location: any;
   history: any;
   inquiryStore: InquiryStore;
   listingStore: ListingStore;

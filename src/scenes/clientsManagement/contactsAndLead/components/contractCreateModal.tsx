@@ -127,7 +127,7 @@ class ContractCreateModal extends AppComponentListBase<Props, State> {
                 {this.state.isExistsEmail && (
                   <>
                     <a style={{ color: "red " }}>
-                      Phone number already exists.
+                      Email already exists.
                       <a
                         onClick={() => {
                           this.setState({ isExistsEmail: false });

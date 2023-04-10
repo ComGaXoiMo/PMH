@@ -562,7 +562,7 @@ export const portalLayouts: any = {
     component: LoadableComponent(() => import("../../../scenes/proposal")),
   },
   proposalCreate: {
-    path: "/proposal-create",
+    path: "/proposal-create/:id",
     name: "PROPOSAL_CREATE",
     // permission: appPermissions.company.create,
     layout: layouts.portalLayout,

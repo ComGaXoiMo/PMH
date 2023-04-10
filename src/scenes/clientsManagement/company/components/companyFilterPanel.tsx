@@ -5,6 +5,7 @@ import { Button, Select } from "antd";
 import Col from "antd/lib/col";
 import Search from "antd/lib/input/Search";
 import Row from "antd/lib/row";
+import { PlusCircleFilled } from "@ant-design/icons";
 
 type Props = {
   handleSearch: any;
@@ -54,7 +55,7 @@ class companyFilterPanel extends React.Component<Props> {
               style={{ borderRadius: "8px", backgroundColor: "#FEC20C" }}
               onClick={() => this.props.onCreate()}
             >
-              {L("NEW_UNIT")}
+              <PlusCircleFilled /> {L("NEW_COMPANY")}
             </Button>
           </div>
         </Row>

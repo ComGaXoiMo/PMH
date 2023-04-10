@@ -7,6 +7,7 @@ import { AppComponentListBase } from "@components/AppComponentBase";
 import withRouter from "@components/Layout/Router/withRouter";
 
 interface Props {
+  id: any;
   history: any;
   visible: boolean;
   onClose: () => void;
@@ -25,11 +26,12 @@ class CreateProposalModal extends AppComponentListBase<Props, State> {
     super(props);
     this.state = {};
   }
+
   gotoDetail = (id?) => {
     const { history } = this.props;
     id
-      ? history.push(portalLayouts.proposals.path)
-      : history.push(portalLayouts.proposalCreate.path);
+      ? history.push(portalLayouts.proposalCreate.path.replace(":id", id))
+      : history.push(portalLayouts.proposals.path);
   };
   render(): React.ReactNode {
     const { visible, onClose } = this.props;
@@ -57,7 +59,7 @@ class CreateProposalModal extends AppComponentListBase<Props, State> {
           <Col sm={{ span: 12 }}>
             <strong>Use Template</strong>
             <Card
-              onClick={() => this.gotoDetail()}
+              onClick={() => this.gotoDetail(this.props.id)}
               style={{ height: 260, borderRadius: "12px" }}
             ></Card>
           </Col>

@@ -10,9 +10,11 @@ import withRouter from "@components/Layout/Router/withRouter";
 import CustomSteps from "@components/Steps/CustomSteps";
 import ProjectUnitInfo from "./components/projectUnitInfo";
 import EditProposal from "./components/editProposal";
+import { portalLayouts } from "@components/Layout/Router/router.config";
 
 export interface IProposalCreateProps {
   history: any;
+  params: any;
 }
 
 export interface IProposalCreateState {
@@ -49,7 +51,17 @@ class ProposalCreate extends AppComponentListBase<
     this.setState({ current: this.state.current - 1 });
   };
   onSave = () => {
-    this.props.history.goBack();
+    // const self = this
+    // confirm()
+  };
+  onClose = () => {
+    this.props.history.push({
+      pathname: portalLayouts.inquiriesDetail.path.replace(
+        ":id",
+        this.props.params?.id
+      ),
+      search: "proposal",
+    });
   };
   onChange = (value: number) => {
     console.log("onChange:", value);
@@ -58,8 +70,13 @@ class ProposalCreate extends AppComponentListBase<
   public render() {
     return (
       <>
-        <div className="modul-lable-name">
-          <strong>{L("ProposalCreate")}</strong>
+        <div className="proposal-header modul-lable-name">
+          <strong>{L("PROPOSAL_CREATE")}</strong>
+          <div>
+            <Button>{L("CLOSE")}</Button>
+            <Button>{L("COPPY_LINK")}</Button>
+            <Button>{L("EXPORT_EXCEL")}</Button>
+          </div>
         </div>
         <div className="proposal-create-body">
           <Row className="h-100" gutter={[0, 0]}>
@@ -71,6 +88,7 @@ class ProposalCreate extends AppComponentListBase<
               {this.state.current === 0 && <ProspectInfo />}
               {this.state.current === 1 && <ProjectUnitInfo />}
               {this.state.current === 2 && <EditProposal />}
+              {this.state.current === 3 && <EditProposal />}
             </Col>
             <Col
               style={{

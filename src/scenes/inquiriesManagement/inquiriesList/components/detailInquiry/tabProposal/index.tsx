@@ -87,6 +87,7 @@ class Proposal extends AppComponentListBase<IProposalProps, IProposalState> {
           visible={this.state.modalVisible}
           onClose={this.toggleModal}
           onOk={this.handleOk}
+          id={this.props.params?.id}
         />
       </>
     );

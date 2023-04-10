@@ -19,7 +19,9 @@ import TabSiteVisit from "./tabSiteVisit";
 import TabBooking from "./tabBooking";
 import TabMatching from "./tabMatching";
 
-export interface IinfoInquiryProps {}
+export interface IinfoInquiryProps {
+  location: any;
+}
 
 export interface IinfoInquiryState {
   tabActiveKey: any;
@@ -50,6 +52,10 @@ class infoInquiry extends AppComponentListBase<
   state = {
     tabActiveKey: tabKeys.tabActivity,
   };
+  async componentDidMount() {
+    this.props.location.search === "?proposal" &&
+      this.setState({ tabActiveKey: tabKeys.tabProposal });
+  }
   changeTab = (tabKey) => {
     this.setState({ tabActiveKey: tabKey });
   };

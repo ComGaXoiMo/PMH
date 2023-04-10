@@ -56,6 +56,10 @@ input {
   height: 40px;
   border-radius: 16px;
 }
+//button title
+.ant-btn > span  {
+  font-weight: 700;
+}
 .ant-btn:hover,
 .ant-btn:focus {
   color: #000000 !important;
@@ -111,6 +115,10 @@ input {
     box-shadow: none;
   }
 }
+
+
+
+
 
 .btn-primary-outlined {
   border: 1px solid @border-primary-color !important;
@@ -614,6 +622,9 @@ input {
   padding: 8px;
 }
 .ant-notification-notice {
+  // position: fixed !important;
+  // bottom: "20px";
+  // left: "30px";
   border-radius: 20px !important;
   background-color: #28cd9e !important;
   color: #fafafa !important;
@@ -740,6 +751,11 @@ input {
   background-color: #ffffff;
   padding: 12px;
 }
+.proposal-header{
+display: flex;
+justify-content: space-between;
+    align-items: center;
+}
 
 .ant-tabs-tabpane {
   height: 100%;
@@ -777,7 +793,14 @@ input {
 .ant-radio-button-wrapper:first-child {
   border-radius: 8px 0 0 8px !important;
 }
+//radio button title
 
+.ant-radio-button-wrapper{
+  font-weight: 600;
+}
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  font-weight: 700;
+}
 /*TAB*/
 .ant-tabs > .ant-tabs-nav .ant-tabs-nav-more {
   background-color: white !important;
